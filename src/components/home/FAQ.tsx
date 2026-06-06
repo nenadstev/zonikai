@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
+import { HoverCard } from "@/components/ui/HoverCard";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { cn } from "@/lib/utils";
 
@@ -53,16 +55,20 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="border-t border-border bg-white py-20 md:py-28">
+    <SectionShell id="faq" variant="muted" bordered>
       <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
-          <SectionHeader label="FAQ" title="Frequently asked questions" />
+          <SectionHeader
+            label="FAQ"
+            title="Common questions."
+            titleAccent="Straight answers."
+          />
         </AnimateOnScroll>
 
         <div className="space-y-2">
           {faqs.map((faq, i) => (
             <AnimateOnScroll key={faq.question} delay={i * 0.04}>
-              <div className="overflow-hidden rounded-xl border border-border bg-white">
+              <HoverCard className="!p-0 overflow-hidden hover:!shadow-sm">
                 <button
                   type="button"
                   onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -88,11 +94,11 @@ export function FAQ() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </HoverCard>
             </AnimateOnScroll>
           ))}
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

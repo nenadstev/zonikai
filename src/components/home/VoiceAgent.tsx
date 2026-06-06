@@ -11,6 +11,8 @@ import {
   User,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
+import { HoverCard } from "@/components/ui/HoverCard";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { TruckIllustration } from "@/components/ui/TruckIllustration";
 
@@ -79,13 +81,14 @@ export function VoiceAgent() {
   }, [cycle]);
 
   return (
-    <section id="voice-agent" className="py-20 md:py-28">
+    <SectionShell id="voice-agent" variant="white" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
             label="AI Voice Agent"
-            title="When something's wrong, Zonik calls — and updates your dashboard."
-            subtitle="AI voice agents reach drivers automatically, confirm status, and push updates to your tracking dashboard — no manual check calls required."
+            title="No more 2 AM check calls."
+            titleAccent="Zonik calls the driver — and updates your dashboard."
+            punchline="When a load is at risk, the AI voice agent reaches the driver, confirms status, and syncs everything automatically."
           />
         </AnimateOnScroll>
 
@@ -181,22 +184,22 @@ export function VoiceAgent() {
                   isTruck: true,
                 },
               ].map((item) => (
-                <div key={item.title} className="flex gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-white">
+                <HoverCard key={item.title} accent="top" className="flex gap-4 !p-5">
+                  <div className="icon-chip h-10 w-10 shrink-0 group-hover:scale-110">
                     {item.isTruck ? (
-                      <TruckIllustration variant="icon" className="h-5 w-5 text-muted" />
+                      <TruckIllustration variant="icon" className="h-5 w-5" />
                     ) : (
-                      <item.icon className="h-4 w-4 text-muted" />
+                      <item.icon className="h-4 w-4" />
                     )}
                   </div>
                   <div>
-                    <h3 className="text-sm font-semibold">{item.title}</h3>
+                    <h3 className="text-sm font-bold">{item.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-muted">{item.text}</p>
                   </div>
-                </div>
+                </HoverCard>
               ))}
 
-              <div className="rounded-xl border border-border bg-white p-5">
+              <div className="feature-spotlight rounded-xl p-5">
                 <div className="flex items-center justify-between text-xs text-muted">
                   <span>Before voice agent</span>
                   <ArrowRight className="h-3 w-3" />
@@ -217,6 +220,6 @@ export function VoiceAgent() {
           </AnimateOnScroll>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

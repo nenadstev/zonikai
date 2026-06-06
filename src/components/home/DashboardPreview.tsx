@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { AlertTriangle, Phone, Wifi, WifiOff } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { TruckIllustration } from "@/components/ui/TruckIllustration";
+import { BrandMark } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 type LoadRow = {
@@ -94,27 +95,28 @@ export function DashboardPreview() {
   const selected = loads.find((l) => l.id === selectedId);
 
   return (
-    <section id="product" className="bg-white py-20 md:py-28">
+    <SectionShell id="product" variant="muted" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
-            label="Dashboard"
-            title="Everything your team needs. In one view."
-            subtitle="Active loads, GPS status, voice agent updates, and risk levels — all in a clean operations dashboard."
+            label="Operations Dashboard"
+            title="Zonik monitors every load for you."
+            titleAccent="Your team only steps in when it matters."
+            punchline="This dashboard runs 24/7 — tracking GPS, ETAs, and risks — and tells your after-hours team exactly what's happening. No manual portal checks. No calling every driver. Just react where it's urgent."
           />
         </AnimateOnScroll>
 
         <AnimateOnScroll delay={0.1}>
-          <div className="card-clean overflow-hidden">
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
+          <div className="card-clean overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)]">
+            <div className="flex items-center justify-between border-b border-border bg-primary px-5 py-4 text-white">
               <div className="flex items-center gap-3">
-                <TruckIllustration variant="icon" className="h-5 w-5 text-secondary-dark" />
+                <BrandMark size={20} className="h-5 w-5" />
                 <div>
                   <h3 className="text-sm font-semibold">Active Loads</h3>
-                  <p className="text-xs text-muted">4 loads · Live monitoring</p>
+                  <p className="text-xs text-neutral-400">4 loads · Live monitoring</p>
                 </div>
               </div>
-              <span className="flex items-center gap-1.5 text-xs text-muted">
+              <span className="flex items-center gap-1.5 rounded-full bg-success/20 px-2.5 py-1 text-xs text-success">
                 <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-dot" />
                 Syncing
               </span>
@@ -151,8 +153,9 @@ export function DashboardPreview() {
                       key={load.id}
                       onClick={() => setSelectedId(load.id)}
                       className={cn(
-                        "cursor-pointer border-b border-border transition-colors hover:bg-surface/30",
-                        selectedId === load.id && "bg-accent-soft/30"
+                        "cursor-pointer border-b border-border transition-all hover:bg-accent-soft/20",
+                        selectedId === load.id && "bg-accent-soft/40 ring-1 ring-inset ring-secondary/20",
+                        load.riskLevel === "danger" && selectedId !== load.id && "hover:bg-danger-bg/30"
                       )}
                     >
                       <td className="px-4 py-3.5 font-medium">{load.loadNum}</td>
@@ -210,6 +213,6 @@ export function DashboardPreview() {
           </div>
         </AnimateOnScroll>
       </div>
-    </section>
+    </SectionShell>
   );
 }

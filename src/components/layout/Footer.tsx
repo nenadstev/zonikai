@@ -21,7 +21,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-            <Logo />
+        <Logo className="mb-1" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
               Zonik AI monitors every active load 24/7 — GPS, voice agents,
               and smart alerts — so your team reacts only when it matters.

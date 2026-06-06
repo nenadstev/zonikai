@@ -1,71 +1,71 @@
-import { Phone, PhoneOff, Moon } from "lucide-react";
+import { Phone, PhoneOff, Moon, ArrowRight } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
+import { HoverCard } from "@/components/ui/HoverCard";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { TruckIllustration } from "@/components/ui/TruckIllustration";
 
 const problems = [
   {
     icon: PhoneOff,
     title: "Too many manual check calls",
+    stat: "Hours wasted nightly",
     description:
-      "Tracking teams spend hours calling drivers for loads that are running fine — with no real issues to resolve.",
+      "Your team calls drivers on loads that are running fine — with nothing to fix.",
+    accent: false,
   },
   {
     icon: Phone,
     title: "Delays noticed too late",
+    stat: "Windows already missed",
     description:
-      "By the time a delay is spotted, pickup or delivery windows are already at risk. Reactive tracking costs trust.",
+      "By the time someone spots a delay, pickup or delivery is already at risk.",
+    accent: true,
   },
   {
     icon: Moon,
-    title: "No clear overview during nights and weekends",
+    title: "Zero visibility after hours",
+    stat: "Nights & weekends blind",
     description:
-      "After hours, visibility drops. Loads move without oversight, and problems escalate before anyone knows.",
+      "Loads move without oversight. Problems escalate before anyone on shift knows.",
+    accent: false,
   },
 ];
 
 export function Problem() {
   return (
-    <section className="border-t border-border py-20 md:py-28">
+    <SectionShell variant="white" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
             label="The problem"
-            title="Stop manually checking every load after hours."
+            title="Your team shouldn't spend the night"
+            titleAccent="checking loads that are fine."
+            punchline="Most after-hours work is repetitive noise. The real risks are what get missed."
           />
         </AnimateOnScroll>
-
-        <p className="mx-auto mb-12 max-w-2xl text-center text-base text-muted">
-          Tracking teams often spend hours verifying loads with no issues, while
-          real risks slip through — especially when coverage is thinnest.
-        </p>
 
         <div className="grid gap-4 md:grid-cols-3">
           {problems.map((problem, i) => (
             <AnimateOnScroll key={problem.title} delay={i * 0.08}>
-              <div className="group h-full rounded-2xl border border-border bg-white p-6 transition-shadow hover:shadow-sm">
-                <div className="mb-4 icon-chip h-10 w-10">
-                  <problem.icon className="h-4 w-4" />
+              <HoverCard spotlight={problem.accent} accent="left" className="h-full">
+                <div className="flex items-start justify-between">
+                  <div className="icon-chip h-10 w-10 group-hover:scale-110">
+                    <problem.icon className="h-4 w-4" />
+                  </div>
+                  <span className="rounded-full bg-danger-bg px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-danger">
+                    {problem.stat}
+                  </span>
                 </div>
-                <h3 className="text-[15px] font-semibold tracking-[-0.01em]">
-                  {problem.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {problem.description}
+                <h3 className="mt-4 text-base font-semibold tracking-[-0.01em]">{problem.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{problem.description}</p>
+                <p className="mt-4 flex items-center gap-1 text-xs font-medium text-secondary-dark opacity-0 transition-opacity group-hover:opacity-100">
+                  Zonik fixes this <ArrowRight className="h-3 w-3" />
                 </p>
-              </div>
+              </HoverCard>
             </AnimateOnScroll>
           ))}
         </div>
-
-        <AnimateOnScroll delay={0.2}>
-          <div className="mt-12 flex items-center justify-center gap-4 opacity-40">
-            <TruckIllustration variant="semi" className="max-w-[140px]" />
-            <TruckIllustration variant="semi" className="max-w-[140px] scale-90" />
-            <TruckIllustration variant="semi" className="max-w-[140px] hidden sm:block" />
-          </div>
-        </AnimateOnScroll>
       </div>
-    </section>
+    </SectionShell>
   );
 }

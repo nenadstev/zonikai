@@ -1,5 +1,6 @@
 import { Plug } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { IntegrationLogo } from "@/components/ui/IntegrationLogo";
 
@@ -22,13 +23,14 @@ const secondaryIntegrations = [
 
 export function Integrations() {
   return (
-    <section id="integrations" className="border-t border-border bg-white py-20 md:py-28">
+    <SectionShell id="integrations" variant="accent" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
             label="ELD Integrations"
-            title="Connect your ELD. Zonik handles the rest."
-            subtitle="Plug into the GPS and telematics platforms you already use. Live location, speed, and vehicle data flow straight into Zonik AI."
+            title="Plug in your ELD."
+            titleAccent="Zonik pulls live GPS instantly."
+            punchline="Works with the telematics platforms you already use — no rip and replace."
           />
         </AnimateOnScroll>
 
@@ -93,6 +95,6 @@ export function Integrations() {
           </div>
         </AnimateOnScroll>
       </div>
-    </section>
+    </SectionShell>
   );
 }

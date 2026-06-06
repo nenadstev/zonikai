@@ -1,34 +1,54 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 type LogoProps = {
   className?: string;
-  showText?: boolean;
+  variant?: "full" | "icon";
+  href?: string;
 };
 
-export function Logo({ className, showText = true }: LogoProps) {
+export function BrandMark({
+  className,
+  size = 20,
+}: {
+  className?: string;
+  size?: number;
+}) {
   return (
-    <Link href="/" className={cn("flex items-center gap-2.5", className)}>
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-secondary/20 bg-accent-soft">
-        <svg viewBox="0 0 24 24" className="h-4 w-4 text-foreground" fill="none">
-          <path
-            d="M2 14h3l1.5-4h9L17 14h3"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <rect x="5" y="14" width="14" height="4" rx="1" fill="currentColor" opacity="0.15" />
-          <circle cx="7" cy="18" r="1.5" fill="currentColor" />
-          <circle cx="17" cy="18" r="1.5" fill="currentColor" />
-          <path d="M8 10h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      </div>
-      {showText && (
-        <span className="text-[15px] font-semibold tracking-[-0.01em] text-foreground">
-          Zonik <span className="text-highlight">AI</span>
-        </span>
-      )}
+    <Image
+      src="/brand/zonik-favicon.png"
+      alt=""
+      width={size}
+      height={size}
+      className={cn("shrink-0 object-contain", className)}
+      aria-hidden
+    />
+  );
+}
+
+export function Logo({ className, variant = "full", href = "/" }: LogoProps) {
+  const content =
+    variant === "icon" ? (
+      <BrandMark size={32} className="h-8 w-8" />
+    ) : (
+      <Image
+        src="/brand/zonik-ai-logo.png"
+        alt="Zonik AI"
+        width={148}
+        height={40}
+        className="h-8 w-auto object-contain"
+        priority
+      />
+    );
+
+  if (!href) {
+    return <span className={cn("inline-flex items-center", className)}>{content}</span>;
+  }
+
+  return (
+    <Link href={href} className={cn("inline-flex items-center", className)}>
+      {content}
     </Link>
   );
 }

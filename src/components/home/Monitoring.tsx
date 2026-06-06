@@ -10,6 +10,8 @@ import {
   PhoneCall,
 } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
+import { HoverCard } from "@/components/ui/HoverCard";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 const features = [
@@ -17,11 +19,13 @@ const features = [
     icon: MapPin,
     title: "Live GPS Tracking",
     description: "Continuous location monitoring for every active truck on the road.",
+    featured: true,
   },
   {
     icon: PhoneCall,
     title: "AI Voice Agents",
     description: "Automatic driver calls that confirm status and update your dashboard.",
+    featured: true,
   },
   {
     icon: Clock,
@@ -62,31 +66,35 @@ const features = [
 
 export function Monitoring() {
   return (
-    <section className="py-20 md:py-28">
+    <SectionShell variant="white" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
             label="Capabilities"
-            title="Automated monitoring. Clear actions."
+            title="Zonik watches everything."
+            titleAccent="You act on exceptions only."
+            punchline="GPS, ETAs, voice calls, delays, and risk scores — all automated, all the time."
           />
         </AnimateOnScroll>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, i) => (
             <AnimateOnScroll key={feature.title} delay={i * 0.04}>
-              <div className="group h-full rounded-2xl border border-border bg-white p-5 transition-shadow hover:shadow-sm">
-                <div className="mb-3 icon-chip h-9 w-9">
+              <HoverCard
+                spotlight={feature.featured}
+                accent={feature.featured ? "left" : "top"}
+                className={`h-full !p-5 ${feature.featured ? "lg:row-span-1" : ""}`}
+              >
+                <div className="icon-chip mb-3 h-9 w-9 group-hover:scale-110">
                   <feature.icon className="h-4 w-4" />
                 </div>
-                <h3 className="text-sm font-semibold">{feature.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                  {feature.description}
-                </p>
-              </div>
+                <h3 className="text-sm font-bold">{feature.title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted">{feature.description}</p>
+              </HoverCard>
             </AnimateOnScroll>
           ))}
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }

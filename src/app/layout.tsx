@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "Zonik AI — After-Hours Load Tracking Agent",
   description:
     "Zonik AI monitors every active load, tracks GPS in real time, calls drivers with AI voice agents, and alerts your team when human attention is actually needed.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

@@ -4,7 +4,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MapPin, Navigation, Satellite, Signal, Truck } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
+import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
 import { TruckIllustration } from "@/components/ui/TruckIllustration";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 
@@ -25,78 +27,27 @@ export function GpsTracking() {
   }, []);
 
   return (
-    <section id="gps" className="border-y border-border bg-white py-20 md:py-28">
+    <SectionShell id="gps" variant="dark" bordered>
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
+            dark
             label="Live GPS"
-            title="Every truck. Every route. Always visible."
-            subtitle="Zonik AI continuously tracks GPS location, speed, and route progress — so your team always knows where every load stands."
+            title="Know where every truck is —"
+            titleAccent="without opening a single portal."
+            punchline="GPS location, speed, and route progress checked continuously. Not on a manual refresh."
           />
         </AnimateOnScroll>
 
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <AnimateOnScroll direction="left">
             <div className="card-clean relative overflow-hidden p-1">
-              <div className="relative overflow-hidden rounded-[0.75rem] bg-surface p-6">
-                <div className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-medium text-muted">
+              <div className="relative overflow-hidden rounded-[0.75rem] border border-neutral-800 bg-neutral-900/50 p-4">
+                <div className="absolute right-4 top-4 z-10 flex items-center gap-1.5 rounded-full border border-neutral-700 bg-neutral-800 px-2.5 py-1 text-[11px] font-medium text-neutral-300">
                   <Signal className="h-3 w-3 text-success" />
                   3 signals live
                 </div>
-
-                <svg viewBox="0 0 360 220" className="w-full">
-                  <rect width="360" height="220" fill="#FAFAFA" rx="8" />
-                  {[...Array(7)].map((_, i) => (
-                    <line key={`h${i}`} x1="0" y1={i * 33} x2="360" y2={i * 33} stroke="#F0F0F0" strokeWidth="0.5" />
-                  ))}
-                  {[...Array(9)].map((_, i) => (
-                    <line key={`v${i}`} x1={i * 45} y1="0" x2={i * 45} y2="220" stroke="#F0F0F0" strokeWidth="0.5" />
-                  ))}
-
-                  <path
-                    d="M 40 180 Q 100 60 180 100 T 320 80"
-                    fill="none"
-                    stroke="#E8E8E8"
-                    strokeWidth="2"
-                    strokeDasharray="6 4"
-                  />
-                  <path
-                    d="M 40 180 Q 100 60 180 100 T 320 80"
-                    fill="none"
-                    stroke="#818CF8"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    opacity="0.6"
-                  />
-
-                  {[
-                    { cx: 40, cy: 180, color: "#16A34A" },
-                    { cx: 180, cy: 100, color: "#818CF8" },
-                    { cx: 320, cy: 80, color: "#EA580C" },
-                  ].map((point, i) => (
-                    <g key={i}>
-                      <circle cx={point.cx} cy={point.cy} r="12" fill={point.color} opacity="0.1" />
-                      <motion.circle
-                        cx={point.cx}
-                        cy={point.cy}
-                        r="4"
-                        fill={point.color}
-                        animate={{ opacity: activeIndex === i ? 1 : 0.4, scale: activeIndex === i ? 1.3 : 1 }}
-                        transition={{ duration: 0.4 }}
-                      />
-                    </g>
-                  ))}
-
-                  <motion.g
-                    animate={{ x: [0, 70, 140, 210, 280], y: [0, -120, -80, -100, -100] }}
-                    transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                  >
-                    <rect x="-6" y="-2.5" width="10" height="5" rx="0.8" fill="#818CF8" />
-                    <rect x="2.5" y="-1" width="4" height="3.5" rx="0.4" fill="#C7D2FE" />
-                    <circle cx="-2.5" cy="3.5" r="1.2" fill="#71717A" />
-                    <circle cx="5" cy="3.5" r="1.2" fill="#71717A" />
-                  </motion.g>
-                </svg>
+                <RouteMapAnimation theme="dark" showLabels />
 
                 <div className="mt-4 grid grid-cols-3 gap-2">
                   {[
@@ -104,9 +55,9 @@ export function GpsTracking() {
                     { icon: Navigation, label: "Route match" },
                     { icon: MapPin, label: "Stop ETA" },
                   ].map(({ icon: Icon, label }) => (
-                    <div key={label} className="flex flex-col items-center rounded-lg border border-border bg-white py-2.5">
-                      <Icon className="h-3.5 w-3.5 text-secondary-dark" />
-                      <span className="mt-1 text-[10px] text-muted">{label}</span>
+                    <div key={label} className="flex flex-col items-center rounded-lg border border-neutral-700 bg-neutral-800/80 py-2.5">
+                      <Icon className="h-3.5 w-3.5 text-secondary" />
+                      <span className="mt-1 text-[10px] text-neutral-400">{label}</span>
                     </div>
                   ))}
                 </div>
@@ -119,19 +70,20 @@ export function GpsTracking() {
               {trucks.map((truck, i) => (
                 <motion.div
                   key={truck.id}
+                  whileHover={{ x: 4 }}
                   className={`flex items-center gap-4 rounded-xl border p-4 transition-all ${
                     activeIndex === i
-                      ? "border-accent/30 bg-accent-soft/50"
-                      : "border-border bg-white"
+                      ? "border-secondary/50 bg-accent-soft/10 shadow-[0_0_24px_rgba(129,140,248,0.15)]"
+                      : "border-neutral-800 bg-neutral-900/50 hover:border-neutral-700"
                   }`}
-                  animate={{ scale: activeIndex === i ? 1.01 : 1 }}
+                  animate={{ scale: activeIndex === i ? 1.02 : 1 }}
                 >
                   <div className="icon-chip h-10 w-10 shrink-0">
                     <Truck className="h-4 w-4" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium">{truck.id}</span>
+                      <span className="text-sm font-semibold text-white">{truck.id}</span>
                       <StatusBadge variant={truck.status}>{truck.label}</StatusBadge>
                     </div>
                     <p className="mt-0.5 truncate text-xs text-muted">
@@ -143,14 +95,13 @@ export function GpsTracking() {
               ))}
             </div>
 
-            <p className="mt-6 text-sm leading-relaxed text-muted">
-              GPS data is checked continuously — not on a manual refresh cycle.
-              When a signal drops or a truck goes off-route, Zonik AI flags it
-              immediately.
+            <p className="mt-6 rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 text-sm leading-relaxed text-neutral-400">
+              <span className="font-semibold text-[#a5b4fc]">Signal drops instantly flagged.</span>{" "}
+              When GPS goes offline or a truck goes off-route, Zonik AI alerts your team — no waiting for the next manual check.
             </p>
           </AnimateOnScroll>
         </div>
       </div>
-    </section>
+    </SectionShell>
   );
 }
