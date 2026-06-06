@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" fill="none" role="img" aria-label="Platform Science">
+  <rect x="0" y="10" width="20" height="20" rx="4" fill="#0066CC"/>
+  <text x="28" y="18" fontFamily="system-ui, -apple-system, sans-serif" fontSize="11" fontWeight="700" fill="#0066CC">PLATFORM</text>
+  <text x="28" y="32" fontFamily="system-ui, -apple-system, sans-serif" fontSize="11" fontWeight="700" fill="#333333">SCIENCE</text>
+</svg>
