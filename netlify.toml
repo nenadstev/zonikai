@@ -4,3 +4,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/brand/zonik-favicon.png"
+  status = 200
