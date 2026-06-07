@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import { motion } from "framer-motion";
 
 const ROUTE =
@@ -20,6 +21,11 @@ export function RouteMapAnimation({
   compact = false,
   theme = "light",
 }: RouteMapProps) {
+  const uid = useId().replace(/:/g, "");
+  const routeActiveId = `routeActive-${uid}`;
+  const routeGlowId = `routeGlow-${uid}`;
+  const truckGlowId = `truckGlow-${uid}`;
+
   const bg = theme === "dark" ? "#18181B" : compact ? "#FAFAFA" : "#F8FAFC";
   const gridStroke = theme === "dark" ? "#27272A" : "#ECECEC";
   const labelFill = theme === "dark" ? "#A1A1AA" : "#737373";
@@ -27,17 +33,17 @@ export function RouteMapAnimation({
   return (
     <svg viewBox={viewBox} className={height} aria-hidden>
       <defs>
-        <linearGradient id="routeActive" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id={routeActiveId} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#818CF8" stopOpacity="0.2" />
           <stop offset="50%" stopColor="#818CF8" stopOpacity="1" />
           <stop offset="100%" stopColor="#6366F1" stopOpacity="0.6" />
         </linearGradient>
-        <linearGradient id="routeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id={routeGlowId} x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#818CF8" stopOpacity="0" />
           <stop offset="50%" stopColor="#818CF8" stopOpacity="0.5" />
           <stop offset="100%" stopColor="#818CF8" stopOpacity="0" />
         </linearGradient>
-        <filter id="truckGlow">
+        <filter id={truckGlowId}>
           <feGaussianBlur stdDeviation="2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -48,7 +54,6 @@ export function RouteMapAnimation({
 
       <rect width="400" height="180" fill={bg} rx="8" />
 
-      {/* Grid */}
       {[...Array(6)].map((_, i) => (
         <line
           key={`g${i}`}
@@ -61,7 +66,6 @@ export function RouteMapAnimation({
         />
       ))}
 
-      {/* Base route */}
       <path
         d={ROUTE}
         fill="none"
@@ -71,39 +75,35 @@ export function RouteMapAnimation({
         strokeDasharray="6 8"
       />
 
-      {/* Animated route draw */}
       <motion.path
         d={ROUTE}
         fill="none"
-        stroke="url(#routeActive)"
+        stroke={`url(#${routeActiveId})`}
         strokeWidth="3"
         strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0.6 }}
+        initial={{ pathLength: 0, opacity: 0.4 }}
         animate={{ pathLength: [0, 1, 1, 0], opacity: [0.4, 1, 1, 0.4] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", times: [0, 0.45, 0.55, 1] }}
       />
 
-      {/* Traveling pulse on route */}
       <motion.path
         d={ROUTE}
         fill="none"
-        stroke="url(#routeGlow)"
+        stroke={`url(#${routeGlowId})`}
         strokeWidth="8"
         strokeLinecap="round"
-        initial={{ pathLength: 0.08, pathOffset: 0 }}
-        animate={{ pathOffset: [0, 1] }}
+        initial={{ pathLength: 0.12, pathOffset: 0, opacity: 0.6 }}
+        animate={{ pathOffset: [0, 1], opacity: 0.6 }}
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        style={{ pathLength: 0.12 }}
       />
 
-      {/* Pickup */}
       <g>
         <motion.circle
           cx="36"
           cy="132"
           r="10"
           fill="#16A34A"
-          opacity="0.15"
+          initial={{ opacity: 0.15, scale: 1 }}
           animate={{ scale: [1, 1.4, 1], opacity: [0.15, 0.25, 0.15] }}
           transition={{ duration: 2.5, repeat: Infinity }}
         />
@@ -115,14 +115,13 @@ export function RouteMapAnimation({
         )}
       </g>
 
-      {/* Delivery */}
       <g>
         <motion.circle
           cx="368"
           cy="98"
           r="10"
           fill="#818CF8"
-          opacity="0.15"
+          initial={{ opacity: 0.15, scale: 1 }}
           animate={{ scale: [1, 1.4, 1], opacity: [0.15, 0.25, 0.15] }}
           transition={{ duration: 2.5, repeat: Infinity, delay: 0.5 }}
         />
@@ -134,9 +133,8 @@ export function RouteMapAnimation({
         )}
       </g>
 
-      {/* Truck following route */}
       <motion.g
-        filter="url(#truckGlow)"
+        filter={`url(#${truckGlowId})`}
         style={{ offsetPath: `path('${ROUTE}')`, offsetRotate: "auto" } as React.CSSProperties}
         animate={{ offsetDistance: ["0%", "100%"] }}
         transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -147,7 +145,6 @@ export function RouteMapAnimation({
         <circle cx="7" cy="4.5" r="1.8" fill="#52525B" />
       </motion.g>
 
-      {/* Trailing ping */}
       <motion.g
         style={{ offsetPath: `path('${ROUTE}')`, offsetRotate: "auto" } as React.CSSProperties}
         animate={{ offsetDistance: ["0%", "100%"] }}
@@ -158,6 +155,7 @@ export function RouteMapAnimation({
           cy="0"
           r="6"
           fill="#818CF8"
+          initial={{ opacity: 0.5, scale: 0.6 }}
           animate={{ opacity: [0.5, 0], scale: [0.6, 1.8] }}
           transition={{ duration: 1.2, repeat: Infinity }}
         />

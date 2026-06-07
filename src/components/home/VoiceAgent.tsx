@@ -47,20 +47,22 @@ function VoiceWaveBars() {
 
 export function VoiceAgent() {
   const [steps, setSteps] = useState(initialSteps);
-  const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
     let stepIndex = 0;
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
+    const schedule = (fn: () => void, ms: number) => {
+      timeouts.push(setTimeout(fn, ms));
+    };
+
     const runCycle = () => {
       setSteps(initialSteps.map((s) => ({ ...s, status: "pending" })));
       stepIndex = 0;
 
       const advance = () => {
         if (stepIndex >= initialSteps.length) {
-          setTimeout(() => {
-            setCycle((c) => c + 1);
-            runCycle();
-          }, 2500);
+          schedule(runCycle, 2500);
           return;
         }
 
@@ -71,14 +73,18 @@ export function VoiceAgent() {
           }))
         );
         stepIndex++;
-        setTimeout(advance, stepIndex === 2 ? 2500 : 1800);
+        schedule(advance, stepIndex === 2 ? 2500 : 1800);
       };
 
-      setTimeout(advance, 500);
+      schedule(advance, 500);
     };
 
     runCycle();
-  }, [cycle]);
+
+    return () => {
+      timeouts.forEach(clearTimeout);
+    };
+  }, []);
 
   return (
     <SectionShell id="voice-agent" variant="white" bordered>

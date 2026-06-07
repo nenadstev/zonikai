@@ -61,7 +61,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
                   <motion.div
                     key={id}
                     className="rounded-md bg-surface px-2 py-1 font-mono text-[9px] text-muted"
-                    animate={active ? { opacity: [0.4, 1, 0.4] } : {}}
+                    animate={active ? { opacity: [0.4, 1, 0.4] } : { opacity: 0.4 }}
                     transition={{ duration: 2, repeat: Infinity, delay: j * 0.4 }}
                   >
                     {id}
@@ -75,7 +75,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
                   <motion.span
                     key={j}
                     className="h-1.5 w-1.5 rounded-full bg-success"
-                    animate={active ? { opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] } : {}}
+                    animate={active ? { opacity: [0.3, 1, 0.3], scale: [0.8, 1.2, 0.8] } : { opacity: 0.3, scale: 1 }}
                     transition={{ duration: 1.5, repeat: Infinity, delay: j * 0.3 }}
                   />
                 ))}
@@ -94,7 +94,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
               stroke="#818CF8"
               strokeWidth="1.5"
               strokeDasharray="4 4"
-              animate={active ? { strokeDashoffset: [0, -16] } : {}}
+              animate={active ? { strokeDashoffset: [0, -16] } : { strokeDashoffset: 0 }}
               transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             />
             <motion.line
@@ -105,7 +105,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
               stroke="#818CF8"
               strokeWidth="1.5"
               strokeDasharray="4 4"
-              animate={active ? { strokeDashoffset: [0, -16] } : {}}
+              animate={active ? { strokeDashoffset: [0, -16] } : { strokeDashoffset: 0 }}
               transition={{ duration: 0.8, repeat: Infinity, ease: "linear" }}
             />
           </svg>
@@ -119,7 +119,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
                       "0 0 0 0 rgba(129,140,248,0)",
                     ],
                   }
-                : {}
+                : { boxShadow: "0 0 0 0 rgba(129,140,248,0)" }
             }
             transition={{ duration: 2, repeat: Infinity }}
             className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-white shadow-lg"
@@ -177,7 +177,7 @@ export function MonitorVisual({ active }: { active: boolean }) {
                         "#ffffff",
                       ],
                     }
-                  : {}
+                  : { backgroundColor: "#ffffff" }
               }
               transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.2 }}
               className="flex items-center justify-between px-3 py-2"
@@ -352,13 +352,13 @@ export function AlertVisual({ active }: { active: boolean }) {
                     "0 4px 20px rgba(220,38,38,0.15)",
                   ],
                 }
-              : {}
+              : { scale: 1, boxShadow: "0 4px 20px rgba(220,38,38,0.15)" }
           }
           transition={{ duration: 2, repeat: Infinity }}
           className="relative flex flex-col rounded-xl border-2 border-danger/40 bg-danger-bg p-3"
         >
           <motion.div
-            animate={active ? { rotate: [0, 12, -12, 0] } : {}}
+            animate={active ? { rotate: [0, 12, -12, 0] } : { rotate: 0 }}
             transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
             className="absolute -right-1 -top-1 flex h-7 w-7 items-center justify-center rounded-full bg-danger text-white shadow-md"
           >
@@ -370,7 +370,7 @@ export function AlertVisual({ active }: { active: boolean }) {
             GPS offline · Truck stationary · Next stop late
           </p>
           <motion.span
-            animate={active ? { opacity: [0.7, 1, 0.7] } : {}}
+            animate={active ? { opacity: [0.7, 1, 0.7] } : { opacity: 1 }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="mt-auto inline-block rounded-lg bg-danger px-2 py-1.5 text-center text-[9px] font-semibold text-white"
           >
