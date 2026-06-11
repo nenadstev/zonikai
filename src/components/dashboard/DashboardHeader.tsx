@@ -4,23 +4,21 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 export function DashboardHeader() {
-  const [now, setNow] = useState<Date | null>(null);
+  const [now, setNow] = useState(() => new Date());
 
   useEffect(() => {
-    setNow(new Date());
     const t = setInterval(() => setNow(new Date()), 1000);
     return () => clearInterval(t);
   }, []);
 
-  const formatted =
-    now?.toLocaleString("en-US", {
+  const formatted = now.toLocaleString("en-US", {
       weekday: "short",
       month: "short",
       day: "numeric",
       hour: "numeric",
       minute: "2-digit",
       hour12: true,
-    }) ?? "—";
+    });
 
   return (
     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">

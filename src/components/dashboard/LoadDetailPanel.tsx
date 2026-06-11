@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, ChevronDown, ChevronUp, Pencil, X } from "lucide-react";
 import type { Load, LoadStatus, LoadStop, StopStatus } from "@/lib/dashboard-types";
@@ -17,35 +17,31 @@ type Props = {
 type ModalType = "confirmStop" | "sendHistory" | "changeStatus" | null;
 
 export function LoadDetailPanel({ load, onClose }: Props) {
-  const [aiSummary, setAiSummary] = useState("");
+  return (
+    <AnimatePresence>
+      {load && <LoadDetailPanelInner key={load.id} load={load} onClose={onClose} />}
+    </AnimatePresence>
+  );
+}
+
+function LoadDetailPanelInner({ load, onClose }: { load: Load; onClose: () => void }) {
+  const [aiSummary, setAiSummary] = useState(load.aiSummary);
   const [editingAiSummary, setEditingAiSummary] = useState(false);
-  const [aiSummaryDraft, setAiSummaryDraft] = useState("");
-  const [voiceCheckIn, setVoiceCheckIn] = useState(false);
-  const [humanNote, setHumanNote] = useState("");
-  const [humanNoteTime, setHumanNoteTime] = useState<string | null>(null);
-  const [stops, setStops] = useState<LoadStop[]>([]);
-  const [loadStatus, setLoadStatus] = useState<LoadStatus>("Loaded");
-  const [currentEta, setCurrentEta] = useState("");
+  const [aiSummaryDraft, setAiSummaryDraft] = useState(load.aiSummary);
+  const [voiceCheckIn, setVoiceCheckIn] = useState(load.voiceCheckIn ?? false);
+  const [humanNote, setHumanNote] = useState(load.humanInput?.text ?? "");
+  const [humanNoteTime, setHumanNoteTime] = useState<string | null>(load.humanInput?.addedAt ?? null);
+  const [stops, setStops] = useState<LoadStop[]>(() => load.stops.map((s) => ({ ...s })));
+  const [loadStatus, setLoadStatus] = useState<LoadStatus>(load.loadStatus);
+  const [currentEta, setCurrentEta] = useState(load.currentEta);
   const [modal, setModal] = useState<ModalType>(null);
   const [expandedCall, setExpandedCall] = useState<string | null>(null);
   const [statusTab, setStatusTab] = useState<"load" | "stop">("load");
-  const [selectedStopId, setSelectedStopId] = useState<string>("");
+  const [selectedStopId, setSelectedStopId] = useState(
+    () => load.stops[load.currentStopIndex]?.id ?? load.stops[0]?.id ?? ""
+  );
 
-  useEffect(() => {
-    if (!load) return;
-    setAiSummary(load.aiSummary);
-    setAiSummaryDraft(load.aiSummary);
-    setEditingAiSummary(false);
-    setVoiceCheckIn(load.voiceCheckIn ?? false);
-    setHumanNote(load.humanInput?.text ?? "");
-    setHumanNoteTime(load.humanInput?.addedAt ?? null);
-    setStops(load.stops.map((s) => ({ ...s })));
-    setLoadStatus(load.loadStatus);
-    setCurrentEta(load.currentEta);
-    setSelectedStopId(load.stops[load.currentStopIndex]?.id ?? load.stops[0]?.id ?? "");
-  }, [load]);
-
-  const callLogsForLoad = load ? getCallLogsForLoad(load.loadNum) : [];
+  const callLogsForLoad = getCallLogsForLoad(load.loadNum);
 
   const canSendToHistory = loadStatus === "Delivered" || loadStatus === "Cancelled";
 
@@ -58,8 +54,6 @@ export function LoadDetailPanel({ load, onClose }: Props) {
   };
 
   return (
-    <AnimatePresence>
-      {load && (
         <>
           <motion.div
             initial={{ opacity: 0 }}
@@ -398,7 +392,5 @@ export function LoadDetailPanel({ load, onClose }: Props) {
             </DashboardModal>
           )}
         </>
-      )}
-    </AnimatePresence>
   );
 }
