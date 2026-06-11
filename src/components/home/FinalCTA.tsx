@@ -28,7 +28,7 @@ export function FinalCTA() {
                 <Button href="/contact" variant="accent" size="lg">
                   Book a Demo
                 </Button>
-                <Button href="/#product" variant="outlineDark" size="lg">
+                <Button href="/dashboard" variant="outlineDark" size="lg">
                   See the Dashboard
                 </Button>
               </div>

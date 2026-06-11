@@ -212,6 +212,17 @@ export function DashboardPreview() {
             )}
           </div>
         </AnimateOnScroll>
+
+        <AnimateOnScroll delay={0.15}>
+          <div className="mt-8 text-center">
+            <a
+              href="/dashboard"
+              className="inline-flex items-center gap-2 rounded-full border border-secondary/30 bg-accent-soft px-5 py-2.5 text-sm font-semibold text-secondary-dark transition-colors hover:bg-secondary-dark hover:text-white"
+            >
+              Open full operations dashboard →
+            </a>
+          </div>
+        </AnimateOnScroll>
       </div>
     </SectionShell>
   );

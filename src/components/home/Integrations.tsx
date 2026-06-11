@@ -5,13 +5,13 @@ import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { IntegrationLogo } from "@/components/ui/IntegrationLogo";
 
 const eldIntegrations = [
-  { name: "Samsara", logo: "/integrations/samsara.svg" },
-  { name: "Geotab", logo: "/integrations/geotab.svg" },
-  { name: "Motive", logo: "/integrations/motive.svg" },
-  { name: "Omnitracs", logo: "/integrations/omnitracs.svg" },
-  { name: "Platform Science", logo: "/integrations/platform-science.svg" },
-  { name: "Trimble", logo: "/integrations/trimble.svg" },
-  { name: "Verizon Connect", logo: "/integrations/verizon-connect.svg" },
+  { name: "Samsara", logo: "/integrations/samsara.png", surface: "light" as const },
+  { name: "Geotab", logo: "/integrations/geotab.png", surface: "dark" as const },
+  { name: "Motive", logo: "/integrations/motive.svg", surface: "light" as const },
+  { name: "Omnitracs", logo: "/integrations/omnitracs.svg", surface: "light" as const },
+  { name: "Platform Science", logo: "/integrations/platform-science.png", surface: "dark" as const },
+  { name: "Trimble", logo: "/integrations/trimble.png", surface: "dark" as const },
+  { name: "Verizon Connect", logo: "/integrations/verizon-connect.png", surface: "light" as const },
 ];
 
 const secondaryIntegrations = [
@@ -51,15 +51,16 @@ export function Integrations() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              {eldIntegrations.map((item, i) => (
+              {eldIntegrations.map((item) => (
                 <div
                   key={item.name}
-                  className="group flex h-24 flex-col items-center justify-center rounded-xl border border-border bg-white px-4 py-5 transition-all hover:border-secondary/30 hover:shadow-sm"
+                  className="group flex h-28 flex-col items-center justify-center rounded-xl border border-border bg-white px-3 py-4 transition-all hover:border-secondary/30 hover:shadow-sm"
                 >
                   <IntegrationLogo
                     name={item.name}
                     src={item.logo}
-                    className="h-7 opacity-80 transition-opacity group-hover:opacity-100"
+                    surface={item.surface}
+                    className="opacity-90 transition-opacity group-hover:opacity-100"
                   />
                   <span className="mt-3 text-[11px] font-medium text-muted group-hover:text-secondary-dark">
                     {item.name}
