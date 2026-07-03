@@ -11,6 +11,7 @@ const navLinks = [
   { label: "GPS", href: "/#gps" },
   { label: "Voice Agent", href: "/#voice-agent" },
   { label: "Product", href: "/#product" },
+  { label: "Calculator", href: "/calculator" },
   { label: "Integrations", href: "/#integrations" },
   { label: "FAQ", href: "/#faq" },
   { label: "Contact", href: "/contact" },
