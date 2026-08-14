@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/Button";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
-import { BrandMark } from "@/components/ui/Logo";
 
 export function FinalCTA() {
   return (
@@ -10,9 +9,6 @@ export function FinalCTA() {
         <AnimateOnScroll>
           <div className="section-dark relative overflow-hidden rounded-3xl px-6 py-16 text-center md:px-12 md:py-24">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(129,140,248,0.2),transparent_60%)]" />
-            <div className="pointer-events-none absolute -right-8 -top-8 opacity-[0.08]">
-              <BrandMark size={280} className="h-64 w-64" />
-            </div>
 
             <div className="relative z-10">
               <span className="section-label mb-6 inline-flex">Book a demo</span>
