@@ -13,7 +13,7 @@ import {
   Wifi,
 } from "lucide-react";
 import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
-import { BrandMark } from "@/components/ui/Logo";
+import { ZonikMark } from "@/components/ui/ZonikMark";
 import { cn } from "@/lib/utils";
 
 function VoiceBars({ active }: { active: boolean }) {
@@ -26,7 +26,7 @@ function VoiceBars({ active }: { active: boolean }) {
           animate={active ? { height: [3, 14, 6, 12, 4] } : { height: 3 }}
           transition={
             active
-              ? { duration: 0.7, repeat: Infinity, delay: i * 0.08 }
+              ? { duration: 1.1, repeat: Infinity, delay: i * 0.12 }
               : { duration: 0.2 }
           }
         />
@@ -122,9 +122,9 @@ export function ConnectVisual({ active }: { active: boolean }) {
                 : { boxShadow: "0 0 0 0 rgba(129,140,248,0)" }
             }
             transition={{ duration: 2, repeat: Infinity }}
-            className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-primary text-white shadow-lg"
+            className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border border-border bg-white shadow-lg"
           >
-            <BrandMark size={28} className="h-7 w-7" />
+            <ZonikMark className="h-8 w-8" />
           </motion.div>
         </div>
       </div>
@@ -133,7 +133,7 @@ export function ConnectVisual({ active }: { active: boolean }) {
         animate={{ opacity: active ? 1 : 0.4 }}
         className="absolute bottom-3 left-0 right-0 text-center text-[10px] font-medium text-secondary-dark"
       >
-        Data synced · No manual import
+        Connected. Loads fill in on their own.
       </motion.p>
     </div>
   );
@@ -158,10 +158,10 @@ export function MonitorVisual({ active }: { active: boolean }) {
           />
         )}
         <div className="flex items-center justify-between border-b border-border bg-surface/60 px-3 py-2">
-          <span className="text-[10px] font-semibold">Live fleet board</span>
+          <span className="text-[10px] font-semibold">Every truck</span>
           <span className="flex items-center gap-1 text-[9px] text-success">
             <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-dot" />
-            Monitoring
+            Watching
           </span>
         </div>
         <div className="divide-y divide-border">
@@ -218,13 +218,13 @@ export function VoiceVisual({ active }: { active: boolean }) {
 
     const runCycle = () => {
       setPhase(0);
-      timers.push(setTimeout(() => setPhase(1), 600));
-      timers.push(setTimeout(() => setPhase(2), 1800));
-      timers.push(setTimeout(() => setPhase(3), 3200));
+      timers.push(setTimeout(() => setPhase(1), 1200));
+      timers.push(setTimeout(() => setPhase(2), 3200));
+      timers.push(setTimeout(() => setPhase(3), 6000));
     };
 
     timers.push(setTimeout(runCycle, 0));
-    const loop = setInterval(runCycle, 4500);
+    const loop = setInterval(runCycle, 9000);
     return () => {
       timers.forEach(clearTimeout);
       clearInterval(loop);
@@ -243,7 +243,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
               <Radio className="h-3.5 w-3.5" />
             </div>
             <div>
-              <p className="text-[10px] font-semibold">AI Voice Agent</p>
+              <p className="text-[10px] font-semibold">Zonik calling</p>
               <VoiceBars active={active && phase >= 1 && phase < 3} />
             </div>
           </div>
@@ -281,7 +281,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
             >
               <motion.span
                 animate={{ opacity: [1, 0.3, 1] }}
-                transition={{ duration: 1, repeat: Infinity }}
+                transition={{ duration: 1.6, repeat: Infinity }}
                 className="h-1.5 w-1.5 rounded-full bg-secondary"
               />
               Call in progress…
@@ -307,7 +307,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
           className="flex items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-[10px]"
         >
           <Wifi className="h-3 w-3 text-success" />
-          Dashboard updated · Delay +2 hr · Risk: At Risk
+          Your team updated · Late +2 hr
         </motion.div>
       )}
     </div>
@@ -320,9 +320,9 @@ export function AlertVisual({ active }: { active: boolean }) {
   return (
     <div className="relative flex h-full min-h-[220px] flex-col px-4 py-5">
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-[10px] font-semibold text-muted">After-hours operator view</p>
+        <p className="text-[10px] font-semibold text-muted">Your team</p>
         <span className="rounded-full bg-success-bg px-2 py-0.5 text-[9px] font-semibold text-success">
-          4 loads quiet
+          4 trucks fine
         </span>
       </div>
 
@@ -364,17 +364,17 @@ export function AlertVisual({ active }: { active: boolean }) {
           >
             <Bell className="h-3.5 w-3.5" />
           </motion.div>
-          <p className="text-[10px] font-bold text-danger">Action needed</p>
+          <p className="text-[10px] font-bold text-danger">Needs you</p>
           <p className="mt-1 font-mono text-xs font-semibold">#48318</p>
           <p className="mt-1 text-[9px] leading-snug text-muted">
-            GPS offline · Truck stationary · Next stop late
+            GPS off · Truck stopped · Next stop late
           </p>
           <motion.span
             animate={active ? { opacity: [0.7, 1, 0.7] } : { opacity: 1 }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="mt-auto inline-block rounded-lg bg-danger px-2 py-1.5 text-center text-[9px] font-semibold text-white"
           >
-            Review now →
+            Open this
           </motion.span>
         </motion.div>
       </div>

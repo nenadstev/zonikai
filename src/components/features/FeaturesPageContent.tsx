@@ -15,7 +15,7 @@ import { BrandMark } from "@/components/ui/Logo";
 const features = [
   {
     icon: MapPin,
-    title: "GPS tracking all night",
+    title: "GPS tracking 24/7",
     text: "Zonik watches where every truck is. Speed. Route. Stop ETA. If GPS goes dark, you know right away.",
   },
   {
@@ -30,13 +30,13 @@ const features = [
   },
   {
     icon: Moon,
-    title: "Nights, weekends, holidays",
-    text: "Zonik does not sleep. Your fleet stays watched when your day team is off.",
+    title: "Always on",
+    text: "Zonik does not sleep. Day, night, weekends, holidays. Your fleet stays watched.",
   },
   {
     icon: ShieldCheck,
     title: "Fewer mistakes",
-    text: "Missed updates and late finds go down. Your after-hours team works from facts, not guesswork.",
+    text: "Missed updates and late finds go down. Your team works from facts, not guesswork.",
   },
   {
     icon: Users,
@@ -58,10 +58,10 @@ export function FeaturesPageContent() {
             <h1 className="text-3xl font-semibold tracking-[-0.03em] md:text-[2.75rem] md:leading-[1.12]">
               What Zonik does for your fleet
               <br />
-              <span className="headline-accent">after the day shift ends.</span>
+              <span className="headline-accent">every hour of the day.</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              GPS. Driver calls. A clear board. So your night team always knows where
+              GPS. Driver calls. A clear board. So your team always knows where
               every truck stands.
             </p>
           </AnimateOnScroll>
@@ -92,7 +92,7 @@ export function FeaturesPageContent() {
             <SectionHeader
               label="The value"
               title="Less noise. Clear status."
-              titleAccent="Better nights for your team."
+              titleAccent="Better days for your team."
               punchline="Zonik does not replace your people. It cuts busy work so they can fix real problems and keep customers happy."
             />
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">

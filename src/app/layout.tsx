@@ -9,9 +9,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Zonik AI — After-Hours Load Tracking Agent",
+  title: "Zonik AI — 24/7 Load Tracking",
   description:
-    "Zonik watches your trucks at night. It calls drivers when something looks wrong. Your team sees every load on one screen.",
+    "Zonik watches your trucks 24/7. It calls drivers when something looks wrong. Your team sees every load on one screen.",
   icons: {
     icon: [
       { url: "/brand/zonik-favicon.png", type: "image/png" },

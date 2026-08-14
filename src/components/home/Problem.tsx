@@ -1,26 +1,29 @@
-import { Phone, PhoneOff, Moon } from "lucide-react";
+import { Clock, Flame, Route } from "lucide-react";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 
 const problems = [
   {
-    icon: PhoneOff,
-    title: "Too many night check calls",
+    icon: Flame,
+    hook: "They wait until a truck is late.",
+    versus: "Then the phones start.",
     description:
-      "Your team calls drivers on loads that are fine. Hours on the phone. Nothing to fix.",
+      "A pickup or delivery window is already gone. Now the night team is calling drivers and catching up.",
   },
   {
-    icon: Phone,
-    title: "Delays found too late",
+    icon: Clock,
+    hook: "They check one truck at a time.",
+    versus: "The late one is easy to miss.",
     description:
-      "By the time someone sees a problem, the pickup or delivery window is already gone.",
+      "Open the ELD. Check this load. Then the next. By the time they see a delay, it's too late to fix.",
   },
   {
-    icon: Moon,
-    title: "No one watching overnight",
+    icon: Route,
+    hook: "The whole night goes to problems.",
+    versus: "Nobody plans the next loads.",
     description:
-      "Trucks keep moving at night. Trouble piles up until the morning shift walks in.",
+      "They stay on what already broke. They don't have time to set up tomorrow's tours or make money for the company.",
   },
 ];
 
@@ -31,21 +34,22 @@ export function Problem() {
         <AnimateOnScroll>
           <SectionHeader
             label="The problem"
-            title="Night tracking is hard work."
-            titleAccent="And easy to get wrong."
-            punchline="Most night work is calling drivers who are fine. The loads in real trouble slip through."
+            title="At night, the team waits for problems."
+            titleAccent="They don't stop them early."
+            punchline="Tracking is slow. They find out late. The whole shift goes to fixing what already went wrong."
           />
         </AnimateOnScroll>
 
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+        <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-3">
           {problems.map((problem, i) => (
-            <AnimateOnScroll key={problem.title} delay={i * 0.08}>
-              <div className="border-t border-border pt-6">
-                <div className="icon-chip h-10 w-10">
-                  <problem.icon className="h-4 w-4" />
-                </div>
-                <h3 className="mt-4 text-lg font-semibold tracking-[-0.01em]">{problem.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{problem.description}</p>
+            <AnimateOnScroll key={problem.hook} delay={i * 0.08}>
+              <div className="flex h-full flex-col bg-white p-7 md:p-8">
+                <problem.icon className="h-8 w-8 text-secondary" strokeWidth={1.75} />
+                <p className="mt-8 text-2xl font-semibold tracking-[-0.03em] text-foreground md:text-[1.65rem] md:leading-tight">
+                  {problem.hook}
+                </p>
+                <p className="mt-2 text-sm font-medium text-secondary-dark">{problem.versus}</p>
+                <p className="mt-6 text-sm leading-relaxed text-muted">{problem.description}</p>
               </div>
             </AnimateOnScroll>
           ))}

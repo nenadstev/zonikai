@@ -23,7 +23,7 @@ export function Footer() {
           <div className="md:col-span-2">
             <Logo variant="full" className="mb-1" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Zonik watches your trucks at night. It calls drivers when something looks
+              Zonik watches your trucks 24/7. It calls drivers when something looks
               wrong. Your team sees every load on one screen.
             </p>
             <div className="mt-6 space-y-1 text-sm text-muted">
@@ -57,7 +57,7 @@ export function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Zonik AI. All rights reserved.
           </p>
-          <p className="text-xs text-muted">After-hours load tracking for trucking</p>
+          <p className="text-xs text-muted">24/7 load tracking for trucking</p>
         </div>
       </div>
     </footer>

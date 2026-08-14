@@ -12,7 +12,7 @@ const faqs = [
   {
     question: "What is Zonik AI?",
     answer:
-      "An AI agent that watches your loads after hours. It tracks GPS, calls drivers when something looks wrong, and alerts your team only when a load needs help.",
+      "An AI agent that watches your loads 24/7. It tracks GPS, calls drivers when something looks wrong, and alerts your team only when a load needs help.",
   },
   {
     question: "Does it replace my dispatchers?",
@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     question: "Does it run on weekends and holidays?",
-    answer: "Yes. Every night, every weekend, every holiday. It does not call in sick.",
+    answer: "Yes. Day and night. Weekends and holidays. It does not call in sick.",
   },
   {
     question: "Can one person cover the whole night?",
