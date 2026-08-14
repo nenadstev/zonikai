@@ -3,13 +3,13 @@ import { Logo } from "@/components/ui/Logo";
 
 const footerLinks = {
   Product: [
-    { label: "GPS Tracking", href: "/#gps" },
-    { label: "Voice Agent", href: "/#voice-agent" },
-    { label: "Dashboard", href: "/#product" },
-    { label: "Integrations", href: "/#integrations" },
+    { label: "How it works", href: "/#how-it-works" },
+    { label: "Features", href: "/features" },
+    { label: "Integrations", href: "/integrations" },
+    { label: "Calculator", href: "/calculator" },
   ],
   Company: [
-    { label: "FAQ", href: "/#faq" },
+    { label: "FAQ", href: "/faq" },
     { label: "Contact", href: "/contact" },
     { label: "Book a Demo", href: "/contact" },
   ],
@@ -21,10 +21,10 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-2">
-        <Logo className="mb-1" />
+            <Logo variant="full" className="mb-1" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Zonik AI monitors every active load 24/7 — GPS, voice agents,
-              and smart alerts — so your team reacts only when it matters.
+              Zonik watches your trucks at night. It calls drivers when something looks
+              wrong. Your team sees every load on one screen.
             </p>
             <div className="mt-6 space-y-1 text-sm text-muted">
               <p>hello@zonikai.com</p>
@@ -57,9 +57,7 @@ export function Footer() {
           <p className="text-xs text-muted">
             &copy; {new Date().getFullYear()} Zonik AI. All rights reserved.
           </p>
-          <p className="text-xs text-muted">
-            After-hours load tracking for trucking &amp; freight
-          </p>
+          <p className="text-xs text-muted">After-hours load tracking for trucking</p>
         </div>
       </div>
     </footer>

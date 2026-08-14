@@ -209,24 +209,24 @@ export function VoiceVisual({ active }: { active: boolean }) {
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
     if (!active) {
-      setPhase(0);
-      return;
+      timers.push(setTimeout(() => setPhase(0), 0));
+      return () => timers.forEach(clearTimeout);
     }
-    setPhase(0);
-    const t1 = setTimeout(() => setPhase(1), 600);
-    const t2 = setTimeout(() => setPhase(2), 1800);
-    const t3 = setTimeout(() => setPhase(3), 3200);
-    const loop = setInterval(() => {
+
+    const runCycle = () => {
       setPhase(0);
-      setTimeout(() => setPhase(1), 600);
-      setTimeout(() => setPhase(2), 1800);
-      setTimeout(() => setPhase(3), 3200);
-    }, 4500);
+      timers.push(setTimeout(() => setPhase(1), 600));
+      timers.push(setTimeout(() => setPhase(2), 1800));
+      timers.push(setTimeout(() => setPhase(3), 3200));
+    };
+
+    timers.push(setTimeout(runCycle, 0));
+    const loop = setInterval(runCycle, 4500);
     return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
+      timers.forEach(clearTimeout);
       clearInterval(loop);
     };
   }, [active]);

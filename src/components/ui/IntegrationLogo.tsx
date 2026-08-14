@@ -4,27 +4,16 @@ type IntegrationLogoProps = {
   name: string;
   src: string;
   className?: string;
-  surface?: "light" | "dark";
 };
 
-export function IntegrationLogo({
-  name,
-  src,
-  className,
-  surface = "light",
-}: IntegrationLogoProps) {
+export function IntegrationLogo({ name, src, className }: IntegrationLogoProps) {
   return (
-    <div
-      className={cn(
-        "flex h-11 w-full max-w-[132px] items-center justify-center rounded-lg px-3 py-2",
-        surface === "dark" ? "bg-neutral-950" : "bg-surface/60"
-      )}
-    >
+    <div className="flex h-12 w-full max-w-[160px] items-center justify-center">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={src}
         alt={`${name} logo`}
-        className={cn("h-6 w-auto max-w-full object-contain object-center", className)}
+        className={cn("h-8 w-auto max-w-full object-contain object-center", className)}
         loading="lazy"
       />
     </div>

@@ -20,38 +20,38 @@ const steps = [
   {
     number: "01",
     icon: Link2,
-    title: "Connect load & GPS data",
+    title: "Connect your systems",
     description:
-      "Pull active loads from your TMS and live GPS from your ELD — synced automatically, no spreadsheets.",
+      "Plug in your TMS and ELD once. Zonik pulls active loads and live GPS. No spreadsheets. No new hardware.",
     tag: "One-time setup",
     Visual: ConnectVisual,
   },
   {
     number: "02",
     icon: Eye,
-    title: "Monitor every load 24/7",
+    title: "Watch every load",
     description:
-      "Zonik watches location, ETA, stop status, and delays around the clock — your team never refreshes a portal.",
-    tag: "Always on",
+      "Zonik checks location, ETA, and stops all night. Your team does not refresh a portal again.",
+    tag: "All night",
     Visual: MonitorVisual,
   },
   {
     number: "03",
     icon: PhoneCall,
-    title: "AI calls drivers when needed",
+    title: "Call the driver",
     description:
-      "When something looks off, the Voice Agent calls the driver, confirms status, and updates the dashboard.",
-    tag: "No check calls",
+      "If something looks wrong, Zonik calls the driver, asks what happened, and puts the answer on your board.",
+    tag: "AI voice",
     Visual: VoiceVisual,
     featured: true,
   },
   {
     number: "04",
     icon: Bell,
-    title: "Alert your team on exceptions",
+    title: "Alert your team",
     description:
-      "Your after-hours operator sees only loads that need action — everything else stays quiet on the board.",
-    tag: "Exceptions only",
+      "Your people only hear about loads in trouble. Everything else stays quiet.",
+    tag: "Trouble only",
     Visual: AlertVisual,
   },
 ];
@@ -165,9 +165,9 @@ export function HowItWorks() {
         <AnimateOnScroll>
           <SectionHeader
             label="How it works"
-            title="Four steps."
-            titleAccent="Zero manual monitoring."
-            punchline="Connect your data once. Zonik runs the loop — watch each step below."
+            title="Connect. Watch. Call. Alert."
+            titleAccent="That is the whole loop."
+            punchline="Four steps. Watch them play out below."
           />
         </AnimateOnScroll>
 
@@ -275,10 +275,10 @@ export function HowItWorks() {
             {/* Bottom flow summary */}
             <div className="grid divide-y border-t border-border md:grid-cols-4 md:divide-x md:divide-y-0">
               {[
-                "TMS + ELD → Zonik",
-                "24/7 risk scan",
-                "Driver contacted by AI",
-                "Team alerted once",
+                "Connect TMS + ELD",
+                "Watch every load",
+                "Call the driver",
+                "Alert your team",
               ].map((label, i) => (
                 <div
                   key={label}

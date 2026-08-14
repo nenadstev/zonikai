@@ -15,21 +15,21 @@ export function FinalCTA() {
             </div>
 
             <div className="relative z-10">
-              <span className="section-label mb-6 inline-flex">Ready to start?</span>
+              <span className="section-label mb-6 inline-flex">Ready when you are</span>
               <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.1]">
-                Let AI watch every load tonight.
+                Put Zonik on the night shift.
                 <br />
-                <span className="text-[#a5b4fc]">Your team wakes up to exceptions only.</span>
+                <span className="text-[#a5b4fc]">Your people get their nights back.</span>
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-base text-neutral-400">
-                Book a demo and see how one operator with Zonik AI can run your entire after-hours tracking operation.
+                Book a demo — or run the numbers with the cost calculator.
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Button href="/contact" variant="accent" size="lg">
                   Book a Demo
                 </Button>
-                <Button href="/dashboard" variant="outlineDark" size="lg">
-                  See the Dashboard
+                <Button href="/calculator" variant="outlineDark" size="lg">
+                  Open Calculator
                 </Button>
               </div>
             </div>

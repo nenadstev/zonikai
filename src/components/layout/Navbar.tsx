@@ -2,49 +2,58 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "GPS", href: "/#gps" },
-  { label: "Voice Agent", href: "/#voice-agent" },
-  { label: "Product", href: "/#product" },
+  { label: "How it works", href: "/#how-it-works" },
+  { label: "Features", href: "/features" },
+  { label: "Integrations", href: "/integrations" },
   { label: "Calculator", href: "/calculator" },
-  { label: "Integrations", href: "/#integrations" },
-  { label: "FAQ", href: "/#faq" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const overHero = pathname === "/" && !scrolled && !mobileOpen;
 
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        scrolled
-          ? "border-b border-border bg-white/80 backdrop-blur-xl"
-          : "bg-background/80 backdrop-blur-sm"
+        overHero
+          ? "bg-gradient-to-b from-black/50 to-transparent"
+          : "border-b border-border bg-white/80 backdrop-blur-xl"
       )}
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Logo />
+        <Logo className={cn(overHero && "[&_img]:brightness-0 [&_img]:invert")} />
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-6 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[13px] font-medium text-muted transition-colors hover:text-foreground"
+              className={cn(
+                "text-[13px] font-medium transition-colors",
+                overHero
+                  ? "text-white/85 hover:text-white"
+                  : "text-muted hover:text-foreground"
+              )}
             >
               {link.label}
             </Link>
@@ -52,14 +61,17 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href="/contact" size="sm">
+          <Button href="/contact" variant={overHero ? "outlineDark" : "primary"} size="sm">
             Book a Demo
           </Button>
         </div>
 
         <button
           type="button"
-          className="rounded-lg p-2 text-muted hover:bg-surface lg:hidden"
+          className={cn(
+            "rounded-lg p-2 transition-colors lg:hidden",
+            overHero ? "text-white hover:bg-white/10" : "text-muted hover:bg-surface"
+          )}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >

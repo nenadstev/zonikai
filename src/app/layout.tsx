@@ -11,7 +11,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Zonik AI — After-Hours Load Tracking Agent",
   description:
-    "Zonik AI monitors every active load, tracks GPS in real time, calls drivers with AI voice agents, and alerts your team when human attention is actually needed.",
+    "Zonik watches your trucks at night. It calls drivers when something looks wrong. Your team sees every load on one screen.",
   icons: {
     icon: [
       { url: "/brand/zonik-favicon.png", type: "image/png" },

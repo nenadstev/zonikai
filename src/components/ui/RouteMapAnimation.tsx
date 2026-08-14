@@ -11,7 +11,7 @@ type RouteMapProps = {
   height?: string;
   showLabels?: boolean;
   compact?: boolean;
-  theme?: "light" | "dark";
+  theme?: "light" | "dark" | "glass";
 };
 
 export function RouteMapAnimation({
@@ -26,9 +26,17 @@ export function RouteMapAnimation({
   const routeGlowId = `routeGlow-${uid}`;
   const truckGlowId = `truckGlow-${uid}`;
 
-  const bg = theme === "dark" ? "#18181B" : compact ? "#FAFAFA" : "#F8FAFC";
-  const gridStroke = theme === "dark" ? "#27272A" : "#ECECEC";
-  const labelFill = theme === "dark" ? "#A1A1AA" : "#737373";
+  const bg =
+    theme === "glass"
+      ? "transparent"
+      : theme === "dark"
+        ? "#18181B"
+        : compact
+          ? "#FAFAFA"
+          : "#F8FAFC";
+  const gridStroke =
+    theme === "glass" ? "rgba(255,255,255,0.08)" : theme === "dark" ? "#27272A" : "#ECECEC";
+  const labelFill = theme === "dark" || theme === "glass" ? "#D4D4D8" : "#737373";
 
   return (
     <svg viewBox={viewBox} className={height} aria-hidden>

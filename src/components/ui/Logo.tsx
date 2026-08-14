@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 
 type LogoProps = {
   className?: string;
-  variant?: "full" | "icon";
+  variant?: "full" | "compact" | "icon";
   href?: string;
 };
 
@@ -27,16 +27,25 @@ export function BrandMark({
   );
 }
 
-export function Logo({ className, variant = "full", href = "/" }: LogoProps) {
+export function Logo({ className, variant = "compact", href = "/" }: LogoProps) {
   const content =
     variant === "icon" ? (
       <BrandMark size={32} className="h-8 w-8" />
-    ) : (
+    ) : variant === "full" ? (
       <Image
         src="/brand/zonik-ai-logo.png"
         alt="Zonik AI"
-        width={148}
-        height={40}
+        width={200}
+        height={48}
+        className="h-10 w-auto object-contain"
+        priority
+      />
+    ) : (
+      <Image
+        src="/brand/zonik-ai-logo-compact.png"
+        alt="Zonik AI"
+        width={168}
+        height={36}
         className="h-8 w-auto object-contain"
         priority
       />
