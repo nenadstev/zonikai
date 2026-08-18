@@ -13,35 +13,24 @@ import {
   VoiceVisual,
 } from "@/components/home/HowItWorksVisuals";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 
-const steps = [
+const stepMeta = [
   {
     number: "01",
     icon: Link2,
-    shortTitle: "Connected to your TMS and ELD",
-    title: "Zonik is connected to your TMS and ELD",
-    description:
-      "It pulls your loads and live GPS. You don't type anything in. No new hardware.",
     Visual: ConnectVisual,
     holdMs: 5000,
   },
   {
     number: "02",
     icon: Eye,
-    shortTitle: "Watches every truck",
-    title: "Zonik watches every truck",
-    description:
-      "It tracks GPS and the time to the next pickup or delivery. All day, every day. Nobody has to refresh a screen.",
     Visual: MonitorVisual,
     holdMs: 5000,
   },
   {
     number: "03",
     icon: PhoneCall,
-    shortTitle: "Calls drivers who are late",
-    title: "Zonik calls drivers who are late",
-    description:
-      "If a truck is late, Zonik calls the driver. It asks what happened. The answer goes to your team.",
     Visual: VoiceVisual,
     featured: true,
     holdMs: 9500,
@@ -49,10 +38,6 @@ const steps = [
   {
     number: "04",
     icon: Bell,
-    shortTitle: "Tells your team the status",
-    title: "Zonik tells your team the status",
-    description:
-      "They only hear about trucks in trouble. The rest stays quiet.",
     Visual: AlertVisual,
     holdMs: 5000,
   },
@@ -61,9 +46,11 @@ const steps = [
 function StepTimeline({
   active,
   onSelect,
+  items,
 }: {
   active: number;
   onSelect: (i: number) => void;
+  items: { number: string; shortTitle: string }[];
 }) {
   return (
     <div className="relative">
@@ -72,7 +59,7 @@ function StepTimeline({
         aria-hidden
       />
       <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-0">
-        {steps.map((step, i) => {
+        {items.map((step, i) => {
           const isActive = active === i;
           const isDone = active > i;
           return (
@@ -109,8 +96,14 @@ function StepTimeline({
 }
 
 export function HowItWorks() {
+  const { t } = useI18n();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+
+  const steps = stepMeta.map((meta, i) => ({
+    ...meta,
+    ...t.howItWorks.steps[i],
+  }));
 
   const goTo = useCallback((i: number) => {
     setActive(i);
@@ -135,10 +128,10 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <SectionHeader
-            label="How it works"
-            title="Zonik knows every truck and every load."
-            titleAccent="Tracks them 24/7."
-            punchline="Here's what it does to help your after-hours and dispatch teams."
+            label={t.howItWorks.label}
+            title={t.howItWorks.title}
+            titleAccent={t.howItWorks.titleAccent}
+            punchline={t.howItWorks.punchline}
           />
         </AnimateOnScroll>
 
@@ -146,7 +139,7 @@ export function HowItWorks() {
           <div className="card-clean overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
             {/* Timeline selector */}
             <div className="border-b border-border bg-surface/30 p-4 md:p-6">
-              <StepTimeline active={active} onSelect={goTo} />
+              <StepTimeline active={active} onSelect={goTo} items={steps} />
             </div>
 
             {/* Main visual stage */}
@@ -163,11 +156,11 @@ export function HowItWorks() {
                       animate={{ opacity: 1, x: 0 }}
                       className="rounded-full bg-primary px-2.5 py-1 font-mono text-[10px] font-bold text-white"
                     >
-                      Step {step.number}
+                      {t.howItWorks.step} {step.number}
                     </motion.span>
                     {step.featured && (
                       <span className="rounded-full bg-secondary/15 px-2 py-0.5 text-[9px] font-semibold text-secondary-dark">
-                        AI call
+                        {t.howItWorks.aiCall}
                       </span>
                     )}
                   </div>

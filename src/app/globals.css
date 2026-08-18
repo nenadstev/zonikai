@@ -49,6 +49,25 @@ html {
   scroll-behavior: smooth;
 }
 
+.pitch-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(129, 140, 248, 0.45) transparent;
+}
+
+.pitch-truck-halo {
+  animation: pitch-truck-halo 1.8s ease-in-out infinite;
+}
+
+@keyframes pitch-truck-halo {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 0.62;
+  }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

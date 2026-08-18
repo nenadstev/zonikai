@@ -15,6 +15,7 @@ import {
 import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
 import { ZonikMark } from "@/components/ui/ZonikMark";
 import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 
 function VoiceBars({ active }: { active: boolean }) {
   return (
@@ -36,9 +37,10 @@ function VoiceBars({ active }: { active: boolean }) {
 }
 
 export function ConnectVisual({ active }: { active: boolean }) {
+  const { t } = useI18n();
   const sources = [
-    { label: "TMS", sub: "Active loads", icon: Database, side: "left" as const },
-    { label: "ELD / GPS", sub: "Live location", icon: MapPin, side: "right" as const },
+    { label: "TMS", sub: t.visuals.tmsSub, icon: Database, side: "left" as const },
+    { label: "ELD / GPS", sub: t.visuals.eldSub, icon: MapPin, side: "right" as const },
   ];
 
   return (
@@ -133,18 +135,19 @@ export function ConnectVisual({ active }: { active: boolean }) {
         animate={{ opacity: active ? 1 : 0.4 }}
         className="absolute bottom-3 left-0 right-0 text-center text-[10px] font-medium text-secondary-dark"
       >
-        Connected. Loads fill in on their own.
+        {t.visuals.connectedCaption}
       </motion.p>
     </div>
   );
 }
 
 export function MonitorVisual({ active }: { active: boolean }) {
+  const { t } = useI18n();
   const loads = [
-    { id: "#48291", status: "On time", tone: "success" as const },
-    { id: "#48305", status: "At risk", tone: "warning" as const },
-    { id: "#48312", status: "On time", tone: "success" as const },
-    { id: "#48318", status: "Critical", tone: "danger" as const },
+    { id: "#48291", status: t.visuals.onTime, tone: "success" as const },
+    { id: "#48305", status: t.visuals.atRisk, tone: "warning" as const },
+    { id: "#48312", status: t.visuals.onTime, tone: "success" as const },
+    { id: "#48318", status: t.visuals.critical, tone: "danger" as const },
   ];
 
   return (
@@ -158,10 +161,10 @@ export function MonitorVisual({ active }: { active: boolean }) {
           />
         )}
         <div className="flex items-center justify-between border-b border-border bg-surface/60 px-3 py-2">
-          <span className="text-[10px] font-semibold">Every truck</span>
+          <span className="text-[10px] font-semibold">{t.visuals.everyTruck}</span>
           <span className="flex items-center gap-1 text-[9px] text-success">
             <span className="h-1.5 w-1.5 rounded-full bg-success animate-pulse-dot" />
-            Watching
+            {t.visuals.watching}
           </span>
         </div>
         <div className="divide-y divide-border">
@@ -206,6 +209,7 @@ export function MonitorVisual({ active }: { active: boolean }) {
 }
 
 export function VoiceVisual({ active }: { active: boolean }) {
+  const { t } = useI18n();
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
@@ -243,7 +247,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
               <Radio className="h-3.5 w-3.5" />
             </div>
             <div>
-              <p className="text-[10px] font-semibold">Zonik calling</p>
+              <p className="text-[10px] font-semibold">{t.visuals.zonikCalling}</p>
               <VoiceBars active={active && phase >= 1 && phase < 3} />
             </div>
           </div>
@@ -253,7 +257,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
               animate={{ opacity: 1, y: 0 }}
               className="mt-2 rounded-lg bg-white px-2 py-1.5 text-[9px] leading-snug text-muted"
             >
-              &ldquo;Hi, this is Zonik. Can you confirm your status?&rdquo;
+              &ldquo;{t.visuals.callScript}&rdquo;
             </motion.p>
           )}
         </motion.div>
@@ -269,7 +273,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
               <Phone className="h-3.5 w-3.5 text-muted" />
             </div>
             <div>
-              <p className="text-[10px] font-semibold">Driver · T-2187</p>
+              <p className="text-[10px] font-semibold">{t.visuals.driver} · T-2187</p>
               <p className="text-[9px] text-muted">M. Johnson</p>
             </div>
           </div>
@@ -284,7 +288,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
                 transition={{ duration: 1.6, repeat: Infinity }}
                 className="h-1.5 w-1.5 rounded-full bg-secondary"
               />
-              Call in progress…
+              {t.visuals.callInProgress}
             </motion.div>
           )}
           {phase >= 3 && (
@@ -294,7 +298,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
               className="mt-2 flex items-start gap-1 rounded-lg bg-success-bg px-2 py-1.5 text-[9px] text-success"
             >
               <Check className="mt-0.5 h-3 w-3 shrink-0" />
-              &ldquo;Breakdown on I-70. ETA +2 hr.&rdquo;
+              &ldquo;{t.visuals.driverReply}&rdquo;
             </motion.p>
           )}
         </motion.div>
@@ -307,7 +311,7 @@ export function VoiceVisual({ active }: { active: boolean }) {
           className="flex items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-[10px]"
         >
           <Wifi className="h-3 w-3 text-success" />
-          Your team updated · Late +2 hr
+          {t.visuals.teamUpdated}
         </motion.div>
       )}
     </div>
@@ -315,14 +319,15 @@ export function VoiceVisual({ active }: { active: boolean }) {
 }
 
 export function AlertVisual({ active }: { active: boolean }) {
+  const { t } = useI18n();
   const quietLoads = ["#48291", "#48312", "#48320", "#48325", "#48330"];
 
   return (
     <div className="relative flex h-full min-h-[220px] flex-col px-4 py-5">
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-[10px] font-semibold text-muted">Your team</p>
+        <p className="text-[10px] font-semibold text-muted">{t.visuals.yourTeam}</p>
         <span className="rounded-full bg-success-bg px-2 py-0.5 text-[9px] font-semibold text-success">
-          4 trucks fine
+          {t.visuals.trucksFine}
         </span>
       </div>
 
@@ -364,17 +369,17 @@ export function AlertVisual({ active }: { active: boolean }) {
           >
             <Bell className="h-3.5 w-3.5" />
           </motion.div>
-          <p className="text-[10px] font-bold text-danger">Needs you</p>
+          <p className="text-[10px] font-bold text-danger">{t.visuals.needsYou}</p>
           <p className="mt-1 font-mono text-xs font-semibold">#48318</p>
           <p className="mt-1 text-[9px] leading-snug text-muted">
-            GPS off · Truck stopped · Next stop late
+            {t.visuals.alertDetail}
           </p>
           <motion.span
             animate={active ? { opacity: [0.7, 1, 0.7] } : { opacity: 1 }}
             transition={{ duration: 1.5, repeat: Infinity }}
             className="mt-auto inline-block rounded-lg bg-danger px-2 py-1.5 text-center text-[9px] font-semibold text-white"
           >
-            Open this
+            {t.visuals.openThis}
           </motion.span>
         </motion.div>
       </div>

@@ -1,21 +1,34 @@
+"use client";
+
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
-
-const footerLinks = {
-  Product: [
-    { label: "How it works", href: "/#how-it-works" },
-    { label: "Features", href: "/features" },
-    { label: "Integrations", href: "/integrations" },
-    { label: "Calculator", href: "/calculator" },
-  ],
-  Company: [
-    { label: "FAQ", href: "/faq" },
-    { label: "Contact", href: "/contact" },
-    { label: "Book a Demo", href: "/contact" },
-  ],
-};
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 
 export function Footer() {
+  const { t } = useI18n();
+
+  const footerLinks = [
+    {
+      title: t.footer.product,
+      links: [
+        { label: t.nav.howItWorks, href: "/#how-it-works" },
+        { label: t.nav.features, href: "/features" },
+        { label: t.nav.integrations, href: "/integrations" },
+        { label: t.nav.calculator, href: "/calculator" },
+      ],
+    },
+    {
+      title: t.footer.company,
+      links: [
+        { label: t.nav.faq, href: "/faq" },
+        { label: t.nav.contact, href: "/contact" },
+        { label: t.nav.bookDemo, href: "/contact" },
+        { label: t.footer.privacy, href: "/privacy" },
+        { label: t.footer.terms, href: "/terms" },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t border-border bg-white">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
@@ -23,8 +36,7 @@ export function Footer() {
           <div className="md:col-span-2">
             <Logo variant="full" className="mb-1" />
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
-              Zonik watches your trucks 24/7. It calls drivers when something looks
-              wrong. Your team sees every load on one screen.
+              {t.footer.blurb}
             </p>
             <div className="mt-6 space-y-1 text-sm text-muted">
               <p>hello@zonikai.com</p>
@@ -32,13 +44,13 @@ export function Footer() {
             </div>
           </div>
 
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+          {footerLinks.map((group) => (
+            <div key={group.title}>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-muted">
-                {title}
+                {group.title}
               </h3>
               <ul className="mt-4 space-y-2.5">
-                {links.map((link) => (
+                {group.links.map((link) => (
                   <li key={link.href + link.label}>
                     <Link
                       href={link.href}
@@ -55,9 +67,23 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 sm:flex-row">
           <p className="text-xs text-muted">
-            &copy; {new Date().getFullYear()} Zonik AI. All rights reserved.
+            &copy; {new Date().getFullYear()} Zonik AI. {t.footer.rights}
           </p>
-          <p className="text-xs text-muted">24/7 load tracking for trucking</p>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy"
+              className="text-xs text-muted transition-colors hover:text-foreground"
+            >
+              {t.footer.privacy}
+            </Link>
+            <Link
+              href="/terms"
+              className="text-xs text-muted transition-colors hover:text-foreground"
+            >
+              {t.footer.terms}
+            </Link>
+            <p className="text-xs text-muted">{t.footer.tagline}</p>
+          </div>
         </div>
       </div>
     </footer>

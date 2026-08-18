@@ -4,7 +4,7 @@ import { IntegrationsPageContent } from "@/components/integrations/IntegrationsP
 export const metadata: Metadata = {
   title: "Integrations — Zonik AI",
   description:
-    "Connect Samsara, Motive, Geotab, and other ELDs. Live GPS into Zonik with no rip and replace.",
+    "Zonik connects your ELD, TMS, project tools, and chat. Live GPS and load data in one place.",
 };
 
 export default function IntegrationsPage() {

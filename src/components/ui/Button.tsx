@@ -45,6 +45,14 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], className);
 
   if (href) {
+    if (/^https?:\/\//.test(href)) {
+      return (
+        <a href={href} className={classes}>
+          {children}
+        </a>
+      );
+    }
+
     return (
       <Link href={href} className={classes}>
         {children}

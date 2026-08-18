@@ -42,11 +42,11 @@ export function Logo({ className, variant = "compact", href = "/" }: LogoProps) 
       />
     ) : (
       <Image
-        src="/brand/zonik-ai-logo-compact.png"
+        src="/brand/zonik-header.png"
         alt="Zonik AI"
-        width={168}
-        height={36}
-        className="h-8 w-auto object-contain"
+        width={190}
+        height={37}
+        className="h-7 w-auto object-contain"
         priority
       />
     );

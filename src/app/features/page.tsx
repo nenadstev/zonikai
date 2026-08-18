@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { FeaturesPageContent } from "@/components/features/FeaturesPageContent";
+import { FeaturesFullPage } from "@/components/features/FeaturesFullPage";
 
 export const metadata: Metadata = {
   title: "Features — Zonik AI",
   description:
-    "GPS tracking, AI driver calls, and a clear board for your trucking fleet.",
+    "Next-stop ETA, AI driver calls, and a clean shift handoff for after-hours trucking teams.",
 };
 
 export default function FeaturesPage() {
-  return <FeaturesPageContent />;
+  return <FeaturesFullPage />;
 }

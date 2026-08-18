@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { BrandMark } from "@/components/ui/Logo";
 import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 
 function VoiceWave() {
   return (
@@ -24,7 +25,9 @@ function VoiceWave() {
   );
 }
 
-function HeroDashboard() {
+export function HeroDashboard() {
+  const { t } = useI18n();
+  const dash = t.hero.dash;
   const [eta, setEta] = useState({ hours: 2, minutes: 14, seconds: 32 });
   const [status, setStatus] = useState<"on-time" | "at-risk">("on-time");
   const [callPhase, setCallPhase] = useState<"idle" | "calling" | "status">("idle");
@@ -105,8 +108,8 @@ function HeroDashboard() {
                     <Phone className="h-3.5 w-3.5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-semibold text-[#a5b4fc]">AI calling driver</p>
-                    <p className="text-[11px] leading-snug text-neutral-400">Getting status for your team</p>
+                    <p className="text-xs font-semibold text-[#a5b4fc]">{dash.calling}</p>
+                    <p className="text-[11px] leading-snug text-neutral-400">{dash.callingSub}</p>
                   </div>
                   <VoiceWave />
                 </motion.div>
@@ -123,7 +126,7 @@ function HeroDashboard() {
                 >
                   <PhoneCall className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#fbbf24]" />
                   <p className="text-xs leading-snug text-neutral-200">
-                    Breakdown on I-70. New ETA 20:45.
+                    {dash.breakdown}
                   </p>
                 </motion.div>
               )}
@@ -132,12 +135,12 @@ function HeroDashboard() {
 
           <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-3">
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">Next stop</p>
+              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">{dash.nextStop}</p>
               <p className="mt-1 text-sm font-semibold text-white">Chicago, IL</p>
-              <p className="text-[11px] text-neutral-400">Unload</p>
+              <p className="text-[11px] text-neutral-400">{dash.unload}</p>
             </div>
             <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">ETA</p>
+              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">{dash.eta}</p>
               <p className="mt-1 font-mono text-base font-semibold text-white">
                 {pad(eta.hours)}:{pad(eta.minutes)}:{pad(eta.seconds)}
               </p>
@@ -147,12 +150,12 @@ function HeroDashboard() {
                 status === "at-risk" ? "border-warning/40 bg-warning/15" : "border-white/10 bg-white/[0.03]"
               }`}
             >
-              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">Status</p>
+              <p className="text-[10px] font-medium uppercase tracking-wider text-neutral-400">{dash.status}</p>
               <div className="mt-1">
                 <AnimatePresence mode="wait">
                   <motion.div key={status} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
                     <StatusBadge variant={status === "on-time" ? "success" : "warning"}>
-                      {status === "on-time" ? "On Time" : "At Risk"}
+                      {status === "on-time" ? dash.onTime : dash.atRisk}
                     </StatusBadge>
                   </motion.div>
                 </AnimatePresence>
@@ -162,26 +165,24 @@ function HeroDashboard() {
         </div>
 
         <div className="flex items-center gap-4 border-t border-white/10 bg-transparent px-4 py-2.5 text-[11px] text-neutral-400">
-          <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-[#a5b4fc]" /> I-80, NE · Live GPS</span>
+          <span className="flex items-center gap-1.5"><MapPin className="h-3 w-3 text-[#a5b4fc]" /> {dash.liveGps}</span>
         </div>
       </div>
     </motion.div>
   );
 }
 
-const stats = [
-  { icon: MapPin, value: "Next-stop ETA", label: "Pickup or delivery" },
-  { icon: PhoneCall, value: "Calls late drivers", label: "You get the answer" },
-  { icon: ArrowRightLeft, value: "The work is done", label: "Your team does the rest" },
-];
+const statIcons = [MapPin, PhoneCall, ArrowRightLeft];
 
 export function Hero() {
+  const { t } = useI18n();
+
   return (
     <section className="relative -mt-14 flex min-h-[94vh] items-center overflow-hidden bg-[#0a0d16]">
       {/* Background truck photo */}
       <Image
         src="/hero/truck-hero.jpg"
-        alt="Freight truck on the highway at dusk"
+        alt={t.hero.imageAlt}
         fill
         priority
         sizes="100vw"
@@ -202,42 +203,39 @@ export function Hero() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-md">
               <BrandMark size={16} className="h-4 w-4" />
-              24/7 tracking for trucking
+              {t.hero.eyebrow}
             </span>
 
             <h1 className="mt-6 text-[2.15rem] font-semibold leading-[1.08] tracking-[-0.03em] text-white sm:text-[2.7rem] lg:text-[3.05rem]">
-              Know when every truck hits the next stop.
+              {t.hero.headline}
             </h1>
 
             <p className="mt-5 max-w-xl text-lg leading-relaxed text-neutral-300">
-              Zonik watches every truck. You see the next stop and the ETA. If a truck
-              is late, Zonik calls the driver. Your team only steps in when it counts.
+              {t.hero.subhead}
             </p>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/contact" variant="accent" size="lg">
-                Book a Demo
+                {t.hero.bookDemo}
               </Button>
               <Button href="/#how-it-works" variant="outlineDark" size="lg">
-                See How It Works
+                {t.hero.seeHowItWorks}
               </Button>
             </div>
 
-            <div className="mt-9 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="flex items-start gap-3 rounded-2xl border border-white/12 bg-white/[0.07] px-3.5 py-3 backdrop-blur-md"
-                >
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-secondary/20 text-[#a5b4fc]">
-                    <stat.icon className="h-4 w-4" />
-                  </span>
+            <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-3">
+              {t.hero.stats.map((stat, i) => {
+                const Icon = statIcons[i];
+                return (
+                <div key={stat.label} className="flex items-start gap-2.5">
+                  <Icon className="mt-0.5 h-4 w-4 shrink-0 text-[#a5b4fc]" />
                   <div>
-                    <p className="text-sm font-bold leading-tight text-white">{stat.value}</p>
+                    <p className="text-sm font-semibold leading-tight text-white">{stat.value}</p>
                     <p className="mt-0.5 text-xs leading-snug text-neutral-400">{stat.label}</p>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </motion.div>
 

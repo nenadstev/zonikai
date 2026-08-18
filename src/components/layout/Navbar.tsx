@@ -6,18 +6,14 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
-const navLinks = [
-  { label: "How it works", href: "/#how-it-works" },
-  { label: "Features", href: "/features" },
-  { label: "Integrations", href: "/integrations" },
-  { label: "Calculator", href: "/calculator" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contact", href: "/contact" },
-];
+const LOGIN_URL = "https://app.zonikai.com/";
 
 export function Navbar() {
+  const { t } = useI18n();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,6 +27,15 @@ export function Navbar() {
 
   const overHero = pathname === "/" && !scrolled && !mobileOpen;
 
+  const navLinks = [
+    { label: t.nav.howItWorks, href: "/#how-it-works" },
+    { label: t.nav.features, href: "/features" },
+    { label: t.nav.integrations, href: "/integrations" },
+    { label: t.nav.calculator, href: "/calculator" },
+    { label: t.nav.faq, href: "/faq" },
+    { label: t.nav.contact, href: "/contact" },
+  ];
+
   return (
     <header
       className={cn(
@@ -41,9 +46,13 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Logo className={cn(overHero && "[&_img]:brightness-0 [&_img]:invert")} />
+        <Logo
+          className={cn(
+            overHero && "rounded-md bg-white/95 px-1.5 py-0.5 shadow-sm"
+          )}
+        />
 
-        <nav className="hidden items-center gap-6 lg:flex">
+        <nav className="hidden items-center gap-4 xl:gap-6 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -60,23 +69,30 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Button href="/contact" variant={overHero ? "outlineDark" : "primary"} size="sm">
-            Book a Demo
-          </Button>
-        </div>
+        <div className="flex items-center gap-3">
+          <LanguageSwitcher light={overHero} />
 
-        <button
-          type="button"
-          className={cn(
-            "rounded-lg p-2 transition-colors lg:hidden",
-            overHero ? "text-white hover:bg-white/10" : "text-muted hover:bg-surface"
-          )}
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+          <div className="hidden items-center gap-2 lg:flex">
+            <Button href={LOGIN_URL} variant={overHero ? "outlineDark" : "secondary"} size="sm">
+              {t.nav.login}
+            </Button>
+            <Button href="/contact" variant={overHero ? "outlineDark" : "primary"} size="sm">
+              {t.nav.bookDemo}
+            </Button>
+          </div>
+
+          <button
+            type="button"
+            className={cn(
+              "rounded-lg p-2 transition-colors lg:hidden",
+              overHero ? "text-white hover:bg-white/10" : "text-muted hover:bg-surface"
+            )}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={t.nav.toggleMenu}
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {mobileOpen && (
@@ -92,8 +108,11 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button href="/contact" className="mt-3 w-full">
-              Book a Demo
+            <Button href={LOGIN_URL} variant="secondary" className="mt-3 w-full">
+              {t.nav.login}
+            </Button>
+            <Button href="/contact" className="w-full">
+              {t.nav.bookDemo}
             </Button>
           </nav>
         </div>
