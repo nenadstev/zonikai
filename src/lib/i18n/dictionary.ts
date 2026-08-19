@@ -23,6 +23,15 @@ export const en = {
     privacy: "Privacy Policy",
     terms: "Terms of Use",
   },
+  consent: {
+    title: "Cookies",
+    body: "We use Google Tag Manager to measure visits. Your language stays on this device. The demo calendar may set its own cookies.",
+    accept: "Got it",
+    privacy: "Privacy Policy",
+    calWait:
+      "Accept the site notice to load the booking calendar. You can also email hello@zonikai.com.",
+    calAccept: "Load calendar",
+  },
   hero: {
     eyebrow: "24/7 tracking for trucking",
     headline: "Know when every truck hits the next stop.",
@@ -191,6 +200,15 @@ export const sr: typeof en = {
     tagline: "Praćenje kamiona 24/7",
     privacy: "Politika privatnosti",
     terms: "Uslovi korišćenja",
+  },
+  consent: {
+    title: "Kolačići",
+    body: "Koristimo Google Tag Manager da merimo posete. Jezik ostaje na ovom uređaju. Kalendar za demo može da postavi svoje kolačiće.",
+    accept: "U redu",
+    privacy: "Politika privatnosti",
+    calWait:
+      "Prihvati obaveštenje na sajtu da se učita kalendar. Možeš i da pišeš na hello@zonikai.com.",
+    calAccept: "Učitaj kalendar",
   },
   hero: {
     eyebrow: "Praćenje kamiona 24/7",

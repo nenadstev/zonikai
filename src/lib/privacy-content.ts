@@ -101,11 +101,12 @@ const en: PrivacyCopy = {
           items: [
             "Technical logs from our host (IP address, browser, device, pages, time) — needed to run and protect the site",
             "Your language choice (EN/SR), stored only in your browser (localStorage)",
+            "Google Tag Manager may collect page views, device and browser data, and similar measurement signals (see Google’s privacy policy)",
           ],
         },
         {
           type: "p",
-          text: "This website does not use advertising pixels, marketing cookies, or analytics tools. We do not collect GPS, ELD, voice, or load data on the public site.",
+          text: "We do not collect GPS, ELD, voice, or load data on the public site. Google Tag Manager loads with the page.",
         },
       ],
     },
@@ -142,6 +143,7 @@ const en: PrivacyCopy = {
             "Answering email: our legitimate interest to reply, or steps before a contract (Art. 6(1)(f) or 6(1)(b)).",
             "Hosting, security, and abuse prevention: legitimate interest (Art. 6(1)(f)).",
             "Remembering language: legitimate interest in showing the site in your language (Art. 6(1)(f)). This is not used to identify you.",
+            "Google Tag Manager and tags it loads: legitimate interest in understanding how the public site is used (Art. 6(1)(f)). You can object by emailing hello@zonikai.com or by blocking cookies in your browser.",
           ],
         },
         {
@@ -167,6 +169,7 @@ const en: PrivacyCopy = {
           items: [
             "Cal.com — demo scheduling (see cal.com/privacy)",
             "Netlify — website hosting (see netlify.com/privacy)",
+            "Google Tag Manager / Google — site measurement (see policies.google.com/privacy)",
             "Twilio — voice calls in the product (see twilio.com/legal/privacy)",
             "Vapi — AI voice agents in the product (see vapi.ai/privacy)",
             "A language-model provider — drafts or summarizes call content in the product",
@@ -186,7 +189,7 @@ const en: PrivacyCopy = {
       blocks: [
         {
           type: "p",
-          text: "Some providers (including Cal.com, Netlify, Twilio, and Vapi) may process data in the United States or other countries. Where GDPR or Serbian law requires a safeguard, we rely on an adequacy decision or Standard Contractual Clauses, plus extra measures where needed.",
+          text: "Some providers (including Cal.com, Netlify, Google, Twilio, and Vapi) may process data in the United States or other countries. Where GDPR or Serbian law requires a safeguard, we rely on an adequacy decision or Standard Contractual Clauses, plus extra measures where needed.",
         },
         {
           type: "p",
@@ -273,13 +276,15 @@ const en: PrivacyCopy = {
       blocks: [
         {
           type: "p",
-          text: "You can browse this site without advertising cookies. We use only what we need to run the page:",
+          text: "A short notice on the site tells you about measurement and storage. We use:",
         },
         {
           type: "ul",
           items: [
-            "Cal.com may set cookies in the booking embed so you can pick a time. Those cookies are needed for that feature. See Cal.com’s policy for details.",
+            "localStorage key zonik-site-consent remembers that you accepted this notice. It is not sent to our servers.",
             "localStorage key zonik-locale remembers EN or SR. It is not a cookie and is not sent to our servers.",
+            "Google Tag Manager (GTM-WR2NJPC3) loads with the page. It may set cookies and load other Google or third-party tags configured in GTM. See policies.google.com/privacy.",
+            "Cal.com may set cookies in the booking calendar after you accept, so you can pick a time. Those cookies are needed for that feature. See Cal.com’s policy for details. Until you accept, we do not load the calendar.",
           ],
         },
         {
@@ -401,11 +406,12 @@ const sr: PrivacyCopy = {
           items: [
             "Tehnički logovi hostinga (IP adresa, pregledač, uređaj, stranice, vreme) — da sajt radi i da bude bezbedan",
             "Izbor jezika (EN/SR), samo u tvom pregledaču (localStorage)",
+            "Google Tag Manager može da skuplja preglede stranica, podatke o uređaju i pregledaču i slične signale merenja (vidi Googleovu politiku privatnosti)",
           ],
         },
         {
           type: "p",
-          text: "Na ovom sajtu nema reklamnih piksela, marketinških kolačića ni alata za analitiku. Na javnom sajtu ne prikupljamo GPS, ELD, glas ni podatke o tovaru.",
+          text: "Na javnom sajtu ne prikupljamo GPS, ELD, glas ni podatke o tovaru. Google Tag Manager se učitava sa stranicom.",
         },
       ],
     },
@@ -442,6 +448,7 @@ const sr: PrivacyCopy = {
             "Odgovor na mejl: naš legitimni interes da odgovorimo, ili koraci pre ugovora (čl. 6(1)(f) ili 6(1)(b)).",
             "Hosting, bezbednost i sprečavanje zloupotrebe: legitimni interes (čl. 6(1)(f)).",
             "Pamćenje jezika: legitimni interes da sajt bude na tvom jeziku (čl. 6(1)(f)). Time te ne identifikujemo.",
+            "Google Tag Manager i tagovi koje on učita: legitimni interes da vidimo kako se javni sajt koristi (čl. 6(1)(f)). Možeš da se usprotiviš mejlom na hello@zonikai.com ili blokiranjem kolačića u pregledaču.",
           ],
         },
         {
@@ -467,6 +474,7 @@ const sr: PrivacyCopy = {
           items: [
             "Cal.com — zakazivanje dema (cal.com/privacy)",
             "Netlify — hosting sajta (netlify.com/privacy)",
+            "Google Tag Manager / Google — merenje sajta (policies.google.com/privacy)",
             "Twilio — glasovni pozivi u proizvodu (twilio.com/legal/privacy)",
             "Vapi — AI glasovni agenti u proizvodu (vapi.ai/privacy)",
             "Provajder jezičkog modela — piše ili sažima sadržaj poziva u proizvodu",
@@ -486,7 +494,7 @@ const sr: PrivacyCopy = {
       blocks: [
         {
           type: "p",
-          text: "Neki pružaoci (uključujući Cal.com, Netlify, Twilio i Vapi) mogu da obrađuju podatke u SAD ili drugim zemljama. Gde GDPR ili srpski zakon traže zaštitu, oslanjamo se na odluku o adekvatnosti ili standardne ugovorne klauzule, plus dodatne mere gde treba.",
+          text: "Neki pružaoci (uključujući Cal.com, Netlify, Google, Twilio i Vapi) mogu da obrađuju podatke u SAD ili drugim zemljama. Gde GDPR ili srpski zakon traže zaštitu, oslanjamo se na odluku o adekvatnosti ili standardne ugovorne klauzule, plus dodatne mere gde treba.",
         },
         {
           type: "p",
@@ -573,13 +581,15 @@ const sr: PrivacyCopy = {
       blocks: [
         {
           type: "p",
-          text: "Sajt možeš da gledaš bez reklamnih kolačića. Koristimo samo ono što treba da stranica radi:",
+          text: "Kratko obaveštenje na sajtu kaže šta merimo i šta čuvamo. Koristimo:",
         },
         {
           type: "ul",
           items: [
-            "Cal.com može da postavi kolačiće u kalendaru da bi mogao da izabereš termin. Ti kolačići su potrebni za tu funkciju. Detalje vidi u politici Cal.com-a.",
+            "localStorage ključ zonik-site-consent pamti da si prihvatio ovo obaveštenje. Ne šalje se našim serverima.",
             "localStorage ključ zonik-locale pamti EN ili SR. To nije kolačić i ne šalje se našim serverima.",
+            "Google Tag Manager (GTM-WR2NJPC3) se učitava sa stranicom. Može da postavi kolačiće i da učita druge Google ili treće tagove podešene u GTM-u. Vidi policies.google.com/privacy.",
+            "Cal.com može da postavi kolačiće u kalendaru posle prihvatanja, da bi mogao da izabereš termin. Ti kolačići su potrebni za tu funkciju. Detalje vidi u politici Cal.com-a. Dok ne prihvatiš, kalendar ne učitavamo.",
           ],
         },
         {
