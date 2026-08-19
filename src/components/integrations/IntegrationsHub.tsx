@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { IntegrationLogo } from "@/components/ui/IntegrationLogo";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
 const eld = [
@@ -168,9 +169,10 @@ function Hub({ compact = false }: { compact?: boolean }) {
 }
 
 function EldBranch({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   const items = compact ? eld.slice(0, 4) : eld;
   return (
-    <BranchCard label="ELD" icon={MapPin} className={compact ? "p-3 md:p-4" : undefined}>
+    <BranchCard label={t.integrations.eld} icon={MapPin} className={compact ? "p-3 md:p-4" : undefined}>
       <div className={cn("grid gap-2.5", compact ? "grid-cols-4" : "grid-cols-2 sm:grid-cols-4")}>
         {items.map((item) => (
           <LogoTile key={item.name} {...item} />
@@ -181,9 +183,10 @@ function EldBranch({ compact = false }: { compact?: boolean }) {
 }
 
 function TmsBranch({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   const items = compact ? tms.slice(0, 4) : tms;
   return (
-    <BranchCard label="TMS" icon={Database} className={cn("min-w-0 flex-1", compact && "p-3 md:p-4")}>
+    <BranchCard label={t.integrations.tms} icon={Database} className={cn("min-w-0 flex-1", compact && "p-3 md:p-4")}>
       <div className={cn("flex flex-col gap-2", compact && "gap-1.5")}>
         {items.map((name) => (
           <NameChip key={name} name={name} />
@@ -194,9 +197,10 @@ function TmsBranch({ compact = false }: { compact?: boolean }) {
 }
 
 function CommBranch({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   return (
     <BranchCard
-      label="Communication"
+      label={t.integrations.comm}
       icon={MessageSquare}
       className={cn("min-w-0 flex-1", compact && "p-3 md:p-4")}
     >
@@ -210,9 +214,10 @@ function CommBranch({ compact = false }: { compact?: boolean }) {
 }
 
 function PmBranch({ compact = false }: { compact?: boolean }) {
+  const { t } = useI18n();
   return (
     <BranchCard
-      label="Project management"
+      label={t.integrations.pm}
       icon={LayoutList}
       className={cn("mx-auto max-w-xl", compact && "p-3 md:p-4")}
     >

@@ -2,15 +2,13 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Bell, Eye, Link2, PhoneCall, Truck } from "lucide-react";
+import { AlertTriangle, Bell, Eye, HelpCircle, Link2, Phone, PhoneCall, Truck } from "lucide-react";
 import {
   PITCH_AFTER_INDEX,
   PITCH_FEATURES_INDEX,
   PITCH_NIGHT_INDEX,
   PITCH_SLIDE_COUNT,
-  pitchSlides as s,
 } from "@/lib/pitch-slides";
-import { FEATURES } from "@/lib/features";
 import { Button } from "@/components/ui/Button";
 import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
 import { HeroDashboard } from "@/components/home/Hero";
@@ -30,13 +28,16 @@ import {
   ReportStoryVisual,
   StatusStoryVisual,
 } from "@/components/features/FeatureStoryVisuals";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
 const H = "min-h-[100dvh]";
 const VIEW = "h-[100dvh]";
 const COUNT = PITCH_SLIDE_COUNT;
-const FEATURE_N = FEATURES.length;
+const FEATURE_N = 7;
 const FEATURE_GAP_PX = 80;
+const FEATURE_HOLD = 0.68;
+const NIGHT_N = 4;
 const howVisuals = [ConnectVisual, MonitorVisual, VoiceVisual, AlertVisual] as const;
 const howIcons = [Link2, Eye, PhoneCall, Bell];
 const featureVisuals = [
@@ -253,6 +254,103 @@ const NIGHT_TRUCKS = [
   { id: "T-4410", load: "#48318" },
 ];
 
+function ProblemFireVisual() {
+  const { t } = useI18n();
+  const desk = [
+    { name: "Ana", task: t.pitch.ui.calling },
+    { name: "Mark", task: t.pitch.ui.hunting },
+    { name: "Jen", task: t.pitch.ui.onHold },
+  ];
+  return (
+    <div className="flex h-full flex-col justify-center gap-1.5">
+      {desk.map((person) => (
+        <div
+          key={person.name}
+          className="flex items-center gap-2 rounded-lg border border-red-400/25 bg-red-500/10 px-2.5 py-1.5"
+        >
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500/20 text-[10px] font-semibold text-red-200">
+            {person.name[0]}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[11px] font-semibold text-white">{person.name}</p>
+            <p className="truncate text-[10px] text-red-200/70">{person.task}</p>
+          </div>
+          <span className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-red-400" />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProblemLateVisual() {
+  const { t } = useI18n();
+  return (
+    <div className="flex h-full flex-col justify-center gap-2">
+      <div className="grid grid-cols-2 gap-2">
+        <div className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-2">
+          <p className="text-[9px] font-semibold uppercase tracking-wider text-white/35">{t.pitch.ui.window}</p>
+          <p className="mt-0.5 font-mono text-lg font-semibold text-white/30 line-through">20:00</p>
+        </div>
+        <div className="rounded-lg border border-red-400/40 bg-red-500/15 px-2.5 py-2">
+          <p className="text-[9px] font-semibold uppercase tracking-wider text-red-300">{t.pitch.ui.now}</p>
+          <p className="mt-0.5 font-mono text-lg font-semibold text-red-200">21:18</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2 rounded-lg border border-red-400/20 bg-black/20 px-2.5 py-1.5">
+        <Phone className="h-3.5 w-3.5 text-red-300" />
+        <p className="text-[11px] font-medium text-red-100/80">{t.pitch.ui.phones}</p>
+      </div>
+    </div>
+  );
+}
+
+function ProblemUnknownVisual() {
+  const { t } = useI18n();
+  return (
+    <div className="flex h-full flex-col justify-center">
+      {NIGHT_TRUCKS.slice(0, 3).map((row) => (
+        <div
+          key={row.id}
+          className="flex items-center justify-between border-b border-white/10 py-1.5 last:border-0"
+        >
+          <div className="flex items-center gap-2">
+            <HelpCircle className="h-3.5 w-3.5 text-white/30" />
+            <p className="font-mono text-[11px] font-semibold text-white/70">{row.id}</p>
+          </div>
+          <span className="rounded-full border border-white/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-white/35">
+            {t.pitch.ui.unknown}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ProblemNoLoadsVisual() {
+  const { t } = useI18n();
+  return (
+    <div className="grid h-full grid-cols-2 gap-2">
+      <div className="flex flex-col rounded-lg border border-dashed border-white/20 bg-black/20 p-2">
+        <p className="text-[9px] font-semibold uppercase tracking-wider text-white/35">{t.pitch.ui.nextLoads}</p>
+        <p className="mt-auto font-mono text-2xl font-semibold text-white/25">0</p>
+        <p className="text-[10px] text-white/30">{t.pitch.ui.empty}</p>
+      </div>
+      <div className="flex flex-col rounded-lg border border-red-400/30 bg-red-500/10 p-2">
+        <p className="text-[9px] font-semibold uppercase tracking-wider text-red-300">{t.pitch.ui.fires}</p>
+        <p className="mt-auto font-mono text-2xl font-semibold text-red-200">4</p>
+        <p className="text-[10px] text-red-200/70">{t.pitch.ui.wholeDesk}</p>
+      </div>
+    </div>
+  );
+}
+
+const nightVisuals = [
+  ProblemFireVisual,
+  ProblemLateVisual,
+  ProblemUnknownVisual,
+  ProblemNoLoadsVisual,
+];
+
 function NightBlindVisual({ active }: { active: boolean }) {
   const [scan, setScan] = useState(0);
 
@@ -321,6 +419,9 @@ function FeatureReel({
   trackRef: React.RefObject<HTMLDivElement | null>;
   onSelect: (index: number) => void;
 }) {
+  const { t } = useI18n();
+  const s = t.pitch;
+  const features = t.features.items;
   return (
     <div className="flex h-full min-h-0 flex-col">
       <div className="flex shrink-0 items-end justify-between gap-4">
@@ -332,15 +433,15 @@ function FeatureReel({
         </div>
         <div className="flex items-center gap-3">
           <p className="font-mono text-xs font-semibold tracking-[0.16em] text-[#a5b4fc]">
-            {FEATURES[featureIndex].number} / 07
+            {features[featureIndex].number} / 07
           </p>
           <div className="hidden items-center gap-1.5 sm:flex">
-            {FEATURES.map((feature, i) => (
+            {features.map((feature, i) => (
               <button
                 key={feature.number}
                 type="button"
                 onClick={() => onSelect(i)}
-                aria-label={`Feature ${feature.number}`}
+                aria-label={`${t.featuresPage.featureAria} ${feature.number}`}
                 className={cn(
                   "h-1.5 rounded-full transition-all",
                   i === featureIndex ? "w-5 bg-[#a5b4fc]" : "w-1.5 bg-white/20 hover:bg-white/40"
@@ -355,17 +456,17 @@ function FeatureReel({
         <div
           ref={trackRef}
           className="flex h-full will-change-transform"
-          style={{ gap: FEATURE_GAP_PX }}
         >
-          {FEATURES.map((feature, i) => {
+          {features.map((feature, i) => {
             const Visual = featureVisuals[i];
             return (
               <div
                 key={feature.number}
-                className="h-full min-w-full shrink-0 overflow-hidden"
+                data-feature-slide
+                className="h-full min-w-full shrink-0"
                 style={{ flex: "0 0 100%" }}
               >
-                <div className="grid h-full min-h-0 items-center gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+                <div className="grid h-full min-h-0 items-center gap-6 rounded-[1.75rem] border border-white/12 bg-white/[0.05] px-5 py-5 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-10 lg:px-7">
                   <div className="min-w-0 pr-2">
                     <p className="font-mono text-sm font-semibold tracking-[0.18em] text-[#a5b4fc]">
                       {feature.number} / 07
@@ -374,7 +475,7 @@ function FeatureReel({
                       {feature.title}
                     </h3>
                     <p className="mt-4 max-w-md text-sm leading-relaxed text-white/85 md:text-base">
-                      {feature.text}
+                      {s.features.blurbs[i]}
                     </p>
                   </div>
                   <div className="flex h-[min(38vh,20rem)] min-h-[220px] items-stretch overflow-hidden rounded-3xl border border-white/15 bg-white p-4 text-foreground shadow-[0_16px_48px_rgba(0,0,0,0.18)] md:p-5">
@@ -481,6 +582,8 @@ function Stage({
 }
 
 export function PitchDeck() {
+  const { t } = useI18n();
+  const s = t.pitch;
   const scrollerRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const fillRef = useRef<SVGPathElement>(null);
@@ -489,9 +592,12 @@ export function PitchDeck() {
   const nightRef = useRef<HTMLDivElement>(null);
   const dawnRef = useRef<HTMLDivElement>(null);
   const featureTrackRef = useRef<HTMLDivElement>(null);
+  const nightCardsRef = useRef<HTMLDivElement>(null);
   const rawProgress = useRef(0);
   const visProgress = useRef(0);
   const rawFeature = useRef(0);
+  const rawNight = useRef(0);
+  const visNight = useRef(0);
   const targetRef = useRef(0);
   const [active, setActive] = useState(0);
   const [howStep, setHowStep] = useState(0);
@@ -505,9 +611,10 @@ export function PitchDeck() {
     const night = nightRef.current;
     const dawn = dawnRef.current;
     const nightT = peak(p, PITCH_NIGHT_INDEX, 0.16);
-    const dawnT = peak(p, PITCH_AFTER_INDEX, 0.16);
-    if (night) night.style.opacity = String(nightT * 0.95);
-    if (dawn) dawn.style.opacity = String(dawnT * 0.82);
+    const dawnT = peak(p, PITCH_AFTER_INDEX, 0.09);
+    const nightHold = visNight.current > 0.001 && visNight.current < 0.999;
+    if (night) night.style.opacity = String((nightHold ? 1 : nightT) * 0.95);
+    if (dawn) dawn.style.opacity = String(dawnT * 0.72);
     if (!path || !fill || !truck || !truckBody) return;
     const len = path.getTotalLength();
     if (!len) return;
@@ -555,11 +662,38 @@ export function PitchDeck() {
     const track = featureTrackRef.current;
     const viewport = track?.parentElement;
     if (!track || !viewport) return;
-    const x = Math.min(FEATURE_N - 1, Math.max(0, fp * (FEATURE_N - 1)));
-    const step = viewport.clientWidth + FEATURE_GAP_PX;
+    const n = FEATURE_N - 1;
+    const raw = Math.min(n, Math.max(0, fp * n));
+    const i = Math.floor(raw);
+    const t = raw - i;
+    const u =
+      i >= n || t <= FEATURE_HOLD ? 0 : (t - FEATURE_HOLD) / (1 - FEATURE_HOLD);
+    const ease = u * u * (3 - 2 * u);
+    const x = Math.min(n, i + ease);
+    const gap = Math.max(FEATURE_GAP_PX, Math.round(viewport.clientWidth * 0.56));
+    track.style.gap = `${gap}px`;
+    const step = viewport.clientWidth + gap;
     track.style.transform = `translate3d(${-x * step}px, 0, 0)`;
+    track.querySelectorAll<HTMLElement>("[data-feature-slide]").forEach((slide, idx) => {
+      const d = Math.min(1, Math.abs(x - idx));
+      slide.style.opacity = String(1 - d * 0.72);
+    });
     const idx = Math.round(x);
     setFeatureIndex((prev) => (prev === idx ? prev : idx));
+  }, []);
+
+  const paintNight = useCallback((t: number) => {
+    const root = nightCardsRef.current;
+    if (!root) return;
+    const cards = root.querySelectorAll<HTMLElement>("[data-night-card]");
+    cards.forEach((card, i) => {
+      const start = 0.04 + i * (0.78 / Math.max(1, NIGHT_N));
+      const u = Math.min(1, Math.max(0, (t - start) / 0.16));
+      const ease = 1 - (1 - u) ** 3;
+      const y = (1 - ease) * -108;
+      card.style.opacity = String(ease);
+      card.style.transform = `translate3d(0, ${y}px, 0) scale(${0.94 + 0.06 * ease})`;
+    });
   }, []);
 
   const goTo = useCallback((index: number) => {
@@ -614,6 +748,13 @@ export function PitchDeck() {
       } else {
         rawFeature.current = slide > PITCH_FEATURES_INDEX ? 1 : 0;
       }
+      if (slide === PITCH_NIGHT_INDEX) {
+        const chapter = panels[i];
+        const span = Math.max(1, chapter.offsetHeight - root.clientHeight);
+        rawNight.current = Math.min(1, Math.max(0, (y - chapter.offsetTop) / span));
+      } else {
+        rawNight.current = slide > PITCH_NIGHT_INDEX ? 1 : 0;
+      }
       setActive((prev) => (prev === slide ? prev : slide));
       targetRef.current = slide;
       paintFeature(rawFeature.current);
@@ -622,13 +763,20 @@ export function PitchDeck() {
     const tick = () => {
       if (!running) return;
       visProgress.current += (rawProgress.current - visProgress.current) * 0.08;
+      visNight.current += (rawNight.current - visNight.current) * 0.14;
       const p = visProgress.current;
       paintRoute(p);
-      if (Math.abs(rawProgress.current - visProgress.current) > 0.0004) {
+      paintNight(visNight.current);
+      if (
+        Math.abs(rawProgress.current - visProgress.current) > 0.0004 ||
+        Math.abs(rawNight.current - visNight.current) > 0.0004
+      ) {
         raf = requestAnimationFrame(tick);
       } else {
         visProgress.current = rawProgress.current;
+        visNight.current = rawNight.current;
         paintRoute(visProgress.current);
+        paintNight(visNight.current);
         raf = 0;
       }
     };
@@ -641,6 +789,7 @@ export function PitchDeck() {
     read();
     paintRoute(0);
     paintFeature(0);
+    paintNight(0);
     root.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -649,7 +798,7 @@ export function PitchDeck() {
       root.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [paintRoute, paintFeature]);
+  }, [paintRoute, paintFeature, paintNight]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -716,14 +865,18 @@ export function PitchDeck() {
                     "linear-gradient(180deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.8) 100%)",
                 }}
               />
-              <div
-                ref={dawnRef}
-                className="absolute inset-0 opacity-0 mix-blend-screen"
-                style={{
-                  background:
-                    "radial-gradient(ellipse 110% 80% at 50% -8%, rgba(255,196,130,0.95), rgba(255,150,80,0.45) 42%, rgba(255,120,60,0.12) 68%, transparent 82%)",
-                }}
-              />
+              <div ref={dawnRef} className="pitch-dawn absolute inset-0 opacity-0">
+                <div
+                  className="absolute inset-0 mix-blend-screen"
+                  style={{
+                    background:
+                      "radial-gradient(circle at var(--pitch-sun-x) var(--pitch-sun-y), rgba(255,232,180,0.72) 0%, rgba(255,186,100,0.42) 10%, rgba(255,128,52,0.16) 24%, rgba(255,90,40,0.05) 42%, transparent 58%)",
+                  }}
+                />
+                <div className="pitch-sun-bloom" />
+                <div className="pitch-sun-rays" />
+                <div className="pitch-sun" />
+              </div>
             </div>
           </div>
 
@@ -744,7 +897,7 @@ export function PitchDeck() {
                 </h1>
                 <p className="mt-5 max-w-md text-base text-white/60">{s.title.sub}</p>
                 <p className="mt-12 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/40">
-                  Scroll to follow the load
+                  {s.ui.scroll}
                 </p>
               </div>
               <HeroDashboard />
@@ -770,7 +923,7 @@ export function PitchDeck() {
                 <Stage>
                   <Image
                     src="/product/fleet-map.png"
-                    alt="Zonik fleet map"
+                    alt={s.ui.mapAlt}
                     width={1024}
                     height={580}
                     className="h-full w-full object-cover object-top"
@@ -780,25 +933,54 @@ export function PitchDeck() {
             </Card>
           </Slide>
 
-          <Slide index={2}>
-            <div className="grid items-center gap-8 md:grid-cols-2 md:gap-10">
-              <div>
+          <section
+            data-panel={PITCH_NIGHT_INDEX}
+            className="relative z-10"
+            style={{ height: `calc(100dvh * ${1 + NIGHT_N * 0.38})` }}
+          >
+            <div className={cn("sticky top-0 flex flex-col justify-center px-5 py-8 sm:px-8 lg:px-12", VIEW)}>
+              <div className="mx-auto flex h-full w-full max-w-6xl flex-col justify-center">
                 <Eyebrow light>{s.night.eyebrow}</Eyebrow>
-                <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.08]">
+                <h2 className="mt-4 max-w-3xl text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.08]">
                   {s.night.headline}
                 </h2>
-                <div className="mt-8 space-y-4">
-                  {s.night.items.map((item) => (
-                    <div key={item.title} className="border-l-2 border-white/20 pl-4">
-                      <p className="text-lg font-semibold text-white">{item.title}</p>
-                      <p className="mt-1 text-sm text-white/55">{item.text}</p>
+                <div
+                  ref={nightCardsRef}
+                  className="mt-8 grid min-h-0 flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4"
+                >
+                  {s.night.items.map((item, i) => {
+                    const Visual = nightVisuals[i];
+                    return (
+                    <div
+                      key={item.title}
+                      className="relative min-h-[18rem] overflow-hidden rounded-[1.5rem] border border-dashed border-white/15 bg-white/[0.03] sm:min-h-[22rem]"
+                    >
+                      <article
+                        data-night-card
+                        className="absolute inset-0 flex flex-col rounded-[1.5rem] border border-white/12 bg-[#0b1b3a]/85 p-4 shadow-[0_24px_50px_rgba(0,0,0,0.35)] will-change-transform md:p-5"
+                        style={{ opacity: 0, transform: "translate3d(0, -108px, 0) scale(0.94)" }}
+                      >
+                        <div className="mb-3 flex h-[8.25rem] shrink-0 items-stretch overflow-hidden rounded-xl border border-red-400/20 bg-black/25 px-2.5 py-2">
+                          {Visual ? <Visual /> : null}
+                        </div>
+                        <p className="flex items-center gap-1.5 font-mono text-[11px] font-semibold tracking-[0.18em] text-red-300/80">
+                          <AlertTriangle className="h-3 w-3" />
+                          0{i + 1}
+                        </p>
+                        <p className="mt-2 text-base font-semibold leading-snug text-white md:text-lg">
+                          {item.title}
+                        </p>
+                        <p className="mt-1.5 text-sm leading-relaxed text-white/55">
+                          {item.text}
+                        </p>
+                      </article>
                     </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
-              <NightBlindVisual active={active === PITCH_NIGHT_INDEX} />
             </div>
-          </Slide>
+          </section>
 
           <Slide index={3} tight>
             <Card
@@ -900,7 +1082,7 @@ export function PitchDeck() {
           <section
             data-panel={PITCH_FEATURES_INDEX}
             className="relative z-10"
-            style={{ height: `calc(100dvh * ${FEATURE_N})` }}
+            style={{ height: `calc(100dvh * ${FEATURE_N * 1.15})` }}
           >
             <div className={cn("sticky top-0 flex items-center px-5 py-6 sm:px-8 lg:px-12", VIEW)}>
               <div className="relative mx-auto flex h-full w-full max-w-6xl items-stretch">
@@ -934,19 +1116,19 @@ export function PitchDeck() {
                   <p className="mt-8 max-w-xl text-sm text-muted">{s.pricing.note}</p>
                   <div className="mt-6">
                     <Button href="/calculator" variant="secondary">
-                      Open the calculator
+                      {s.pricing.openCalc}
                     </Button>
                   </div>
                 </div>
                 <Stage className="flex h-auto flex-col justify-center p-8">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary">
-                    Custom license
+                    {s.pricing.custom}
                   </p>
                   <p className="mt-3 text-2xl font-semibold tracking-[-0.03em]">
-                    Tracking. Calls. Seats.
+                    {s.pricing.trio}
                   </p>
                   <p className="mt-3 text-sm leading-relaxed text-muted">
-                    The route is the product. Numbers are on the call — not on a public list.
+                    {s.pricing.trioHint}
                   </p>
                   <div className="mt-6">
                     <RouteMapAnimation compact showLabels={false} height="h-24 w-full" />
@@ -982,22 +1164,22 @@ export function PitchDeck() {
                 </ol>
               </div>
               <div className="mt-8">
-                <Button href={s.close.links[0].href} variant="accent" size="lg">
+                <Button href="mailto:hello@zonikai.com?subject=14-day%20trial" variant="accent" size="lg">
                   {s.close.cta}
                 </Button>
               </div>
               <p className="mt-6 text-sm text-white/60">
                 <a
-                  href={s.close.links[1].href}
+                  href="https://app.zonikai.com/"
                   className="hover:text-white"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {s.close.links[1].label}
+                  app.zonikai.com
                 </a>
                 <span className="mx-3">·</span>
-                <a href={s.close.links[2].href} className="hover:text-white">
-                  {s.close.links[2].label}
+                <a href="mailto:hello@zonikai.com" className="hover:text-white">
+                  hello@zonikai.com
                 </a>
               </p>
             </div>
@@ -1011,7 +1193,7 @@ export function PitchDeck() {
             key={i}
             type="button"
             onClick={() => goTo(i)}
-            aria-label={`Go to slide ${i + 1}`}
+            aria-label={`${s.ui.goToSlide} ${i + 1}`}
             className={cn(
               "pointer-events-auto h-2 w-2 rounded-full transition-all",
               active === i

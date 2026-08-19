@@ -1,11 +1,17 @@
+"use client";
+
 import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { BrandMark } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { IntegrationsHub } from "@/components/integrations/IntegrationsHub";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 
 export function IntegrationsPageContent() {
+  const { t } = useI18n();
+  const c = t.integrations;
+
   return (
     <>
       <SectionShell variant="accent" className="!pb-12 !pt-16 md:!pt-20">
@@ -13,15 +19,15 @@ export function IntegrationsPageContent() {
           <AnimateOnScroll>
             <span className="section-label mb-4 inline-flex">
               <BrandMark size={16} className="h-4 w-4" />
-              Integrations
+              {c.label}
             </span>
             <h1 className="text-3xl font-semibold tracking-[-0.03em] md:text-[2.75rem] md:leading-[1.12]">
-              Zonik sits in the middle.
+              {c.title}
               <br />
-              <span className="headline-accent">Your tools plug in.</span>
+              <span className="headline-accent">{c.titleAccent}</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-              ELD. TMS. Project tools. Chat. One connection. Live data into Zonik.
+              {c.intro}
             </p>
           </AnimateOnScroll>
         </div>
@@ -32,12 +38,10 @@ export function IntegrationsPageContent() {
           <AnimateOnScroll>
             <IntegrationsHub />
           </AnimateOnScroll>
-          <p className="mt-10 text-center text-sm text-muted">
-            Don&apos;t see your tool? Ask. We add what your fleet already uses.
-          </p>
+          <p className="mt-10 text-center text-sm text-muted">{c.missing}</p>
           <div className="mt-6 text-center">
             <Button href="/contact" variant="secondary" size="lg">
-              Ask about your stack
+              {c.ask}
             </Button>
           </div>
         </div>

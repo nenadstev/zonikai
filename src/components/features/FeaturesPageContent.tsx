@@ -4,7 +4,7 @@ import { SectionShell } from "@/components/ui/SectionShell";
 import { AnimateOnScroll } from "@/components/ui/AnimateOnScroll";
 import { BrandMark } from "@/components/ui/Logo";
 import { FinalCTA } from "@/components/home/FinalCTA";
-import { FEATURES } from "@/lib/features";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import {
   CallVisual,
   EtaVisual,
@@ -26,6 +26,9 @@ const visuals = [
 ];
 
 export function FeaturesPageContent() {
+  const { t } = useI18n();
+  const features = t.features.items;
+
   return (
     <>
       <SectionShell variant="accent" className="!pb-12 !pt-16 md:!pt-20">
@@ -33,10 +36,10 @@ export function FeaturesPageContent() {
           <AnimateOnScroll>
             <span className="section-label mb-4 inline-flex">
               <BrandMark size={16} className="h-4 w-4" />
-              Features
+              {t.featuresPage.label}
             </span>
             <h1 className="text-3xl font-semibold tracking-[-0.03em] md:text-[2.75rem] md:leading-[1.12]">
-              Always know what&apos;s going on with your trucks.
+              {t.featuresPage.title}
             </h1>
           </AnimateOnScroll>
         </div>
@@ -45,7 +48,7 @@ export function FeaturesPageContent() {
       <SectionShell variant="white" bordered className="!pt-4 md:!pt-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="divide-y divide-border">
-            {FEATURES.map((feature, i) => {
+            {features.map((feature, i) => {
               const Visual = visuals[i];
               return (
                 <AnimateOnScroll key={feature.number} delay={Math.min(i, 3) * 0.06}>

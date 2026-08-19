@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Check, MapPin, Phone, PhoneCall, Truck } from "lucide-react";
 import { RouteMapAnimation } from "@/components/ui/RouteMapAnimation";
 import { StatusBadge } from "@/components/ui/StatusBadge";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
 type VisualProps = { active?: boolean; compact?: boolean };
@@ -24,15 +25,16 @@ function VoiceBars({ active }: { active: boolean }) {
 }
 
 export function EtaStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   return (
     <div className={cn("flex h-full flex-col justify-between", compact ? "gap-3" : "gap-6")}>
       <div>
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-          Next stop · Chicago unload
+          {t.story.chicagoUnload}
         </p>
         <div className={cn("grid grid-cols-2", compact ? "mt-3 gap-2.5" : "mt-6 gap-4")}>
           <div className={cn("rounded-2xl border border-border bg-surface/60", compact ? "p-3" : "p-5")}>
-            <p className="text-xs font-medium text-muted">On paper</p>
+            <p className="text-xs font-medium text-muted">{t.story.onPaper}</p>
             <p
               className={cn(
                 "mt-2 font-mono font-semibold tracking-[-0.04em]",
@@ -54,7 +56,7 @@ export function EtaStoryVisual({ active = true, compact = false }: VisualProps) 
               compact ? "p-3" : "p-5"
             )}
           >
-            <p className="text-xs font-medium text-warning">Live ETA</p>
+            <p className="text-xs font-medium text-warning">{t.story.liveEta}</p>
             <p
               className={cn(
                 "mt-2 font-mono font-semibold tracking-[-0.04em] text-warning",
@@ -66,7 +68,7 @@ export function EtaStoryVisual({ active = true, compact = false }: VisualProps) 
           </motion.div>
         </div>
         <p className={cn("font-semibold text-warning", compact ? "mt-2 text-xs" : "mt-4 text-sm")}>
-          45 min late · window at risk
+          {t.story.lateWindow}
         </p>
       </div>
       <RouteMapAnimation
@@ -78,6 +80,7 @@ export function EtaStoryVisual({ active = true, compact = false }: VisualProps) 
 }
 
 export function CallStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   return (
     <div className={cn("flex h-full flex-col justify-center", compact ? "gap-3" : "gap-5")}>
       <div
@@ -96,8 +99,8 @@ export function CallStoryVisual({ active = true, compact = false }: VisualProps)
             <Phone className={compact ? "h-4 w-4" : "h-5 w-5"} />
           </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold text-secondary-dark">Zonik calling</p>
-            <p className="text-xs text-muted">Getting status for the night team</p>
+            <p className="text-sm font-semibold text-secondary-dark">{t.story.calling}</p>
+            <p className="text-xs text-muted">{t.story.callingSub}</p>
           </div>
           <VoiceBars active={active} />
         </div>
@@ -107,7 +110,7 @@ export function CallStoryVisual({ active = true, compact = false }: VisualProps)
             compact ? "mt-2.5 px-3 py-2 text-xs" : "mt-4 px-4 py-3 text-sm"
           )}
         >
-          “Hi, this is Zonik. Can you confirm your status?”
+          {t.story.callLine}
         </p>
       </div>
 
@@ -122,7 +125,7 @@ export function CallStoryVisual({ active = true, compact = false }: VisualProps)
             <PhoneCall className={compact ? "h-4 w-4 text-muted" : "h-5 w-5 text-muted"} />
           </div>
           <div>
-            <p className="text-sm font-semibold">Driver · T-1042</p>
+            <p className="text-sm font-semibold">{t.story.driverTruck}</p>
             <p className="text-xs text-muted">M. Johnson</p>
           </div>
         </div>
@@ -133,7 +136,7 @@ export function CallStoryVisual({ active = true, compact = false }: VisualProps)
           )}
         >
           <Check className="mt-0.5 h-4 w-4 shrink-0" />
-          Breakdown on I-70. New ETA 20:45.
+          {t.story.breakdown}
         </div>
       </div>
     </div>
@@ -141,22 +144,23 @@ export function CallStoryVisual({ active = true, compact = false }: VisualProps)
 }
 
 export function FactsStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   const rows = [
-    { id: "T-1042", load: "#48291", state: "Needs you", tone: "warning" as const },
-    { id: "T-2187", load: "#48305", state: "On time", tone: "success" as const },
-    { id: "T-3301", load: "#48312", state: "On time", tone: "success" as const },
-    { id: "T-4410", load: "#48318", state: "On time", tone: "success" as const },
-    { id: "T-5522", load: "#48320", state: "On time", tone: "success" as const },
+    { id: "T-1042", load: "#48291", state: t.story.needsYou, tone: "warning" as const },
+    { id: "T-2187", load: "#48305", state: t.story.onTime, tone: "success" as const },
+    { id: "T-3301", load: "#48312", state: t.story.onTime, tone: "success" as const },
+    { id: "T-4410", load: "#48318", state: t.story.onTime, tone: "success" as const },
+    { id: "T-5522", load: "#48320", state: t.story.onTime, tone: "success" as const },
   ];
 
   return (
     <div className="flex h-full flex-col">
       <div className={cn("flex items-center justify-between", compact ? "mb-2" : "mb-4")}>
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
-          Night board
+          {t.story.nightBoard}
         </p>
         <span className="rounded-full bg-success-bg px-2.5 py-1 text-[11px] font-semibold text-success">
-          4 quiet · 1 needs you
+          {t.story.quietNeeds}
         </span>
       </div>
       <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-white">
@@ -190,20 +194,20 @@ export function FactsStoryVisual({ active = true, compact = false }: VisualProps
 }
 
 export function LoadsStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   return (
     <div className="grid h-full min-h-0 overflow-hidden rounded-2xl border border-border md:grid-cols-2">
       <div className={cn("bg-[#111111] text-white", compact ? "p-4" : "p-6 md:p-8")}>
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-          Before
+          {t.story.before}
         </p>
         <p className={cn("font-semibold tracking-[-0.03em]", compact ? "mt-3 text-lg" : "mt-4 text-xl")}>
-          4 fires to put out
+          {t.story.fires}
         </p>
         <ul className={cn("text-sm text-neutral-400", compact ? "mt-4 space-y-2" : "mt-6 space-y-3")}>
-          <li>Late to Chicago</li>
-          <li>GPS dark on T-2187</li>
-          <li>No answer from the driver</li>
-          <li>Next shift does not know</li>
+          {t.story.fireItems.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </div>
       <motion.div
@@ -212,7 +216,7 @@ export function LoadsStoryVisual({ active = true, compact = false }: VisualProps
         className={cn("bg-white", compact ? "p-4" : "p-6 md:p-8")}
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary-dark">
-          With Zonik
+          {t.story.withZonik}
         </p>
         <p
           className={cn(
@@ -220,18 +224,14 @@ export function LoadsStoryVisual({ active = true, compact = false }: VisualProps
             compact ? "mt-3 text-lg" : "mt-4 text-xl"
           )}
         >
-          6 loads to set up
+          {t.story.loadsSetup}
         </p>
         <ul className={cn("text-sm font-medium text-foreground", compact ? "mt-4 space-y-2" : "mt-6 space-y-3")}>
-          <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-success" /> Status is already done
-          </li>
-          <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-success" /> Late trucks already called
-          </li>
-          <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-success" /> Time for the next loads
-          </li>
+          {t.story.loadWins.map((item) => (
+            <li key={item} className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-success" /> {item}
+            </li>
+          ))}
         </ul>
       </motion.div>
     </div>
@@ -239,11 +239,12 @@ export function LoadsStoryVisual({ active = true, compact = false }: VisualProps
 }
 
 export function StatusStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   const stops = [
-    { name: "Omaha pickup", done: true },
-    { name: "Des Moines fuel", done: true },
-    { name: "Chicago unload", done: false, current: true },
-    { name: "Gary empty", done: false },
+    { name: t.story.stops[0], done: true },
+    { name: t.story.stops[1], done: true },
+    { name: t.story.stops[2], done: false, current: true },
+    { name: t.story.stops[3], done: false },
   ];
 
   return (
@@ -251,9 +252,9 @@ export function StatusStoryVisual({ active = true, compact = false }: VisualProp
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="font-mono text-xs text-muted">#48291 · T-1042</p>
-          <p className="mt-1 text-xl font-semibold tracking-[-0.03em]">Omaha → Chicago</p>
+          <p className="mt-1 text-xl font-semibold tracking-[-0.03em]">{t.story.omahaChicago}</p>
         </div>
-        <StatusBadge variant="warning">At risk</StatusBadge>
+        <StatusBadge variant="warning">{t.story.atRisk}</StatusBadge>
       </div>
       <div className="space-y-3">
         {stops.map((stop) => (
@@ -283,7 +284,7 @@ export function StatusStoryVisual({ active = true, compact = false }: VisualProp
       <div className="mt-auto">
         <div className="mb-2 flex items-center gap-1.5 text-xs text-muted">
           <MapPin className="h-3.5 w-3.5 text-secondary" />
-          I-80, NE · Live GPS
+          {t.story.liveGps}
         </div>
         <RouteMapAnimation
           height={compact ? "h-16 w-full" : "h-28 w-full md:h-32"}
@@ -296,7 +297,8 @@ export function StatusStoryVisual({ active = true, compact = false }: VisualProp
 }
 
 export function HandoffStoryVisual({ active = true, compact = false }: VisualProps) {
-  const trucks = ["T-1042 late", "T-2187 on time", "T-3301 on time"];
+  const { t } = useI18n();
+  const trucks = t.story.truckRows;
 
   return (
     <div className="flex h-full flex-col items-stretch justify-center gap-4 md:flex-row md:items-center">
@@ -307,9 +309,9 @@ export function HandoffStoryVisual({ active = true, compact = false }: VisualPro
         )}
       >
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-500">
-          Night
+          {t.story.night}
         </p>
-        <p className="mt-2 text-lg font-semibold">12 trucks watched</p>
+        <p className="mt-2 text-lg font-semibold">{t.story.trucksWatched}</p>
         <ul className="mt-4 space-y-2 text-sm text-neutral-400">
           {trucks.map((row) => (
             <li key={row}>{row}</li>
@@ -325,16 +327,16 @@ export function HandoffStoryVisual({ active = true, compact = false }: VisualPro
       </motion.div>
       <div className={cn("flex-1 rounded-2xl border border-border bg-white", compact ? "p-3.5" : "p-5")}>
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-secondary-dark">
-          Day
+          {t.story.day}
         </p>
         <p className="mt-2 flex items-center gap-2 text-lg font-semibold">
-          Same facts
+          {t.story.sameFacts}
           <Check className="h-5 w-5 text-success" />
         </p>
         <ul className="mt-4 space-y-2 text-sm text-muted">
-          <li>Late already called</li>
-          <li>New ETA on the board</li>
-          <li>No “I thought you knew”</li>
+          {t.story.handoffItems.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
         </ul>
       </div>
     </div>
@@ -342,10 +344,11 @@ export function HandoffStoryVisual({ active = true, compact = false }: VisualPro
 }
 
 export function ReportStoryVisual({ active = true, compact = false }: VisualProps) {
+  const { t } = useI18n();
   const cards = [
-    { label: "Pay / mile", value: "$2.14", hint: "This week" },
-    { label: "Dispatcher", value: "Ana", hint: "2 late loads" },
-    { label: "Driver", value: "M. Johnson", hint: "1 late stop" },
+    { label: t.story.payMile, value: "$2.14", hint: t.story.thisWeek },
+    { label: t.story.dispatcher, value: "Ana", hint: t.story.anaHint },
+    { label: t.story.driver, value: "M. Johnson", hint: t.story.driverHint },
   ];
 
   return (

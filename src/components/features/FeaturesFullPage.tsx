@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { BrandMark } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { FEATURES } from "@/lib/features";
+import { useI18n } from "@/lib/i18n/LocaleProvider";
 import {
   CallStoryVisual,
   EtaStoryVisual,
@@ -27,9 +27,11 @@ const visuals = [
 ];
 
 export function FeaturesFullPage() {
+  const { t } = useI18n();
+  const features = t.features.items;
   const scrollerRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const panelCount = FEATURES.length + 2;
+  const panelCount = features.length + 2;
 
   useEffect(() => {
     const root = scrollerRef.current;
@@ -69,19 +71,19 @@ export function FeaturesFullPage() {
         >
           <span className="section-label mb-6 inline-flex">
             <BrandMark size={16} className="h-4 w-4" />
-            Features
+            {t.featuresPage.label}
           </span>
           <h1 className="max-w-3xl text-4xl font-semibold tracking-[-0.03em] md:text-6xl md:leading-[1.05]">
-            Always know what&apos;s going on with your trucks.
+            {t.featuresPage.title}
           </h1>
           <button
             type="button"
             onClick={() => goTo(1)}
             className="absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-muted transition-colors hover:text-foreground"
-            aria-label="Scroll to next section"
+            aria-label={t.featuresPage.scrollAria}
           >
             <span className="text-[11px] font-semibold uppercase tracking-[0.22em]">
-              Scroll
+              {t.featuresPage.scroll}
             </span>
             <span className="relative flex h-10 w-6 items-start justify-center rounded-full border-2 border-current pt-2">
               <motion.span
@@ -98,7 +100,7 @@ export function FeaturesFullPage() {
           </button>
         </section>
 
-        {FEATURES.map((feature, i) => {
+        {features.map((feature, i) => {
           const Visual = visuals[i];
           const panelIndex = i + 1;
           return (
@@ -130,25 +132,24 @@ export function FeaturesFullPage() {
         })}
 
         <section
-          data-panel={FEATURES.length + 1}
+          data-panel={features.length + 1}
           className="flex h-[calc(100dvh-3.5rem)] snap-start snap-always items-center px-4 py-8 sm:px-6 lg:px-8"
         >
           <div className="section-dark relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl px-6 py-16 text-center md:px-12 md:py-24">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(129,140,248,0.2),transparent_60%)]" />
             <div className="relative z-10">
-              <span className="section-label mb-6 inline-flex">Book a demo</span>
+              <span className="section-label mb-6 inline-flex">{t.cta.label}</span>
               <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.1]">
-                Let Zonik do the watching.
+                {t.cta.title}
                 <br />
-                <span className="text-[#a5b4fc]">Your team works on what matters.</span>
+                <span className="text-[#a5b4fc]">{t.cta.titleAccent}</span>
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-base text-neutral-400">
-                Zonik watches every truck. You see the next stop and the ETA. Late
-                drivers get a call. Your team only steps in when it counts.
+                {t.cta.body}
               </p>
               <div className="mt-10">
                 <Button href="/contact" variant="accent" size="lg">
-                  Book a Demo
+                  {t.cta.bookDemo}
                 </Button>
               </div>
             </div>
@@ -162,7 +163,7 @@ export function FeaturesFullPage() {
             key={i}
             type="button"
             onClick={() => goTo(i)}
-            aria-label={`Go to section ${i + 1}`}
+            aria-label={`${t.featuresPage.sectionAria} ${i + 1}`}
             className={cn(
               "pointer-events-auto h-2 w-2 rounded-full transition-all",
               active === i ? "scale-125 bg-secondary" : "bg-border hover:bg-muted"

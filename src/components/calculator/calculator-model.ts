@@ -40,15 +40,23 @@ export type CalculatorResults = {
   revenueOpportunity: number;
   laborEfficiencySavings: number;
   qualitySavings: number;
+  dispatchersFreed: number;
+  afterhoursFreed: number;
+  peopleFreed: number;
+  remainingPeople: number;
+  remainingDispatchers: number;
+  remainingAfterhours: number;
+  headcountSavings: number;
+  loadWorkValue: number;
   totalMonthlyImpact: number;
   annualizedImpact: number;
 };
 
 export const defaultInputs: CalculatorInputs = {
   numberOfDispatchers: 6,
-  avgDispatcherMonthlyCost: 4500,
+  avgDispatcherMonthlyCost: 2000,
   numberOfAfterhoursOperators: 2,
-  avgAfterhoursMonthlyCost: 4000,
+  avgAfterhoursMonthlyCost: 2000,
   trackingTimePercentage: 35,
   activeLoadsPerMonth: 900,
   avgCheckinsPerLoad: 3,
@@ -100,8 +108,23 @@ export function calculateResults(
   const averageTotalTeamCost =
     numberOfDispatchers * avgDispatcherMonthlyCost +
     numberOfAfterhoursOperators * avgAfterhoursMonthlyCost;
-  const trackingTeamCost =
-    averageTotalTeamCost * (safeNumber(inputs.trackingTimePercentage) / 100);
+  const trackingRate = safeNumber(inputs.trackingTimePercentage) / 100;
+  const trackingTeamCost = averageTotalTeamCost * trackingRate;
+  const dispatchersFreed = numberOfDispatchers * trackingRate;
+  const afterhoursFreed = numberOfAfterhoursOperators * trackingRate;
+  const peopleFreed = dispatchersFreed + afterhoursFreed;
+  const remainingDispatchers = Math.max(0, numberOfDispatchers - dispatchersFreed);
+  const remainingAfterhours = Math.max(
+    0,
+    numberOfAfterhoursOperators - afterhoursFreed
+  );
+  const remainingPeople = remainingDispatchers + remainingAfterhours;
+  const headcountSavings =
+    dispatchersFreed * avgDispatcherMonthlyCost +
+    afterhoursFreed * avgAfterhoursMonthlyCost;
+  const loadWorkValue =
+    remainingDispatchers * avgDispatcherMonthlyCost +
+    remainingAfterhours * avgAfterhoursMonthlyCost;
 
   const manualTrackingHours =
     (safeNumber(inputs.activeLoadsPerMonth) *
@@ -135,10 +158,9 @@ export function calculateResults(
     productiveHours *
     safeNumber(inputs.revenuePerProductiveHour) *
     safeNumber(assumptions.scenarioMultiplier);
-  const laborEfficiencySavings = manualTrackingLaborCost * workReductionRate;
+  const laborEfficiencySavings = headcountSavings;
   const qualitySavings = trackingErrorCost * errorReductionRate;
-  const totalMonthlyImpact =
-    laborEfficiencySavings + qualitySavings + revenueOpportunity;
+  const totalMonthlyImpact = headcountSavings + qualitySavings;
   const annualizedImpact = totalMonthlyImpact * 12;
 
   return {
@@ -155,6 +177,14 @@ export function calculateResults(
     revenueOpportunity,
     laborEfficiencySavings,
     qualitySavings,
+    dispatchersFreed,
+    afterhoursFreed,
+    peopleFreed,
+    remainingPeople,
+    remainingDispatchers,
+    remainingAfterhours,
+    headcountSavings,
+    loadWorkValue,
     totalMonthlyImpact,
     annualizedImpact,
   };

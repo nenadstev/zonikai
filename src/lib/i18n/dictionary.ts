@@ -1,9 +1,11 @@
+import { marketingEn, marketingSr } from "@/lib/i18n/marketing";
+
 export const en = {
   nav: {
     howItWorks: "How it works",
     features: "Features",
     integrations: "Integrations",
-    calculator: "Calculator",
+    calculator: "Impact",
     faq: "FAQ",
     contact: "Contact",
     bookDemo: "Book a Demo",
@@ -165,15 +167,14 @@ export const en = {
   },
 };
 
-export type Dictionary = typeof en;
 export type Locale = "en" | "sr";
 
-export const sr: Dictionary = {
+export const sr: typeof en = {
   nav: {
     howItWorks: "Kako radi",
-    features: "Funkcije",
+    features: "Mogućnosti",
     integrations: "Integracije",
-    calculator: "Kalkulator",
+    calculator: "Uticaj",
     faq: "FAQ",
     contact: "Kontakt",
     bookDemo: "Zakaži demo",
@@ -323,7 +324,7 @@ export const sr: Dictionary = {
       },
     ],
     bookDemo: "Zakaži demo",
-    seeFeatures: "Pogledaj funkcije",
+    seeFeatures: "Pogledaj mogućnosti",
     mapAlt: "Zonik mapa flote kamiona širom Amerike",
   },
   cta: {
@@ -335,4 +336,9 @@ export const sr: Dictionary = {
   },
 };
 
-export const dictionaries: Record<Locale, Dictionary> = { en, sr };
+export const dictionaries: Record<Locale, typeof en & typeof marketingEn> = {
+  en: { ...en, ...marketingEn },
+  sr: { ...sr, ...marketingSr },
+};
+
+export type Dictionary = (typeof dictionaries)["en"];

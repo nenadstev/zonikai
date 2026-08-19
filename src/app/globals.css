@@ -68,6 +68,79 @@ html {
   }
 }
 
+.pitch-dawn {
+  --pitch-sun-x: 13%;
+  --pitch-sun-y: 18%;
+}
+
+.pitch-sun {
+  position: absolute;
+  left: var(--pitch-sun-x);
+  top: var(--pitch-sun-y);
+  width: 1.85rem;
+  height: 1.85rem;
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 38% 34%,
+    #fffdf6 0%,
+    #ffe7a3 34%,
+    #ffc45a 64%,
+    #ff8d38 100%
+  );
+  box-shadow:
+    0 0 14px 5px rgba(255, 220, 150, 0.7),
+    0 0 40px 14px rgba(255, 168, 78, 0.42),
+    0 0 86px 34px rgba(255, 120, 48, 0.22);
+}
+
+.pitch-sun-rays {
+  position: absolute;
+  left: var(--pitch-sun-x);
+  top: var(--pitch-sun-y);
+  width: min(78vw, 36rem);
+  height: min(78vw, 36rem);
+  transform: translate(-50%, -50%);
+  background: repeating-conic-gradient(
+    from 12deg,
+    rgba(255, 214, 150, 0.12) 0deg 6deg,
+    transparent 6deg 44deg
+  );
+  mask-image: radial-gradient(
+    circle,
+    transparent 8%,
+    rgba(0, 0, 0, 0.45) 18%,
+    rgba(0, 0, 0, 0.16) 40%,
+    transparent 64%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle,
+    transparent 8%,
+    rgba(0, 0, 0, 0.45) 18%,
+    rgba(0, 0, 0, 0.16) 40%,
+    transparent 64%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.4;
+}
+
+.pitch-sun-bloom {
+  position: absolute;
+  left: var(--pitch-sun-x);
+  top: var(--pitch-sun-y);
+  width: min(70vw, 30rem);
+  height: min(70vw, 30rem);
+  transform: translate(-50%, -50%);
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 220, 150, 0.5) 0%,
+    rgba(255, 160, 70, 0.2) 32%,
+    rgba(255, 110, 40, 0.07) 52%,
+    transparent 70%
+  );
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
