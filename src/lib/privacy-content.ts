@@ -25,9 +25,9 @@ const en: PrivacyCopy = {
   label: "Legal",
   title: "Privacy Policy",
   titleAccent: "How we handle your data.",
-  updated: "Last updated: 14 August 2026",
+  updated: "Last updated: 19 August 2026",
   intro:
-    "This policy explains how Zonik AI collects and uses personal data on zonikai.com. It is written to meet the EU GDPR and Serbia’s Law on Personal Data Protection. If you have questions, email hello@zonikai.com.",
+    "Zonik AI collects and uses personal data. This policy explains what we collect on zonikai.com, and how we process driver and load data as a processor when a company uses the product. It is written to meet the EU GDPR and Serbia’s Law on Personal Data Protection. If you have questions, email hello@zonikai.com.",
   contactCta: "Email privacy requests to",
   sections: [
     {
@@ -62,6 +62,10 @@ const en: PrivacyCopy = {
       id: "data",
       title: "3. What data we collect",
       blocks: [
+        {
+          type: "p",
+          text: "We collect personal data. On this website that includes the information below. In the product, we also process driver, truck, and load data as a processor for your company — see section 2.",
+        },
         {
           type: "h3",
           text: "When you book a demo",
@@ -101,13 +105,31 @@ const en: PrivacyCopy = {
         },
         {
           type: "p",
-          text: "This website does not use advertising pixels, marketing cookies, or analytics tools. We do not collect GPS, ELD, voice, or load data here.",
+          text: "This website does not use advertising pixels, marketing cookies, or analytics tools. We do not collect GPS, ELD, voice, or load data on the public site.",
+        },
+      ],
+    },
+    {
+      id: "ai",
+      title: "4. We use AI",
+      blocks: [
+        {
+          type: "p",
+          text: "We use AI. The public website does not make AI decisions about you as a visitor. The Zonik product does use AI: it can place voice calls to drivers your company added, ask for load status, and summarize what it hears for dispatch.",
+        },
+        {
+          type: "p",
+          text: "When we do that, phone numbers, call audio, transcripts, and related load facts may be sent to voice and language-model providers so the call can happen and the status can be written back to your board. Those providers currently include Twilio and Vapi for voice, and a language-model provider that drafts or summarizes call content.",
+        },
+        {
+          type: "p",
+          text: "AI can be wrong or incomplete. Zonik output is a dispatch aid. It is not the only check before a pickup, delivery, or safety decision. Your company remains the controller for driver data in the product.",
         },
       ],
     },
     {
       id: "bases",
-      title: "4. Why we use it, and the legal basis",
+      title: "5. Why we use it, and the legal basis",
       blocks: [
         {
           type: "p",
@@ -134,17 +156,20 @@ const en: PrivacyCopy = {
     },
     {
       id: "sharing",
-      title: "5. Who we share it with",
+      title: "6. Who we share it with",
       blocks: [
         {
           type: "p",
-          text: "We do not sell personal data. We share it only with people and tools that need it to run the site or a demo:",
+          text: "We do not sell personal data. We share it only with people and tools that need it to run the site, a demo, or the Service:",
         },
         {
           type: "ul",
           items: [
             "Cal.com — demo scheduling (see cal.com/privacy)",
             "Netlify — website hosting (see netlify.com/privacy)",
+            "Twilio — voice calls in the product (see twilio.com/legal/privacy)",
+            "Vapi — AI voice agents in the product (see vapi.ai/privacy)",
+            "A language-model provider — drafts or summarizes call content in the product",
             "Email providers — if you write to hello@zonikai.com",
             "Professional advisers or authorities — only if the law requires it",
           ],
@@ -157,11 +182,11 @@ const en: PrivacyCopy = {
     },
     {
       id: "transfers",
-      title: "6. Transfers outside the EEA / Serbia",
+      title: "7. Transfers outside the EEA / Serbia",
       blocks: [
         {
           type: "p",
-          text: "Some providers (including Cal.com and Netlify) may process data in the United States or other countries. Where GDPR or Serbian law requires a safeguard, we rely on an adequacy decision or Standard Contractual Clauses, plus extra measures where needed.",
+          text: "Some providers (including Cal.com, Netlify, Twilio, and Vapi) may process data in the United States or other countries. Where GDPR or Serbian law requires a safeguard, we rely on an adequacy decision or Standard Contractual Clauses, plus extra measures where needed.",
         },
         {
           type: "p",
@@ -171,7 +196,7 @@ const en: PrivacyCopy = {
     },
     {
       id: "retention",
-      title: "7. How long we keep it",
+      title: "8. How long we keep it, and how to delete it",
       blocks: [
         {
           type: "ul",
@@ -180,17 +205,22 @@ const en: PrivacyCopy = {
             "Email: while the thread is active, then a limited archive for legal or accounting reasons.",
             "Server logs: a short period, usually under 90 days, unless we need them to investigate an incident.",
             "Language setting: until you clear site data in your browser.",
+            "Product data (GPS, loads, driver numbers, call audio and transcripts): for as long as the customer contract says. When that ends, or when the customer asks us to delete it, we delete it from our systems and tell our processors to do the same, except where the law requires a short archive.",
           ],
         },
         {
           type: "p",
-          text: "When we no longer need the data, we delete it or strip it so it no longer identifies you.",
+          text: "To ask us to delete data we control (for example a demo booking or an email you sent), write to hello@zonikai.com. Say what you want deleted and how we can find it. Where the law allows, we delete it. We do not keep copies we promised to delete after that request is done, except a legal or security log that no longer holds the content.",
+        },
+        {
+          type: "p",
+          text: "If you are a driver and a carrier uses Zonik, that company is usually the controller. Ask them first. We will help them delete or correct data we hold as their processor.",
         },
       ],
     },
     {
       id: "rights",
-      title: "8. Your rights",
+      title: "9. Your rights",
       blocks: [
         {
           type: "p",
@@ -221,7 +251,7 @@ const en: PrivacyCopy = {
     },
     {
       id: "authority",
-      title: "9. Complaints",
+      title: "10. Complaints",
       blocks: [
         {
           type: "p",
@@ -239,7 +269,7 @@ const en: PrivacyCopy = {
     },
     {
       id: "cookies",
-      title: "10. Cookies and similar storage",
+      title: "11. Cookies and similar storage",
       blocks: [
         {
           type: "p",
@@ -260,17 +290,17 @@ const en: PrivacyCopy = {
     },
     {
       id: "security",
-      title: "11. Security",
+      title: "12. Security",
       blocks: [
         {
           type: "p",
-          text: "We use HTTPS, limit who can see personal data, and work with hosts that apply their own security controls. No online service is fully risk-free. If we learn of a breach that must be reported, we will follow the law, including notice to authorities and to you where required.",
+          text: "We use HTTPS, limit who can see personal data, and work with hosts that apply their own security controls. Customer Data in the product — including GPS, phone numbers, and call recordings — is not stored in a public bucket or at a public URL. No online service is fully risk-free. If we learn of a breach that must be reported, we will follow the law, including notice to authorities and to you where required.",
         },
       ],
     },
     {
       id: "children",
-      title: "12. Children",
+      title: "13. Children",
       blocks: [
         {
           type: "p",
@@ -280,7 +310,7 @@ const en: PrivacyCopy = {
     },
     {
       id: "changes",
-      title: "13. Changes",
+      title: "14. Changes",
       blocks: [
         {
           type: "p",
@@ -295,9 +325,9 @@ const sr: PrivacyCopy = {
   label: "Pravno",
   title: "Politika privatnosti",
   titleAccent: "Kako tretiramo tvoje podatke.",
-  updated: "Poslednja izmena: 14. avgust 2026.",
+  updated: "Poslednja izmena: 19. avgust 2026.",
   intro:
-    "Ova politika objašnjava kako Zonik AI prikuplja i koristi lične podatke na zonikai.com. Pisana je u skladu sa GDPR-om i Zakonom o zaštiti podataka o ličnosti Republike Srbije. Pitanja šalji na hello@zonikai.com.",
+    "Zonik AI prikuplja i koristi lične podatke. Ova politika objašnjava šta skupljamo na zonikai.com i kako, kao obrađivač, obrađujemo podatke vozača i tovara kad firma koristi proizvod. Pisana je u skladu sa GDPR-om i Zakonom o zaštiti podataka o ličnosti Republike Srbije. Pitanja šalji na hello@zonikai.com.",
   contactCta: "Zahteve u vezi sa podacima šalji na hello@zonikai.com",
   sections: [
     {
@@ -332,6 +362,10 @@ const sr: PrivacyCopy = {
       id: "data",
       title: "3. Koje podatke prikupljamo",
       blocks: [
+        {
+          type: "p",
+          text: "Prikupljamo lične podatke. Na ovom sajtu to su podaci ispod. U proizvodu, kao obrađivač za tvoju firmu, obrađujemo i podatke vozača, kamiona i tovara — vidi odeljak 2.",
+        },
         {
           type: "h3",
           text: "Kad zakažeš demo",
@@ -371,13 +405,31 @@ const sr: PrivacyCopy = {
         },
         {
           type: "p",
-          text: "Na ovom sajtu nema reklamnih piksela, marketinških kolačića ni alata za analitiku. Ovde ne prikupljamo GPS, ELD, glas ni podatke o tovaru.",
+          text: "Na ovom sajtu nema reklamnih piksela, marketinških kolačića ni alata za analitiku. Na javnom sajtu ne prikupljamo GPS, ELD, glas ni podatke o tovaru.",
+        },
+      ],
+    },
+    {
+      id: "ai",
+      title: "4. Koristimo AI",
+      blocks: [
+        {
+          type: "p",
+          text: "Koristimo AI. Javni sajt ne donosi AI odluke o tebi kao posetiocu. Zonik proizvod AI koristi: može da zove vozače koje je firma ubacila, da pita za status tovara i da to sažme za dispeč.",
+        },
+        {
+          type: "p",
+          text: "Tada broj, snimak poziva, transkript i povezani podaci o tovaru mogu da idu provajderima glasa i jezičkog modela, da bi se poziv desio i da bi status stigao na tablu. Za glas trenutno koristimo Twilio i Vapi, a jezički model piše ili sažima sadržaj poziva.",
+        },
+        {
+          type: "p",
+          text: "AI može da pogreši ili da nešto preskoči. Zonik je pomoć dispeču. Nije jedina provera pre utovara, istovara ili bezbednosne odluke. Za podatke vozača u proizvodu i dalje je rukovalac tvoja firma.",
         },
       ],
     },
     {
       id: "bases",
-      title: "4. Zašto ih koristimo i na kom osnovu",
+      title: "5. Zašto ih koristimo i na kom osnovu",
       blocks: [
         {
           type: "p",
@@ -404,17 +456,20 @@ const sr: PrivacyCopy = {
     },
     {
       id: "sharing",
-      title: "5. Kome ih dajemo",
+      title: "6. Kome ih dajemo",
       blocks: [
         {
           type: "p",
-          text: "Ne prodajemo lične podatke. Delimo ih samo sa onima koj su potrebni da sajt i demo rade:",
+          text: "Ne prodajemo lične podatke. Delimo ih samo sa onima koji su potrebni da sajt, demo ili Servis rade:",
         },
         {
           type: "ul",
           items: [
             "Cal.com — zakazivanje dema (cal.com/privacy)",
             "Netlify — hosting sajta (netlify.com/privacy)",
+            "Twilio — glasovni pozivi u proizvodu (twilio.com/legal/privacy)",
+            "Vapi — AI glasovni agenti u proizvodu (vapi.ai/privacy)",
+            "Provajder jezičkog modela — piše ili sažima sadržaj poziva u proizvodu",
             "Imejl servisi — ako pišeš na hello@zonikai.com",
             "Savetnici ili organi — samo ako to zakon nalaže",
           ],
@@ -427,11 +482,11 @@ const sr: PrivacyCopy = {
     },
     {
       id: "transfers",
-      title: "6. Prenos van EGP-a / Srbije",
+      title: "7. Prenos van EGP-a / Srbije",
       blocks: [
         {
           type: "p",
-          text: "Neki pružaoci (uključujući Cal.com i Netlify) mogu da obrađuju podatke u SAD ili drugim zemljama. Gde GDPR ili srpski zakon traže zaštitu, oslanjamo se na odluku o adekvatnosti ili standardne ugovorne klauzule, plus dodatne mere gde treba.",
+          text: "Neki pružaoci (uključujući Cal.com, Netlify, Twilio i Vapi) mogu da obrađuju podatke u SAD ili drugim zemljama. Gde GDPR ili srpski zakon traže zaštitu, oslanjamo se na odluku o adekvatnosti ili standardne ugovorne klauzule, plus dodatne mere gde treba.",
         },
         {
           type: "p",
@@ -441,7 +496,7 @@ const sr: PrivacyCopy = {
     },
     {
       id: "retention",
-      title: "7. Koliko dugo čuvamo podatke",
+      title: "8. Koliko dugo čuvamo podatke i kako se brišu",
       blocks: [
         {
           type: "ul",
@@ -450,17 +505,22 @@ const sr: PrivacyCopy = {
             "Imejlovi: dok je prepiska aktivna, zatim ograničena arhiva zbog zakona ili knjigovodstva.",
             "Server logovi: kratko, obično ispod 90 dana, osim ako trebaju zbog incidenta.",
             "Izbor jezika: dok ne obrišeš podatke sajta u pregledaču.",
+            "Podaci u proizvodu (GPS, tovari, brojevi vozača, snimci i transkripti): onoliko koliko piše u ugovoru sa klijentom. Kad ugovor prestane, ili kad klijent zatraži brisanje, brišemo ih iz naših sistema i kažemo obrađivačima da urade isto, osim kratke arhive koju zakon traži.",
           ],
         },
         {
           type: "p",
-          text: "Kad nam podaci više ne trebaju, brišemo ih ili ih svedemo tako da se iz njih ne vidi ko si.",
+          text: "Da obrišemo podatke kojima mi rukujemo (npr. zakazan demo ili mejl koji si poslao), piši na hello@zonikai.com. Reci šta da se obriše i kako da te nađemo. Gde zakon dozvoljava, brišemo. Posle toga ne držimo kopije koje smo rekli da ćemo obrisati, osim pravnog ili bezbednosnog zapisa u kom više nema samog sadržaja.",
+        },
+        {
+          type: "p",
+          text: "Ako si vozač i prevoznik koristi Zonik, ta firma je obično rukovalac. Prvo se javi njima. Mi ćemo im pomoći da obrišu ili isprave ono što držimo kao njihov obrađivač.",
         },
       ],
     },
     {
       id: "rights",
-      title: "8. Tvoja prava",
+      title: "9. Tvoja prava",
       blocks: [
         {
           type: "p",
@@ -491,7 +551,7 @@ const sr: PrivacyCopy = {
     },
     {
       id: "authority",
-      title: "9. Pritužbe",
+      title: "10. Pritužbe",
       blocks: [
         {
           type: "p",
@@ -509,7 +569,7 @@ const sr: PrivacyCopy = {
     },
     {
       id: "cookies",
-      title: "10. Kolačići i slično skladištenje",
+      title: "11. Kolačići i slično skladištenje",
       blocks: [
         {
           type: "p",
@@ -530,17 +590,17 @@ const sr: PrivacyCopy = {
     },
     {
       id: "security",
-      title: "11. Bezbednost",
+      title: "12. Bezbednost",
       blocks: [
         {
           type: "p",
-          text: "Koristimo HTTPS, ograničavamo ko vidi lične podatke i radimo sa hostingom koji ima svoje mere zaštite. Nijedna onlajn usluga nije bez rizika. Ako saznamo za incident koji mora da se prijavi, postupićemo po zakonu, uključujući obaveštenje organa i tebe gde je to obavezno.",
+          text: "Koristimo HTTPS, ograničavamo ko vidi lične podatke i radimo sa hostingom koji ima svoje mere zaštite. Podaci klijenta u proizvodu — GPS, telefoni, snimci poziva — nisu na javnom bucketu niti na javnom URL-u. Nijedna onlajn usluga nije bez rizika. Ako saznamo za incident koji mora da se prijavi, postupićemo po zakonu, uključujući obaveštenje organa i tebe gde je to obavezno.",
         },
       ],
     },
     {
       id: "children",
-      title: "12. Deca",
+      title: "13. Deca",
       blocks: [
         {
           type: "p",
@@ -550,7 +610,7 @@ const sr: PrivacyCopy = {
     },
     {
       id: "changes",
-      title: "13. Izmene",
+      title: "14. Izmene",
       blocks: [
         {
           type: "p",

@@ -25,7 +25,7 @@ const en: TermsCopy = {
   label: "Legal",
   title: "Terms of Use",
   titleAccent: "Rules for the site and the product.",
-  updated: "Last updated: 14 August 2026",
+  updated: "Last updated: 19 August 2026",
   intro:
     "These Terms are the standard rules of use for Zonik. They cover zonikai.com and the Zonik product at app.zonikai.com. If your company signs a custom offer, order, license, or MSA with us, that signed document controls if it conflicts with this page.",
   contactCta: "Questions about these Terms",
@@ -99,13 +99,39 @@ const en: TermsCopy = {
         },
         {
           type: "p",
-          text: "Website content is for information. It is not a promise that your fleet will get a specific result.",
+          text: "Website content is for information. It is not a promise that your fleet will get a specific result. This site does not publish other companies’ reviews or testimonials. We do not invent customer quotes.",
+        },
+        {
+          type: "p",
+          text: "The calculator is an estimate only. Figures it shows are not a quote, not an invoice, and not a guarantee of savings or results.",
+        },
+      ],
+    },
+    {
+      id: "trial",
+      title: "5. Trial and how to stop",
+      blocks: [
+        {
+          type: "p",
+          text: "A 14-day trial is available only if we agree to it by email. This website does not take a card, does not start a paid plan by itself, and does not auto-charge when a trial ends.",
+        },
+        {
+          type: "p",
+          text: "If we do not sign an Order before the trial ends, access stops. Moving to paid use happens only with a signed Order — never by keeping a card on file from this site.",
+        },
+        {
+          type: "p",
+          text: "To cancel a trial, or to tell us not to continue after it, send one email to hello@zonikai.com. That is the same step as writing to us, and it is not harder than booking a demo.",
+        },
+        {
+          type: "p",
+          text: "Paid access follows the Order. To cancel paid access, follow the Order; you may also write to hello@zonikai.com and we will treat that as notice.",
         },
       ],
     },
     {
       id: "service",
-      title: "5. The Service",
+      title: "6. The Service",
       blocks: [
         {
           type: "p",
@@ -123,7 +149,7 @@ const en: TermsCopy = {
     },
     {
       id: "accounts",
-      title: "6. Accounts and access",
+      title: "7. Accounts and access",
       blocks: [
         {
           type: "p",
@@ -137,7 +163,7 @@ const en: TermsCopy = {
     },
     {
       id: "data",
-      title: "7. Customer data and third-party tools",
+      title: "8. Customer data and third-party tools",
       blocks: [
         {
           type: "p",
@@ -159,11 +185,15 @@ const en: TermsCopy = {
     },
     {
       id: "calls",
-      title: "8. AI driver calls and consent",
+      title: "9. AI driver calls and consent",
       blocks: [
         {
           type: "p",
-          text: "Zonik places AI voice calls only to drivers your company has added to the Service. We do not pick numbers from the open web or call drivers you have not loaded.",
+          text: "Zonik places AI voice calls only to drivers your company has added to the Service. We do not pick numbers from the open web or call drivers you have not loaded. Calls ask about load status — for example where a driver is and whether they will make a window. They are not medical, mental-health, or legal advice. They are not a 911 or crisis line.",
+        },
+        {
+          type: "p",
+          text: "Voice and call content may be processed by subprocessors, including Twilio and Vapi for voice, and a language-model provider that drafts or summarizes what was said. Zonik is a logistics tool for dispatch. We do not offer a consumer chatbot crisis protocol. If a driver or anyone else is in danger, they must use local emergency services. Your dispatch team stays responsible for how you act on call results.",
         },
         {
           type: "p",
@@ -185,7 +215,7 @@ const en: TermsCopy = {
     },
     {
       id: "use",
-      title: "9. Acceptable use",
+      title: "10. Acceptable use",
       blocks: [
         {
           type: "p",
@@ -209,15 +239,15 @@ const en: TermsCopy = {
     },
     {
       id: "fees",
-      title: "10. Fees and licenses",
+      title: "11. Fees and licenses",
       blocks: [
         {
           type: "p",
-          text: "There is no public price on this site. Each company receives a custom offer and a license to use the Service for its own internal operations, on the terms in the Order.",
+          text: "There is no public price on this site. Each company receives a custom offer and a license to use the Service for its own internal operations, on the terms in the Order. A trial under section 5 is not a fee and is not a charge.",
         },
         {
           type: "p",
-          text: "You pay the fees in the Order. Unless the Order says otherwise, fees are non-refundable, and unpaid invoices may lead to suspension.",
+          text: "You pay the fees in the Order. Unless the Order says otherwise, fees paid under an Order are non-refundable, and unpaid invoices may lead to suspension. That sentence does not turn a trial into a paid invoice.",
         },
         {
           type: "p",
@@ -227,7 +257,7 @@ const en: TermsCopy = {
     },
     {
       id: "ip",
-      title: "11. Intellectual property",
+      title: "12. Intellectual property",
       blocks: [
         {
           type: "p",
@@ -241,7 +271,7 @@ const en: TermsCopy = {
     },
     {
       id: "confidentiality",
-      title: "12. Confidentiality",
+      title: "13. Confidentiality",
       blocks: [
         {
           type: "p",
@@ -255,7 +285,7 @@ const en: TermsCopy = {
     },
     {
       id: "disclaimer",
-      title: "13. Disclaimer of warranties",
+      title: "14. Disclaimer of warranties",
       blocks: [
         {
           type: "p",
@@ -283,7 +313,7 @@ const en: TermsCopy = {
     },
     {
       id: "liability",
-      title: "14. Limitation of liability",
+      title: "15. Limitation of liability",
       blocks: [
         {
           type: "p",
@@ -301,7 +331,7 @@ const en: TermsCopy = {
     },
     {
       id: "indemnity",
-      title: "15. Indemnity",
+      title: "16. Indemnity",
       blocks: [
         {
           type: "p",
@@ -321,7 +351,7 @@ const en: TermsCopy = {
     },
     {
       id: "term",
-      title: "16. Term, suspension, and termination",
+      title: "17. Term, suspension, and termination",
       blocks: [
         {
           type: "p",
@@ -329,7 +359,7 @@ const en: TermsCopy = {
         },
         {
           type: "p",
-          text: "We may suspend or end access for material breach, non-payment under the Order, legal risk, or harm to the Service or to others. You may stop using the site at any time. Paid access follows the Order.",
+          text: "We may suspend or end access for material breach, non-payment under the Order, legal risk, or harm to the Service or to others. You may stop using the site at any time. To end a trial, email hello@zonikai.com (section 5). Paid access follows the Order; the same email is enough as fallback notice.",
         },
         {
           type: "p",
@@ -339,7 +369,7 @@ const en: TermsCopy = {
     },
     {
       id: "changes",
-      title: "17. Changes to these Terms",
+      title: "18. Changes to these Terms",
       blocks: [
         {
           type: "p",
@@ -353,7 +383,7 @@ const en: TermsCopy = {
     },
     {
       id: "law",
-      title: "18. Governing law",
+      title: "19. Governing law",
       blocks: [
         {
           type: "p",
@@ -380,7 +410,7 @@ const sr: TermsCopy = {
   label: "Pravno",
   title: "Uslovi korišćenja",
   titleAccent: "Pravila za sajt i proizvod.",
-  updated: "Poslednja izmena: 14. avgust 2026.",
+  updated: "Poslednja izmena: 19. avgust 2026.",
   intro:
     "Ovo su standardna pravila korišćenja Zonika. Važe za zonikai.com i za proizvod na app.zonikai.com. Ako vaša firma sa nama potpiše ponudu, nalog, licencu ili MSA, taj potpisani dokument važi ako se sukobi sa ovom stranicom.",
   contactCta: "Pitanja o ovim uslovima",
@@ -454,13 +484,39 @@ const sr: TermsCopy = {
         },
         {
           type: "p",
-          text: "Sadržaj sajta je informacija. Nije obećanje da će vaša flota dobiti konkretan rezultat.",
+          text: "Sadržaj sajta je informacija. Nije obećanje da će vaša flota dobiti konkretan rezultat. Na sajtu nema tuđih recenzija ni izjava klijenata. Ne izmišljamo citate.",
+        },
+        {
+          type: "p",
+          text: "Kalkulator je samo procena. Brojevi koje pokaže nisu ponuda, nisu račun i nisu garancija uštede ni rezultata.",
+        },
+      ],
+    },
+    {
+      id: "trial",
+      title: "5. Probni period i kako da ga zaustavite",
+      blocks: [
+        {
+          type: "p",
+          text: "Probni period od 14 dana važi samo ako se tako dogovorimo mejlom. Ovaj sajt ne uzima karticu, sam ne pokreće plaćeni plan i ne naplaćuje automatski kad probni period istekne.",
+        },
+        {
+          type: "p",
+          text: "Ako do kraja probnog perioda ne potpišemo Nalog, pristup prestaje. Prelazak na plaćeno ide samo potpisanim Nalogom — nikad tako što na sajtu ostane kartica.",
+        },
+        {
+          type: "p",
+          text: "Da otkažete probni period, ili da kažete da nećete da nastavite posle njega, pošaljite jedan mejl na hello@zonikai.com. To je isti korak kao da nam pišete, i nije teži od zakazivanja dema.",
+        },
+        {
+          type: "p",
+          text: "Plaćeni pristup prati Nalog. Da ga otkažete, radite kako piše Nalog; smete i da pišete na hello@zonikai.com i to tretiramo kao obaveštenje.",
         },
       ],
     },
     {
       id: "service",
-      title: "5. Servis",
+      title: "6. Servis",
       blocks: [
         {
           type: "p",
@@ -478,7 +534,7 @@ const sr: TermsCopy = {
     },
     {
       id: "accounts",
-      title: "6. Nalozi i pristup",
+      title: "7. Nalozi i pristup",
       blocks: [
         {
           type: "p",
@@ -492,7 +548,7 @@ const sr: TermsCopy = {
     },
     {
       id: "data",
-      title: "7. Vaši podaci i tuđi alati",
+      title: "8. Vaši podaci i tuđi alati",
       blocks: [
         {
           type: "p",
@@ -514,11 +570,15 @@ const sr: TermsCopy = {
     },
     {
       id: "calls",
-      title: "8. AI pozivi vozačima i pristanak",
+      title: "9. AI pozivi vozačima i pristanak",
       blocks: [
         {
           type: "p",
-          text: "Zonik AI-jem zove samo vozače koje je vaša firma ubacila u Servis. Ne biramo brojeve sa interneta i ne zovemo vozače koje niste učitali.",
+          text: "Zonik AI-jem zove samo vozače koje je vaša firma ubacila u Servis. Ne biramo brojeve sa interneta i ne zovemo vozače koje niste učitali. Pozivi pitaju za status tovara — npr. gde je vozač i stiže li na vreme. To nije medicinski, psihološki ni pravni savet. Nije 911 ni krizna linija.",
+        },
+        {
+          type: "p",
+          text: "Glas i sadržaj poziva mogu da obrađuju podobrađivači, uključujući Twilio i Vapi za glas, i provajdera jezičkog modela koji piše ili sažima šta je rečeno. Zonik je logistički alat za dispeč. Ne nudimo protokol krizne linije kao potrošački četbot. Ako je vozač ili bilo ko u opasnosti, treba da zove hitne službe. Vaš dispeč i dalje odgovara za to kako reagujete na rezultat poziva.",
         },
         {
           type: "p",
@@ -540,7 +600,7 @@ const sr: TermsCopy = {
     },
     {
       id: "use",
-      title: "9. Dozvoljena upotreba",
+      title: "10. Dozvoljena upotreba",
       blocks: [
         {
           type: "p",
@@ -564,15 +624,15 @@ const sr: TermsCopy = {
     },
     {
       id: "fees",
-      title: "10. Cene i licence",
+      title: "11. Cene i licence",
       blocks: [
         {
           type: "p",
-          text: "Na sajtu nema javne cene. Svaka firma dobija posebnu ponudu i licencu da Servis koristi za svoj unutrašnji rad, po uslovima iz Naloga.",
+          text: "Na sajtu nema javne cene. Svaka firma dobija posebnu ponudu i licencu da Servis koristi za svoj unutrašnji rad, po uslovima iz Naloga. Probni period iz odeljka 5 nije naknada i nije naplata.",
         },
         {
           type: "p",
-          text: "Plaćate iznose iz Naloga. Osim ako Nalog kaže drugačije, naknade se ne vraćaju, a neplaćeni računi mogu da dovedu do suspenzije.",
+          text: "Plaćate iznose iz Naloga. Osim ako Nalog kaže drugačije, naknade plaćene po Nalogu se ne vraćaju, a neplaćeni računi mogu da dovedu do suspenzije. Ta rečenica ne pretvara probni period u plaćeni račun.",
         },
         {
           type: "p",
@@ -582,7 +642,7 @@ const sr: TermsCopy = {
     },
     {
       id: "ip",
-      title: "11. Intelektualna svojina",
+      title: "12. Intelektualna svojina",
       blocks: [
         {
           type: "p",
@@ -596,7 +656,7 @@ const sr: TermsCopy = {
     },
     {
       id: "confidentiality",
-      title: "12. Poverljivost",
+      title: "13. Poverljivost",
       blocks: [
         {
           type: "p",
@@ -610,7 +670,7 @@ const sr: TermsCopy = {
     },
     {
       id: "disclaimer",
-      title: "13. Odricanje od garancija",
+      title: "14. Odricanje od garancija",
       blocks: [
         {
           type: "p",
@@ -638,7 +698,7 @@ const sr: TermsCopy = {
     },
     {
       id: "liability",
-      title: "14. Ograničenje odgovornosti",
+      title: "15. Ograničenje odgovornosti",
       blocks: [
         {
           type: "p",
@@ -656,7 +716,7 @@ const sr: TermsCopy = {
     },
     {
       id: "indemnity",
-      title: "15. Naknada štete",
+      title: "16. Naknada štete",
       blocks: [
         {
           type: "p",
@@ -676,7 +736,7 @@ const sr: TermsCopy = {
     },
     {
       id: "term",
-      title: "16. Trajanje, suspenzija i prestanak",
+      title: "17. Trajanje, suspenzija i prestanak",
       blocks: [
         {
           type: "p",
@@ -684,7 +744,7 @@ const sr: TermsCopy = {
         },
         {
           type: "p",
-          text: "Pristup možemo da suspendujemo ili prekinemo zbog bitnog kršenja, neplaćanja po Nalogu, pravnog rizika ili štete po Servis ili druge. Sajt možete da prestanete da koristite kad hoćete. Plaćeni pristup prati Nalog.",
+          text: "Pristup možemo da suspendujemo ili prekinemo zbog bitnog kršenja, neplaćanja po Nalogu, pravnog rizika ili štete po Servis ili druge. Sajt možete da prestanete da koristite kad hoćete. Da prekinete probni period, pišite na hello@zonikai.com (odeljak 5). Plaćeni pristup prati Nalog; isti mejl važi i kao rezervno obaveštenje.",
         },
         {
           type: "p",
@@ -694,7 +754,7 @@ const sr: TermsCopy = {
     },
     {
       id: "changes",
-      title: "17. Izmene ovih uslova",
+      title: "18. Izmene ovih uslova",
       blocks: [
         {
           type: "p",
@@ -708,7 +768,7 @@ const sr: TermsCopy = {
     },
     {
       id: "law",
-      title: "18. Merodavno pravo",
+      title: "19. Merodavno pravo",
       blocks: [
         {
           type: "p",
