@@ -264,7 +264,7 @@ function BrokerCallVisual({ active }: { active: boolean }) {
             )}
           >
             <Truck className={cn("mx-auto h-4 w-4", i === 2 ? "text-warning" : "text-[#3f3f46]")} />
-            <p className="mt-1 font-mono text-[11px] font-semibold">{id}</p>
+            <p className="mt-1 font-mono text-[11px] font-semibold text-foreground">{id}</p>
             <p className={cn("text-[10px] font-semibold", i === 2 ? "text-warning" : "text-success")}>
               {i === 2 ? "At risk" : "On time"}
             </p>
@@ -282,16 +282,16 @@ function BrokerCallVisual({ active }: { active: boolean }) {
           </span>
           <div>
             <p className="text-[10px] font-semibold uppercase tracking-wider text-danger">{s.today.incoming}</p>
-            <p className="text-sm font-semibold">{s.today.broker}</p>
+            <p className="text-sm font-semibold text-foreground">{s.today.broker}</p>
           </div>
         </div>
-        <p className="mt-3 rounded-xl bg-white px-3 py-2 text-sm leading-snug">“{s.today.bubble}”</p>
+        <p className="mt-3 rounded-xl bg-white px-3 py-2 text-sm leading-snug text-foreground">“{s.today.bubble}”</p>
       </motion.div>
       <div className="flex items-center gap-3 rounded-xl border border-warning/30 bg-warning-bg px-3 py-2.5">
         <ImageAna />
         <div>
-          <p className="text-sm font-semibold">{s.today.operator}</p>
-          <p className="text-[11px] text-warning">{s.today.operatorLine}</p>
+          <p className="text-sm font-semibold text-foreground">{s.today.operator}</p>
+          <p className="text-[11px] font-medium text-[#9a3412]">{s.today.operatorLine}</p>
         </div>
       </div>
     </div>
@@ -362,13 +362,13 @@ function WorkflowVisual({ active }: { active: boolean }) {
 
 function LanguageVisual() {
   return (
-    <div className="flex h-full flex-col justify-between gap-3 p-5">
+    <div className="flex h-full flex-col justify-between gap-3 bg-white p-5 text-foreground">
       <div className="grid grid-cols-3 gap-2">
         {s.language.drivers.map((d) => (
-          <div key={d.id} className="rounded-xl border border-border bg-surface/60 p-3 text-center">
+          <div key={d.id} className="rounded-xl border border-border bg-[#f4f4f5] p-3 text-center">
             <Truck className="mx-auto h-4 w-4 text-[#3f3f46]" />
-            <p className="mt-1 font-mono text-[11px] font-semibold">{d.id}</p>
-            <p className="text-[11px] text-[#3f3f46]">{d.name}</p>
+            <p className="mt-1 font-mono text-[11px] font-semibold text-foreground">{d.id}</p>
+            <p className="text-[11px] font-medium text-[#3f3f46]">{d.name}</p>
             <p className="mt-2 inline-flex items-center gap-1 rounded-full border border-secondary/25 bg-[#eeedff] px-2 py-0.5 text-[10px] font-semibold text-secondary-dark">
               <Globe className="h-3 w-3" />
               {d.lang}
@@ -379,8 +379,8 @@ function LanguageVisual() {
       <div className="flex items-center gap-3 rounded-xl border border-warning/30 bg-warning-bg px-3 py-3">
         <ImageAna />
         <div>
-          <p className="text-sm font-semibold">{s.language.operator}</p>
-          <p className="text-[11px] font-medium text-warning">Trying T-2187 in Spanish</p>
+          <p className="text-sm font-semibold text-foreground">{s.language.operator}</p>
+          <p className="text-[11px] font-medium text-[#9a3412]">Trying T-2187 in Spanish</p>
         </div>
       </div>
     </div>
@@ -818,7 +818,7 @@ function Card({
       className={cn(
         "rounded-[2rem] border shadow-[0_24px_80px_rgba(0,0,0,0.28)]",
         glass
-          ? "border-white/15 bg-white/[0.08] text-white shadow-[0_24px_80px_rgba(0,0,0,0.4)] backdrop-blur-2xl"
+          ? "border-white/20 bg-[#071224]/82 text-white shadow-[0_24px_80px_rgba(0,0,0,0.45)] backdrop-blur-xl"
           : "border-white/10 bg-white text-foreground",
         compact ? "p-5 sm:p-6" : "p-6 sm:p-8 lg:p-10",
         className
@@ -841,7 +841,7 @@ function Stage({ children, className }: { children: React.ReactNode; className?:
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-3xl border border-border bg-white shadow-[0_20px_60px_rgba(0,0,0,0.08)]",
+        "overflow-hidden rounded-3xl border border-border bg-white text-foreground shadow-[0_20px_60px_rgba(0,0,0,0.08)]",
         className
       )}
     >
@@ -1124,7 +1124,7 @@ export function PitchDeck2() {
                   <p className="mt-6 text-xl font-semibold text-[#e0e7ff]">{s.language.line}</p>
                   <p className="mt-8 text-lg font-semibold text-white">{s.language.tease}</p>
                 </div>
-                <Stage className="min-h-[18rem]">
+                <Stage className="min-h-[18rem] bg-white text-foreground">
                   <LanguageVisual />
                 </Stage>
               </div>
