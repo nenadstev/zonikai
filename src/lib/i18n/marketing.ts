@@ -310,6 +310,31 @@ export const marketingEn = {
       },
     ],
   },
+  thankYou: {
+    label: "Demo booked",
+    title: "You're on the calendar.",
+    titleAccent: "We'll see you soon.",
+    intro:
+      "Thanks for booking a Zonik demo. Check your email for the calendar invite and meeting link.",
+    nextLabel: "What happens next",
+    steps: [
+      {
+        title: "Confirm the invite",
+        text: "Open the email from Cal.com and add the meeting to your calendar.",
+      },
+      {
+        title: "Come ready with your stack",
+        text: "If you can, note your ELD/TMS and how after-hours tracking works today.",
+      },
+      {
+        title: "We walk the product live",
+        text: "Dashboard, delay detection, AI driver calls, and when your team gets involved.",
+      },
+    ],
+    tip: "Need to change the time or ask something first?",
+    primaryCta: "Back to home",
+    secondaryCta: "See how Zonik works",
+  },
   integrations: {
     label: "Integrations",
     title: "Zonik sits in the middle.",
@@ -950,6 +975,31 @@ export const marketingSr: Marketing = {
           "Umesto rutinskog praćenja, tabla ti kaže šta se desilo preko noći.",
       },
     ],
+  },
+  thankYou: {
+    label: "Demo zakazan",
+    title: "Termin je na kalendaru.",
+    titleAccent: "Vidimo se uskoro.",
+    intro:
+      "Hvala što si zakazao Zonik demo. Proveri mejl za pozivnicu i link za sastanak.",
+    nextLabel: "Šta sledi",
+    steps: [
+      {
+        title: "Potvrdi pozivnicu",
+        text: "Otvori mejl od Cal.com i dodaj sastanak u kalendar.",
+      },
+      {
+        title: "Pripremi svoj stack",
+        text: "Ako možeš, navedi ELD/TMS i kako danas radi noćno praćenje.",
+      },
+      {
+        title: "Prolazimo proizvod uživo",
+        text: "Tabla, detekcija kašnjenja, AI pozivi vozačima i kada tim ulazi u igru.",
+      },
+    ],
+    tip: "Treba ti promena termina ili pitanje pre toga?",
+    primaryCta: "Nazad na početnu",
+    secondaryCta: "Pogledaj kako Zonik radi",
   },
   integrations: {
     label: "Integracije",
