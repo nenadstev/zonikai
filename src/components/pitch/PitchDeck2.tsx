@@ -263,7 +263,7 @@ function BrokerCallVisual({ active }: { active: boolean }) {
                 : "border-border bg-surface/70"
             )}
           >
-            <Truck className={cn("mx-auto h-4 w-4", i === 2 ? "text-warning" : "text-muted")} />
+            <Truck className={cn("mx-auto h-4 w-4", i === 2 ? "text-warning" : "text-[#3f3f46]")} />
             <p className="mt-1 font-mono text-[11px] font-semibold">{id}</p>
             <p className={cn("text-[10px] font-semibold", i === 2 ? "text-warning" : "text-success")}>
               {i === 2 ? "At risk" : "On time"}
@@ -329,32 +329,32 @@ function WorkflowVisual({ active }: { active: boolean }) {
                 "rounded-lg border px-2.5 py-1.5 text-[11px] font-semibold",
                 step === i
                   ? "border-warning bg-warning-bg text-warning"
-                  : "border-border bg-surface text-muted"
+                  : "border-border bg-surface text-[#3f3f46]"
               )}
             >
               {item}
             </div>
-            {i < s.workflow.chain.length - 1 ? <ArrowRight className="h-3 w-3 text-muted" /> : null}
+            {i < s.workflow.chain.length - 1 ? <ArrowRight className="h-3 w-3 text-[#3f3f46]" /> : null}
           </div>
         ))}
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-xl border border-border bg-surface p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">ELD</p>
-          <p className="mt-2 font-mono text-sm font-semibold">T-1042 · I-70</p>
-          <p className={cn("mt-1 text-xs", step >= 2 ? "text-warning" : "text-muted")}>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#3f3f46]">ELD</p>
+          <p className="mt-2 font-mono text-sm font-semibold">T-1042 on I-70</p>
+          <p className={cn("mt-1 text-xs", step >= 2 ? "text-warning" : "text-[#3f3f46]")}>
             {step >= 2 ? "ETA 20:45 vs 20:00" : "Location copied"}
           </p>
         </div>
         <div className="rounded-xl border border-border bg-white p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Google Maps</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wider text-[#3f3f46]">Google Maps</p>
           <p className="mt-2 text-sm font-semibold">Chicago unload</p>
           <p className="mt-1 font-mono text-lg font-semibold text-warning">20:45</p>
         </div>
       </div>
       <div className="flex items-center justify-between rounded-xl border border-border px-3 py-2">
         <p className="text-sm font-medium">{s.workflow.queue}</p>
-        <p className="font-mono text-sm font-semibold text-warning">T-2187 → T-3301</p>
+        <p className="font-mono text-sm font-semibold text-warning">T-2187 then T-3301</p>
       </div>
     </div>
   );
@@ -366,9 +366,9 @@ function LanguageVisual() {
       <div className="grid grid-cols-3 gap-2">
         {s.language.drivers.map((d) => (
           <div key={d.id} className="rounded-xl border border-border bg-surface/60 p-3 text-center">
-            <Truck className="mx-auto h-4 w-4 text-muted" />
+            <Truck className="mx-auto h-4 w-4 text-[#3f3f46]" />
             <p className="mt-1 font-mono text-[11px] font-semibold">{d.id}</p>
-            <p className="text-[11px] text-muted">{d.name}</p>
+            <p className="text-[11px] text-[#3f3f46]">{d.name}</p>
             <p className="mt-2 inline-flex items-center gap-1 rounded-full border border-secondary/25 bg-[#eeedff] px-2 py-0.5 text-[10px] font-semibold text-secondary-dark">
               <Globe className="h-3 w-3" />
               {d.lang}
@@ -380,7 +380,7 @@ function LanguageVisual() {
         <ImageAna />
         <div>
           <p className="text-sm font-semibold">{s.language.operator}</p>
-          <p className="text-[11px] text-warning">Trying T-2187 · Spanish…</p>
+          <p className="text-[11px] font-medium text-warning">Trying T-2187 in Spanish</p>
         </div>
       </div>
     </div>
@@ -391,7 +391,7 @@ function CostVisual() {
   return (
     <div className="grid h-full grid-cols-[1.1fr_0.9fr] gap-3 p-5">
       <div className="rounded-xl border border-border bg-surface/70 p-4">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">{s.cost.timeLabel}</p>
+        <p className="text-[10px] font-semibold uppercase tracking-wider text-[#3f3f46]">{s.cost.timeLabel}</p>
         <ul className="mt-3 space-y-2">
           {s.cost.timeItems.map((item) => (
             <li key={item} className="rounded-lg border border-warning/20 bg-warning-bg px-3 py-2 text-sm font-medium text-warning">
@@ -410,40 +410,56 @@ function CostVisual() {
 
 function IdeaVisual({ active }: { active: boolean }) {
   return (
-    <div className="grid h-full grid-cols-2 gap-3 p-4">
-      <div className="rounded-xl border border-border bg-surface/80 p-3">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">{s.idea.beforeLabel}</p>
-        <ul className="mt-3 space-y-2">
-          {s.idea.beforeTasks.map((task) => (
+    <div className="grid h-full grid-cols-[1fr_auto_1fr] items-stretch gap-2 p-4">
+      <div className="flex flex-col rounded-2xl border border-border bg-[#111111] p-4 text-white">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/80">{s.idea.beforeLabel}</p>
+        <p className="mt-1 text-sm font-semibold">{s.idea.operatorLabel}</p>
+        <ul className="mt-4 flex-1 space-y-2">
+          {s.idea.beforeTasks.map((task, i) => (
             <motion.li
               key={task}
-              animate={active ? { x: [0, 8, 0], opacity: [1, 0.45, 1] } : undefined}
-              transition={{ duration: 2.4, repeat: Infinity }}
-              className="rounded-lg border border-warning/25 bg-warning-bg px-2.5 py-1.5 text-sm text-warning"
+              animate={
+                active
+                  ? { x: [0, 12, 0], opacity: [1, 0.35, 1] }
+                  : undefined
+              }
+              transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.15 }}
+              className="rounded-xl border border-warning/40 bg-warning-bg px-3 py-2.5 text-sm font-semibold text-[#9a3412]"
             >
               {task}
             </motion.li>
           ))}
         </ul>
       </div>
-      <div className="space-y-3">
-        <div className="rounded-xl border border-secondary/25 bg-[#eeedff] p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-secondary-dark">Zonik</p>
-          <ul className="mt-2 space-y-1.5">
+      <div className="flex flex-col items-center justify-center px-1">
+        <motion.div
+          animate={active ? { x: [0, 6, 0] } : undefined}
+          transition={{ duration: 1.6, repeat: Infinity }}
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary text-white"
+        >
+          <ArrowRight className="h-5 w-5" />
+        </motion.div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <div className="flex-1 rounded-2xl border-2 border-secondary/40 bg-[#eeedff] p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-secondary-dark">{s.idea.zonikLabel}</p>
+          <p className="mt-1 text-xs font-medium text-secondary-dark">{s.idea.zonikLine}</p>
+          <ul className="mt-3 space-y-2">
             {s.idea.afterZonik.map((task) => (
-              <li key={task} className="flex items-center gap-2 text-sm text-secondary-dark">
-                <Check className="h-3.5 w-3.5" />
+              <li key={task} className="flex items-center gap-2 rounded-lg bg-white px-2.5 py-2 text-sm font-semibold text-secondary-dark">
+                <Check className="h-3.5 w-3.5 shrink-0" />
                 {task}
               </li>
             ))}
           </ul>
         </div>
-        <div className="rounded-xl border border-success/30 bg-success-bg p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-success">{s.idea.afterLabel}</p>
-          <ul className="mt-2 space-y-1.5">
+        <div className="flex-1 rounded-2xl border-2 border-success/40 bg-success-bg p-4">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-success">{s.idea.teamLabel}</p>
+          <p className="mt-1 text-xs font-medium text-[#14532d]">{s.idea.teamLine}</p>
+          <ul className="mt-3 space-y-2">
             {s.idea.afterTeam.map((task) => (
-              <li key={task} className="flex items-center gap-2 text-sm font-medium text-foreground">
-                <ArrowRight className="h-3.5 w-3.5 text-success" />
+              <li key={task} className="flex items-center gap-2 rounded-lg bg-white px-2.5 py-2 text-sm font-semibold text-foreground">
+                <ArrowRight className="h-3.5 w-3.5 shrink-0 text-success" />
                 {task}
               </li>
             ))}
@@ -459,14 +475,14 @@ function LoadOnTimeVisual({ active }: { active: boolean }) {
     <div className="flex h-full flex-col justify-between gap-4 p-5">
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-mono text-xs text-muted">#48291 · T-1042</p>
+          <p className="font-mono text-xs font-medium text-[#3f3f46]">#48291, T-1042</p>
           <p className="mt-1 text-lg font-semibold">{s.loadOnTime.nextStop}</p>
         </div>
         <StatusBadge variant="success">{s.loadOnTime.status}</StatusBadge>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-2xl border border-border bg-surface/60 p-4">
-          <p className="text-xs text-muted">{s.loadOnTime.scheduled}</p>
+          <p className="text-xs text-[#3f3f46]">{s.loadOnTime.scheduled}</p>
           <p className="mt-2 font-mono text-3xl font-semibold">20:00</p>
         </div>
         <motion.div
@@ -487,14 +503,14 @@ function LoadDelayVisual({ active }: { active: boolean }) {
     <div className="flex h-full flex-col justify-between gap-4 p-5">
       <div className="flex items-start justify-between">
         <div>
-          <p className="font-mono text-xs text-muted">#48291 · T-1042</p>
+          <p className="font-mono text-xs font-medium text-[#3f3f46]">#48291, T-1042</p>
           <p className="mt-1 text-lg font-semibold">{s.loadOnTime.nextStop}</p>
         </div>
         <StatusBadge variant="warning">{s.loadDelay.status}</StatusBadge>
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-2xl border border-border bg-surface/60 p-4">
-          <p className="text-xs text-muted">{s.loadDelay.scheduled}</p>
+          <p className="text-xs text-[#3f3f46]">{s.loadDelay.scheduled}</p>
           <p className="mt-2 font-mono text-3xl font-semibold">20:00</p>
         </div>
         <motion.div
@@ -507,7 +523,7 @@ function LoadDelayVisual({ active }: { active: boolean }) {
         </motion.div>
       </div>
       <p className="text-center text-sm font-semibold text-warning">
-        {s.loadDelay.late} · {s.loadDelay.risk}
+        {s.loadDelay.late}, {s.loadDelay.risk}
       </p>
       <div className="flex items-center justify-center gap-2 rounded-xl border border-secondary/30 bg-accent-soft px-3 py-2 text-sm font-medium text-secondary-dark">
         <PhoneCall className="h-4 w-4" />
@@ -547,7 +563,7 @@ function LoadCallVisual({ active }: { active: boolean }) {
             transition={{ delay: 0.2 + i * 0.2 }}
             className="rounded-xl border border-border bg-white px-4 py-3"
           >
-            <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">{field.label}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-[#3f3f46]">{field.label}</p>
             <p className="mt-1 font-mono text-lg font-semibold">{field.value}</p>
           </motion.div>
         ))}
@@ -561,20 +577,20 @@ function KnowsVisual() {
     <div className="flex h-full flex-col gap-3 p-4">
       <div className="rounded-xl border border-border bg-white p-4">
         <div className="flex items-center justify-between">
-          <p className="font-mono text-sm font-semibold">#48291 · T-1042</p>
+          <p className="font-mono text-sm font-semibold">#48291, T-1042</p>
           <StatusBadge variant="warning">{s.knows.status}</StatusBadge>
         </div>
         <div className="mt-3 grid grid-cols-3 gap-2 text-sm">
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-muted">{s.knows.reason}</p>
+            <p className="text-[10px] uppercase tracking-wider text-[#3f3f46]">{s.knows.reason}</p>
             <p className="font-semibold">{s.knows.reasonVal}</p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-muted">{s.knows.eta}</p>
+            <p className="text-[10px] uppercase tracking-wider text-[#3f3f46]">{s.knows.eta}</p>
             <p className="font-mono font-semibold">{s.knows.etaVal}</p>
           </div>
           <div>
-            <p className="text-[10px] uppercase tracking-wider text-muted">{s.knows.contact}</p>
+            <p className="text-[10px] uppercase tracking-wider text-[#3f3f46]">{s.knows.contact}</p>
             <p className="font-semibold">{s.knows.contactVal}</p>
           </div>
         </div>
@@ -618,7 +634,7 @@ function PathsVisual({ active }: { active: boolean }) {
         </ol>
       </div>
       <div className="hidden items-center md:flex">
-        <span className="rounded-full border border-border bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-muted">
+        <span className="rounded-full border border-border bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#3f3f46]">
           or
         </span>
       </div>
@@ -650,20 +666,20 @@ function ChangesVisual() {
   return (
     <div className="grid h-full grid-cols-2 gap-3 text-foreground">
       <div className="flex flex-col rounded-2xl border border-border bg-[#111111] p-4 text-white">
-        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">{s.changes.today}</p>
-        <p className="mt-1 text-xs text-white/50">{s.changes.todayCaption}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white">{s.changes.today}</p>
+        <p className="mt-1 text-xs text-white">{s.changes.todayCaption}</p>
         <ul className="mt-3 flex-1 space-y-1.5">
           {s.changes.todayItems.map((item) => (
-            <li key={item} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/70">
+            <li key={item} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white">
               {item}
             </li>
           ))}
         </ul>
-        <p className="mt-3 font-mono text-sm text-white/35">Next loads · 0</p>
+        <p className="mt-3 font-mono text-sm font-semibold text-white">Next loads: 0</p>
       </div>
       <div className="flex flex-col rounded-2xl border-2 border-success/40 bg-white p-4 shadow-[0_16px_40px_rgba(34,197,94,0.12)]">
         <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-secondary-dark">{s.changes.withZonik}</p>
-        <p className="mt-1 text-xs text-muted">{s.changes.afterCaption}</p>
+        <p className="mt-1 text-xs text-[#3f3f46]">{s.changes.afterCaption}</p>
         <ul className="mt-3 flex-1 space-y-2">
           {s.changes.afterItems.map((item, i) => (
             <li
@@ -688,7 +704,7 @@ function DispatchVisual({ active }: { active: boolean }) {
   return (
     <div className="grid h-full grid-cols-2 gap-3 text-foreground">
       <div className="rounded-2xl border border-border bg-[#ececee] p-4">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">{s.dispatch.beforeLabel}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[#3f3f46]">{s.dispatch.beforeLabel}</p>
         <ul className="mt-3 space-y-2">
           {s.dispatch.beforeItems.map((item) => (
             <li key={item} className="rounded-lg border border-warning/25 bg-warning-bg px-3 py-2 text-sm font-medium text-[#9a3412]">
@@ -731,20 +747,20 @@ function HandoffVisual() {
   return (
     <div className="grid h-full gap-3 text-foreground md:grid-cols-2">
       <div className="space-y-2 rounded-2xl border border-border bg-[#111111] p-4 text-white">
-        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/40">{s.handoff.todayLabel}</p>
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white">{s.handoff.todayLabel}</p>
         <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white/50">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white">
             <Mail className="h-3.5 w-3.5" />
             {s.handoff.todayFrom}
           </p>
-          <p className="mt-2 text-sm leading-snug text-white/80">“{s.handoff.todayFromBody}”</p>
+          <p className="mt-2 text-sm leading-snug text-white">“{s.handoff.todayFromBody}”</p>
         </div>
         <div className="rounded-xl border border-white/10 bg-white/5 p-3">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white/50">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white">
             <Mail className="h-3.5 w-3.5" />
             {s.handoff.todayBack}
           </p>
-          <p className="mt-2 text-sm leading-snug text-white/80">“{s.handoff.todayBackBody}”</p>
+          <p className="mt-2 text-sm leading-snug text-white">“{s.handoff.todayBackBody}”</p>
         </div>
       </div>
       <div className="rounded-2xl border-2 border-success/40 bg-white p-4">
@@ -815,7 +831,7 @@ function Card({
 
 function Eyebrow({ children, light }: { children: React.ReactNode; light?: boolean }) {
   return (
-    <p className={cn("text-[11px] font-semibold uppercase tracking-[0.2em]", light ? "text-[#a5b4fc]" : "text-secondary")}>
+    <p className={cn("text-[11px] font-semibold uppercase tracking-[0.2em]", light ? "text-[#e0e7ff]" : "text-secondary")}>
       {children}
     </p>
   );
@@ -1046,13 +1062,13 @@ export function PitchDeck2() {
                     {s.today.headline}
                   </h1>
                   {s.today.lines.map((line) => (
-                    <p key={line} className="mt-3 text-base text-white/70">
+                    <p key={line} className="mt-3 text-base text-white">
                       {line}
                     </p>
                   ))}
-                  <p className="mt-4 text-xl font-semibold text-[#a5b4fc]">“{s.today.quote}”</p>
+                  <p className="mt-4 text-xl font-semibold text-[#e0e7ff]">“{s.today.quote}”</p>
                   <p className="mt-5 text-base font-semibold text-white">{s.today.late}</p>
-                  <p className="mt-1 text-base text-white/70">{s.today.hit}</p>
+                  <p className="mt-1 text-base text-white">{s.today.hit}</p>
                   <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-warning">
                     {s.today.emotion}
                   </p>
@@ -1077,7 +1093,7 @@ export function PitchDeck2() {
                       <span className="font-mono text-sm font-semibold text-secondary">{step.number}</span>
                       <div>
                         <p className="text-sm font-semibold">{step.title}</p>
-                        <p className="mt-0.5 text-sm text-muted">{step.text}</p>
+                        <p className="mt-0.5 text-sm text-[#3f3f46]">{step.text}</p>
                       </div>
                     </li>
                   ))}
@@ -1101,11 +1117,11 @@ export function PitchDeck2() {
                     {s.language.headline}
                   </h2>
                   {s.language.lines.map((line) => (
-                    <p key={line} className="mt-3 text-base text-white/70">
+                    <p key={line} className="mt-3 text-base text-white">
                       {line}
                     </p>
                   ))}
-                  <p className="mt-6 text-xl font-semibold text-[#a5b4fc]">{s.language.line}</p>
+                  <p className="mt-6 text-xl font-semibold text-[#e0e7ff]">{s.language.line}</p>
                   <p className="mt-8 text-lg font-semibold text-white">{s.language.tease}</p>
                 </div>
                 <Stage className="min-h-[18rem]">
@@ -1123,12 +1139,12 @@ export function PitchDeck2() {
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.cost.headline}</h2>
                   <ul className="mt-5 space-y-1.5">
                     {s.cost.lines.map((line) => (
-                      <li key={line} className="text-base text-muted">
+                      <li key={line} className="text-base text-[#3f3f46]">
                         {line}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-4 text-base text-muted">{s.cost.but}</p>
+                  <p className="mt-4 text-base text-[#3f3f46]">{s.cost.but}</p>
                   <p className="mt-6 text-xl font-semibold text-secondary-dark">{s.cost.payoff}</p>
                   <p className="mt-8 text-lg font-semibold">{s.cost.tease}</p>
                 </div>
@@ -1149,14 +1165,14 @@ export function PitchDeck2() {
                   </h2>
                   <ul className="mt-5 space-y-2">
                     {s.idea.points.map((point) => (
-                      <li key={point} className="text-base text-white/75">
+                      <li key={point} className="text-base text-white">
                         {point}
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-6 text-xl font-semibold text-[#a5b4fc]">{s.idea.payoff}</p>
-                  <p className="mt-4 text-sm text-white/70">{s.idea.zonikLine}</p>
-                  <p className="text-sm text-white/70">{s.idea.teamLine}</p>
+                  <p className="mt-6 text-xl font-semibold text-[#e0e7ff]">{s.idea.payoff}</p>
+                  <p className="mt-4 text-sm text-white">{s.idea.zonikLine}</p>
+                  <p className="text-sm text-white">{s.idea.teamLine}</p>
                 </div>
                 <Stage className="min-h-[20rem]">
                   <IdeaVisual active={active === 4} />
@@ -1169,7 +1185,7 @@ export function PitchDeck2() {
             <Card glass>
               <Eyebrow light>{s.how.eyebrow}</Eyebrow>
               <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">{s.how.headline}</h2>
-              <p className="mt-2 text-lg text-[#a5b4fc]">{s.how.sub}</p>
+              <p className="mt-2 text-lg text-[#e0e7ff]">{s.how.sub}</p>
               <div className="mt-6 overflow-hidden rounded-3xl border border-white/12 bg-white/[0.04]">
                 <div className="grid grid-cols-2 border-b border-white/10 md:grid-cols-4">
                   {s.how.steps.map((step, i) => {
@@ -1181,7 +1197,7 @@ export function PitchDeck2() {
                         onClick={() => setHowStep(i)}
                         className={cn(
                           "flex items-center gap-2 border-b border-white/15 px-3 py-3 text-left text-white md:border-b-0 md:border-r md:last:border-r-0",
-                          howStep === i ? "bg-white/15" : "text-white/90 hover:bg-white/[0.08]"
+                          howStep === i ? "bg-white/15" : "text-white hover:bg-white/[0.08]"
                         )}
                       >
                         <span
@@ -1193,7 +1209,7 @@ export function PitchDeck2() {
                           <Icon className="h-3.5 w-3.5" />
                         </span>
                         <span>
-                          <p className="font-mono text-[10px] text-[#c7d2fe]">{step.number}</p>
+                          <p className="font-mono text-[10px] text-[#e0e7ff]">{step.number}</p>
                           <p className="text-sm font-semibold">{step.title}</p>
                         </span>
                       </button>
@@ -1231,7 +1247,7 @@ export function PitchDeck2() {
                             {item}
                           </div>
                         ))}
-                        <p className="mt-2 text-sm font-semibold text-warning">OR · {s.how.escalate[4]}</p>
+                        <p className="mt-2 text-sm font-semibold text-warning">OR {s.how.escalate[4]}</p>
                       </div>
                     ) : (
                       <HowVisual active={active === PITCH2_HOW_INDEX} />
@@ -1239,7 +1255,7 @@ export function PitchDeck2() {
                   </div>
                   <div className="flex flex-col justify-center border-t border-white/15 p-6 lg:border-l lg:border-t-0">
                     <p className="text-lg font-semibold text-white">{s.how.steps[howStep].headline}</p>
-                    <p className="mt-2 text-sm leading-relaxed text-white/85">{s.how.steps[howStep].text}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-white">{s.how.steps[howStep].text}</p>
                   </div>
                 </div>
               </div>
@@ -1252,7 +1268,7 @@ export function PitchDeck2() {
                 <div>
                   <Eyebrow>{s.loadOnTime.eyebrow}</Eyebrow>
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.loadOnTime.headline}</h2>
-                  <p className="mt-4 text-lg text-muted">{s.loadOnTime.sub}</p>
+                  <p className="mt-4 text-lg text-[#3f3f46]">{s.loadOnTime.sub}</p>
                 </div>
                 <Stage className="min-h-[16rem]">
                   <LoadOnTimeVisual active={active === PITCH2_LOAD_ONTIME_INDEX} />
@@ -1267,7 +1283,7 @@ export function PitchDeck2() {
                 <div>
                   <Eyebrow>{s.loadDelay.eyebrow}</Eyebrow>
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.loadDelay.headline}</h2>
-                  <p className="mt-4 text-lg text-muted">{s.loadDelay.sub}</p>
+                  <p className="mt-4 text-lg text-[#3f3f46]">{s.loadDelay.sub}</p>
                 </div>
                 <Stage className="min-h-[18rem]">
                   <LoadDelayVisual active={active === PITCH2_LOAD_DELAY_INDEX} />
@@ -1292,7 +1308,7 @@ export function PitchDeck2() {
                 <div>
                   <Eyebrow>{s.knows.eyebrow}</Eyebrow>
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.knows.headline}</h2>
-                  <p className="mt-4 text-lg text-muted">{s.knows.loop}</p>
+                  <p className="mt-4 text-lg text-[#3f3f46]">{s.knows.loop}</p>
                   <p className="mt-6 text-xl font-semibold text-secondary-dark">{s.knows.payoff}</p>
                 </div>
                 <Stage className="min-h-[18rem]">
@@ -1305,7 +1321,7 @@ export function PitchDeck2() {
           <Slide index={10}>
             <Card glass>
               <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">{s.paths.headline}</h2>
-              <p className="mt-3 text-xl text-[#a5b4fc]">{s.paths.sub}</p>
+              <p className="mt-3 text-xl text-[#e0e7ff]">{s.paths.sub}</p>
               <Stage className="mt-6 min-h-[20rem] bg-white p-4 text-foreground">
                 <PathsVisual active={active === 10} />
               </Stage>
@@ -1325,7 +1341,7 @@ export function PitchDeck2() {
                 <div>
                   <h2 className="text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.changes.headline}</h2>
                   <p className="mt-6 text-2xl font-semibold text-secondary-dark">{s.changes.payoff}</p>
-                  <p className="mt-3 text-base text-muted">{s.changes.note}</p>
+                  <p className="mt-3 text-base text-[#3f3f46]">{s.changes.note}</p>
                 </div>
                 <Stage className="min-h-[22rem] p-3">
                   <ChangesVisual />
@@ -1342,7 +1358,7 @@ export function PitchDeck2() {
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.dispatch.headline}</h2>
                   <ul className="mt-5 space-y-2">
                     {s.dispatch.points.map((point) => (
-                      <li key={point} className="text-base text-muted">
+                      <li key={point} className="text-base text-[#3f3f46]">
                         {point}
                       </li>
                     ))}
@@ -1365,11 +1381,11 @@ export function PitchDeck2() {
                     {s.handoff.headline}
                   </h2>
                   {s.handoff.lines.map((line) => (
-                    <p key={line} className="mt-3 text-base text-white/70">
+                    <p key={line} className="mt-3 text-base text-white">
                       {line}
                     </p>
                   ))}
-                  <p className="mt-6 text-xl font-semibold text-[#a5b4fc]">{s.handoff.payoff}</p>
+                  <p className="mt-6 text-xl font-semibold text-[#e0e7ff]">{s.handoff.payoff}</p>
                 </div>
                 <Stage className="min-h-[18rem] p-3">
                   <HandoffVisual />
@@ -1384,7 +1400,7 @@ export function PitchDeck2() {
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.1]">
                 {s.transition.headline}
               </h2>
-              <p className="mx-auto mt-4 max-w-lg text-base text-white/70 md:text-lg">{s.transition.sub}</p>
+              <p className="mx-auto mt-4 max-w-lg text-base text-white md:text-lg">{s.transition.sub}</p>
               <div className="mt-10">
                 <Button href="https://app.zonikai.com/" variant="accent" size="lg" className="gap-2">
                   {s.transition.cta}
@@ -1399,7 +1415,7 @@ export function PitchDeck2() {
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">
               {s.integrations.headline}
             </h2>
-            <p className="mt-2 text-sm text-white/55">{s.integrations.sub}</p>
+            <p className="mt-2 text-sm text-white">{s.integrations.sub}</p>
             <div className="mt-5 rounded-[2rem] ring-1 ring-white/10">
               <IntegrationsHub compact />
             </div>
@@ -1409,15 +1425,15 @@ export function PitchDeck2() {
             <div className="mx-auto max-w-3xl">
               <Eyebrow light>{s.pilot.eyebrow}</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl">{s.pilot.headline}</h2>
-              <p className="mt-3 text-xl font-semibold text-[#a5b4fc]">{s.pilot.sub}</p>
+              <p className="mt-3 text-xl font-semibold text-[#e0e7ff]">{s.pilot.sub}</p>
               <div className="mt-8 rounded-[1.75rem] border border-white/15 bg-white/[0.08] p-5 sm:p-7">
                 <ol className="space-y-5">
                   {s.pilot.steps.map((step, i) => (
                     <li key={step.title} className="flex gap-4">
-                      <span className="font-mono text-sm font-semibold text-[#a5b4fc]">0{i + 1}</span>
+                      <span className="font-mono text-sm font-semibold text-[#e0e7ff]">0{i + 1}</span>
                       <div>
                         <p className="text-base font-semibold text-white">{step.title}</p>
-                        <p className="mt-1 text-sm text-white/70">{step.text}</p>
+                        <p className="mt-1 text-sm text-white">{step.text}</p>
                       </div>
                     </li>
                   ))}
@@ -1438,7 +1454,7 @@ export function PitchDeck2() {
                 <div>
                   <Eyebrow>{s.pricing.eyebrow}</Eyebrow>
                   <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.pricing.headline}</h2>
-                  <p className="mt-4 text-lg text-muted">{s.pricing.sub}</p>
+                  <p className="mt-4 text-lg text-[#3f3f46]">{s.pricing.sub}</p>
                   <ul className="mt-6 flex flex-wrap gap-2">
                     {s.pricing.factors.map((factor) => (
                       <li
