@@ -1,9 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { Button } from "@/components/ui/Button";
-import { useSiteConsent } from "@/lib/i18n/ConsentProvider";
-import { useI18n } from "@/lib/i18n/LocaleProvider";
 
 const CAL_LINK = "zonikai-nikola/30min";
 const CAL_NAMESPACE = "demo";
@@ -37,7 +34,6 @@ function loadCalEmbed() {
       cal.q = cal.q || [];
       document.head.appendChild(document.createElement("script")).src =
         "https://app.cal.com/embed/embed.js";
-      cal.loaded = true;
     }
 
     if (args[0] === "init") {
@@ -66,12 +62,7 @@ function loadCalEmbed() {
 }
 
 export function CalEmbed() {
-  const { t } = useI18n();
-  const { ready, accepted, accept } = useSiteConsent();
-
   useEffect(() => {
-    if (!accepted) return;
-
     const host = document.getElementById("zonik-cal-embed");
     if (!host || host.querySelector("iframe")) return;
 
@@ -106,18 +97,7 @@ export function CalEmbed() {
         },
       },
     });
-  }, [accepted]);
-
-  if (!ready || !accepted) {
-    return (
-      <div className="flex min-h-[280px] w-full flex-col items-center justify-center gap-4 bg-white px-6 py-16 text-center">
-        <p className="max-w-md text-sm leading-relaxed text-muted">{t.consent.calWait}</p>
-        <Button size="sm" onClick={accept} disabled={!ready}>
-          {t.consent.calAccept}
-        </Button>
-      </div>
-    );
-  }
+  }, []);
 
   return (
     <div

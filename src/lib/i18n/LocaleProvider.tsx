@@ -18,18 +18,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved === "en" || saved === "sr") {
-      setLocaleState(saved);
+    if (saved === "sr") {
+      window.localStorage.setItem(STORAGE_KEY, "en");
     }
   }, []);
 
   useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
+    document.documentElement.lang = "en";
+  }, []);
 
   const setLocale = (next: Locale) => {
-    setLocaleState(next);
-    window.localStorage.setItem(STORAGE_KEY, next);
+    if (next !== "en") return;
+    setLocaleState("en");
+    window.localStorage.setItem(STORAGE_KEY, "en");
   };
 
   return (

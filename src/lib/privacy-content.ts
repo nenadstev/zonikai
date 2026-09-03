@@ -284,7 +284,7 @@ const en: PrivacyCopy = {
             "localStorage key zonik-site-consent remembers that you accepted this notice. It is not sent to our servers.",
             "localStorage key zonik-locale remembers EN or SR. It is not a cookie and is not sent to our servers.",
             "Google Tag Manager (GTM-WR2NJPC3) loads with the page. It may set cookies and load other Google or third-party tags configured in GTM. See policies.google.com/privacy.",
-            "Cal.com may set cookies in the booking calendar after you accept, so you can pick a time. Those cookies are needed for that feature. See Cal.com’s policy for details. Until you accept, we do not load the calendar.",
+            "Cal.com may set cookies in the booking calendar on the contact page so you can pick a time. Those cookies are needed for that feature. See Cal.com’s policy for details.",
           ],
         },
         {
@@ -589,7 +589,7 @@ const sr: PrivacyCopy = {
             "localStorage ključ zonik-site-consent pamti da si prihvatio ovo obaveštenje. Ne šalje se našim serverima.",
             "localStorage ključ zonik-locale pamti EN ili SR. To nije kolačić i ne šalje se našim serverima.",
             "Google Tag Manager (GTM-WR2NJPC3) se učitava sa stranicom. Može da postavi kolačiće i da učita druge Google ili treće tagove podešene u GTM-u. Vidi policies.google.com/privacy.",
-            "Cal.com može da postavi kolačiće u kalendaru posle prihvatanja, da bi mogao da izabereš termin. Ti kolačići su potrebni za tu funkciju. Detalje vidi u politici Cal.com-a. Dok ne prihvatiš, kalendar ne učitavamo.",
+            "Cal.com može da postavi kolačiće u kalendaru na contact stranici, da bi mogao da izabereš termin. Ti kolačići su potrebni za tu funkciju. Detalje vidi u politici Cal.com-a.",
           ],
         },
         {

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { useI18n } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
@@ -70,8 +69,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <LanguageSwitcher light={overHero} />
-
           <div className="hidden items-center gap-2 lg:flex">
             <Button href={LOGIN_URL} variant={overHero ? "outlineDark" : "secondary"} size="sm">
               {t.nav.login}
