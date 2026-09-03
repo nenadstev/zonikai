@@ -1,4 +1,4 @@
-export const PITCH2_SLIDE_COUNT = 16;
+export const PITCH2_SLIDE_COUNT = 18;
 export const PITCH2_NIGHT_INDEX = 0;
 export const PITCH2_HOW_INDEX = 5;
 export const PITCH2_LOAD_ONTIME_INDEX = 6;

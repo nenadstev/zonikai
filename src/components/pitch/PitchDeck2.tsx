@@ -2,15 +2,16 @@
 
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
-  AlertTriangle,
   ArrowRight,
   Bell,
   Check,
   Eye,
   Globe,
   Link2,
+  Mail,
   Phone,
   PhoneCall,
+  Sun,
   Truck,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -602,35 +603,44 @@ function KnowsVisual() {
 
 function PathsVisual({ active }: { active: boolean }) {
   return (
-    <div className="grid h-full gap-3 p-4 md:grid-cols-2">
-      <div className="rounded-2xl border border-success/30 bg-success-bg p-4">
-        <p className="text-sm font-semibold text-success">{s.paths.pathA.title}</p>
-        <ul className="mt-3 space-y-2 text-sm">
-          {s.paths.pathA.items.map((item) => (
-            <li key={item} className="flex items-center gap-2">
-              <Check className="h-3.5 w-3.5 text-success" />
+    <div className="grid h-full gap-3 text-foreground md:grid-cols-[1fr_auto_1fr]">
+      <div className="rounded-2xl border-2 border-success/40 bg-success-bg p-5">
+        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-success">{s.paths.pathA.title}</p>
+        <ol className="mt-4 space-y-3">
+          {s.paths.pathA.items.map((item, i) => (
+            <li key={item} className="flex items-start gap-3 text-sm font-medium text-[#14532d]">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-success text-[11px] font-bold text-white">
+                {i + 1}
+              </span>
               {item}
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
-      <div className="rounded-2xl border border-warning/30 bg-warning-bg p-4">
-        <p className="text-sm font-semibold text-warning">{s.paths.pathB.title}</p>
-        <ul className="mt-3 space-y-2 text-sm">
-          {s.paths.pathB.items.map((item) => (
-            <li key={item} className="flex items-center gap-2">
-              <AlertTriangle className="h-3.5 w-3.5 text-warning" />
+      <div className="hidden items-center md:flex">
+        <span className="rounded-full border border-border bg-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-muted">
+          or
+        </span>
+      </div>
+      <div className="rounded-2xl border-2 border-warning/50 bg-warning-bg p-5">
+        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-warning">{s.paths.pathB.title}</p>
+        <ol className="mt-4 space-y-3">
+          {s.paths.pathB.items.map((item, i) => (
+            <li key={item} className="flex items-start gap-3 text-sm font-medium text-[#9a3412]">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-warning text-[11px] font-bold text-white">
+                {i + 1}
+              </span>
               {item}
             </li>
           ))}
-        </ul>
-        <motion.p
-          animate={active ? { opacity: [0.7, 1, 0.7] } : undefined}
+        </ol>
+        <motion.div
+          animate={active ? { opacity: [0.85, 1, 0.85] } : undefined}
           transition={{ duration: 2, repeat: Infinity }}
-          className="mt-4 text-sm font-semibold text-warning"
+          className="mt-5 rounded-xl border-2 border-warning bg-white px-3 py-2.5 text-sm font-semibold text-warning"
         >
           {s.paths.pathB.action}
-        </motion.p>
+        </motion.div>
       </div>
     </div>
   );
@@ -638,30 +648,111 @@ function PathsVisual({ active }: { active: boolean }) {
 
 function ChangesVisual() {
   return (
-    <div className="grid h-full grid-cols-[0.42fr_0.58fr] gap-3 p-4">
-      <div className="rounded-xl border border-border bg-[#ececee] p-3 opacity-80">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">{s.changes.today}</p>
-        <ul className="mt-2 space-y-1.5">
+    <div className="grid h-full grid-cols-2 gap-3 text-foreground">
+      <div className="flex flex-col rounded-2xl border border-border bg-[#111111] p-4 text-white">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-white/40">{s.changes.today}</p>
+        <p className="mt-1 text-xs text-white/50">{s.changes.todayCaption}</p>
+        <ul className="mt-3 flex-1 space-y-1.5">
           {s.changes.todayItems.map((item) => (
-            <li key={item} className="rounded-lg bg-white/70 px-2.5 py-1.5 text-[12px] text-muted">
+            <li key={item} className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-sm text-white/70">
+              {item}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 font-mono text-sm text-white/35">Next loads · 0</p>
+      </div>
+      <div className="flex flex-col rounded-2xl border-2 border-success/40 bg-white p-4 shadow-[0_16px_40px_rgba(34,197,94,0.12)]">
+        <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-secondary-dark">{s.changes.withZonik}</p>
+        <p className="mt-1 text-xs text-muted">{s.changes.afterCaption}</p>
+        <ul className="mt-3 flex-1 space-y-2">
+          {s.changes.afterItems.map((item, i) => (
+            <li
+              key={item}
+              className={cn(
+                "rounded-xl px-3 py-2.5 text-sm font-semibold",
+                i >= 3
+                  ? "border-2 border-success bg-success-bg text-success"
+                  : "border border-secondary/20 bg-[#eeedff] text-secondary-dark"
+              )}
+            >
               {item}
             </li>
           ))}
         </ul>
       </div>
-      <div className="rounded-xl border-2 border-success/40 bg-white p-3 shadow-[0_12px_32px_rgba(34,197,94,0.12)]">
-        <p className="text-[10px] font-bold uppercase tracking-wider text-secondary-dark">{s.changes.withZonik}</p>
-        <ul className="mt-2 space-y-2">
-          {s.changes.afterItems.map((item, i) => (
+    </div>
+  );
+}
+
+function DispatchVisual({ active }: { active: boolean }) {
+  return (
+    <div className="grid h-full grid-cols-2 gap-3 text-foreground">
+      <div className="rounded-2xl border border-border bg-[#ececee] p-4">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">{s.dispatch.beforeLabel}</p>
+        <ul className="mt-3 space-y-2">
+          {s.dispatch.beforeItems.map((item) => (
+            <li key={item} className="rounded-lg border border-warning/25 bg-warning-bg px-3 py-2 text-sm font-medium text-[#9a3412]">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <motion.div
+        animate={active ? { boxShadow: ["0 0 0 rgba(34,197,94,0)", "0 12px 28px rgba(34,197,94,0.16)", "0 0 0 rgba(34,197,94,0)"] } : undefined}
+        transition={{ duration: 3, repeat: Infinity }}
+        className="rounded-2xl border-2 border-success/40 bg-white p-4"
+      >
+        <div className="flex items-center justify-between">
+          <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-secondary-dark">{s.dispatch.afterLabel}</p>
+          <span className="inline-flex items-center gap-1 rounded-full bg-success-bg px-2 py-0.5 text-[10px] font-bold text-success">
+            <Sun className="h-3 w-3" /> 24/7
+          </span>
+        </div>
+        <ul className="mt-3 space-y-2">
+          {s.dispatch.afterItems.map((item, i) => (
             <li
               key={item}
               className={cn(
-                "rounded-lg px-3 py-2 text-sm font-semibold",
-                i === s.changes.afterItems.length - 1
-                  ? "border-2 border-success bg-success-bg text-success"
-                  : "border border-secondary/20 bg-[#eeedff] text-secondary-dark"
+                "flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold",
+                i >= 2 ? "bg-success-bg text-success" : "bg-[#eeedff] text-secondary-dark"
               )}
             >
+              <Check className="h-3.5 w-3.5 shrink-0" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </div>
+  );
+}
+
+function HandoffVisual() {
+  return (
+    <div className="grid h-full gap-3 text-foreground md:grid-cols-2">
+      <div className="space-y-2 rounded-2xl border border-border bg-[#111111] p-4 text-white">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-white/40">{s.handoff.todayLabel}</p>
+        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white/50">
+            <Mail className="h-3.5 w-3.5" />
+            {s.handoff.todayFrom}
+          </p>
+          <p className="mt-2 text-sm leading-snug text-white/80">“{s.handoff.todayFromBody}”</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-white/5 p-3">
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold text-white/50">
+            <Mail className="h-3.5 w-3.5" />
+            {s.handoff.todayBack}
+          </p>
+          <p className="mt-2 text-sm leading-snug text-white/80">“{s.handoff.todayBackBody}”</p>
+        </div>
+      </div>
+      <div className="rounded-2xl border-2 border-success/40 bg-white p-4">
+        <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-secondary-dark">{s.handoff.zonikLabel}</p>
+        <p className="mt-1 text-sm font-semibold text-success">{s.handoff.zonikBoard}</p>
+        <ul className="mt-3 space-y-2">
+          {s.handoff.zonikItems.map((item) => (
+            <li key={item} className="rounded-xl border border-border bg-surface px-3 py-2.5 text-sm font-medium">
               {item}
             </li>
           ))}
@@ -1215,7 +1306,7 @@ export function PitchDeck2() {
             <Card glass>
               <h2 className="text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">{s.paths.headline}</h2>
               <p className="mt-3 text-xl text-[#a5b4fc]">{s.paths.sub}</p>
-              <Stage className="mt-6 min-h-[18rem]">
+              <Stage className="mt-6 min-h-[20rem] bg-white p-4 text-foreground">
                 <PathsVisual active={active === 10} />
               </Stage>
               <div className="mt-6 space-y-1 text-center">
@@ -1230,13 +1321,13 @@ export function PitchDeck2() {
 
           <Slide index={PITCH2_AFTER_INDEX}>
             <Card compact className="border-[#ffd7b0]/35 shadow-[0_24px_80px_rgba(255,150,80,0.18)]">
-              <div className="grid items-center gap-6 md:grid-cols-[0.72fr_1.28fr]">
+              <div className="grid items-center gap-6 lg:grid-cols-[0.62fr_1.38fr]">
                 <div>
                   <h2 className="text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.changes.headline}</h2>
                   <p className="mt-6 text-2xl font-semibold text-secondary-dark">{s.changes.payoff}</p>
                   <p className="mt-3 text-base text-muted">{s.changes.note}</p>
                 </div>
-                <Stage className="min-h-[18rem]">
+                <Stage className="min-h-[22rem] p-3">
                   <ChangesVisual />
                 </Stage>
               </div>
@@ -1244,6 +1335,50 @@ export function PitchDeck2() {
           </Slide>
 
           <Slide index={12}>
+            <Card>
+              <div className="grid items-center gap-8 md:grid-cols-2">
+                <div>
+                  <Eyebrow>{s.dispatch.eyebrow}</Eyebrow>
+                  <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">{s.dispatch.headline}</h2>
+                  <ul className="mt-5 space-y-2">
+                    {s.dispatch.points.map((point) => (
+                      <li key={point} className="text-base text-muted">
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="mt-6 text-xl font-semibold text-secondary-dark">{s.dispatch.payoff}</p>
+                </div>
+                <Stage className="min-h-[18rem] p-3">
+                  <DispatchVisual active={active === 12} />
+                </Stage>
+              </div>
+            </Card>
+          </Slide>
+
+          <Slide index={13}>
+            <Card glass>
+              <div className="grid items-center gap-8 md:grid-cols-2">
+                <div>
+                  <Eyebrow light>{s.handoff.eyebrow}</Eyebrow>
+                  <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">
+                    {s.handoff.headline}
+                  </h2>
+                  {s.handoff.lines.map((line) => (
+                    <p key={line} className="mt-3 text-base text-white/70">
+                      {line}
+                    </p>
+                  ))}
+                  <p className="mt-6 text-xl font-semibold text-[#a5b4fc]">{s.handoff.payoff}</p>
+                </div>
+                <Stage className="min-h-[18rem] p-3">
+                  <HandoffVisual />
+                </Stage>
+              </div>
+            </Card>
+          </Slide>
+
+          <Slide index={14}>
             <div className="mx-auto max-w-2xl text-center">
               <Eyebrow light>{s.transition.eyebrow}</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl md:leading-[1.1]">
@@ -1259,7 +1394,7 @@ export function PitchDeck2() {
             </div>
           </Slide>
 
-          <Slide index={13}>
+          <Slide index={15}>
             <Eyebrow light>{s.integrations.eyebrow}</Eyebrow>
             <h2 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">
               {s.integrations.headline}
@@ -1270,7 +1405,7 @@ export function PitchDeck2() {
             </div>
           </Slide>
 
-          <Slide index={14}>
+          <Slide index={16}>
             <div className="mx-auto max-w-3xl">
               <Eyebrow light>{s.pilot.eyebrow}</Eyebrow>
               <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-5xl">{s.pilot.headline}</h2>
@@ -1297,7 +1432,7 @@ export function PitchDeck2() {
             </div>
           </Slide>
 
-          <Slide index={15}>
+          <Slide index={17}>
             <Card>
               <div className="grid items-start gap-8 md:grid-cols-2">
                 <div>
