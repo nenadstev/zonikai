@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isDashboard = pathname?.startsWith("/dashboard");
-  const isPitch = pathname === "/pitch";
+  const isPitch = pathname === "/pitch" || pathname === "/pitch-2";
   const isSnapPage = pathname === "/features" || isPitch;
 
   return (
