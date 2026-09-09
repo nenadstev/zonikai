@@ -20,6 +20,7 @@ export function Footer() {
     {
       title: t.footer.company,
       links: [
+        { label: t.nav.about, href: "/about" },
         { label: t.nav.faq, href: "/faq" },
         { label: t.nav.contact, href: "/contact" },
         { label: t.nav.bookDemo, href: "/contact" },

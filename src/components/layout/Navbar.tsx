@@ -31,6 +31,7 @@ export function Navbar() {
     { label: t.nav.features, href: "/features" },
     { label: t.nav.integrations, href: "/integrations" },
     { label: t.nav.calculator, href: "/calculator" },
+    { label: t.nav.about, href: "/about" },
     { label: t.nav.faq, href: "/faq" },
     { label: t.nav.contact, href: "/contact" },
   ];
